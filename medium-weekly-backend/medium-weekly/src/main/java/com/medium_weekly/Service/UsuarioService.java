@@ -26,6 +26,7 @@ public class UsuarioService implements IUsuarioService{
 
     private UsuarioDTO crearDTO(Usuario usuario){
         return new UsuarioDTO(
+             usuario.getId_usuario(),
             usuario.getNombre(),
             usuario.getRol(),
                 usuario.getContrasena()

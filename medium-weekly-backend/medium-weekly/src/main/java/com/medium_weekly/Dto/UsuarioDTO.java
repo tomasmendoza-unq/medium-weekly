@@ -15,7 +15,8 @@ public class UsuarioDTO {
 
     private String contrasena;
 
-    public UsuarioDTO(String nombre, Rol rol, String contrasena) {
+    public UsuarioDTO(Long id,String nombre, Rol rol, String contrasena) {
+        this.id_usuario = id;
         Nombre = nombre;
         this.rol = rol;
         this.contrasena = contrasena;
