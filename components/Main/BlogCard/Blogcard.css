@@ -1,0 +1,17 @@
+.card {
+    width: 50vw;
+    height: 140px;
+    border-radius: 10px;
+    background-color: var(--tertiary-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.list {
+    margin: 50px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-direction: column;
+}

@@ -1,10 +1,23 @@
+import Bloglist from '../components/Main/Bloglist/Bloglist'
+import Footer from '../components/Footer/Footer'
+import Navbar from '../components/Header/Navbar'
+import Notifications from '../components/Main/Notifications/Notifications'
 import './App.css'
 
 function App() {
   return (
-    <>
-      <h1>Medium Weekly</h1>
-    </>
+    <div className='app'>
+      <header>
+        <Navbar/>
+      </header>
+      <main>
+        <Bloglist/>
+        <Notifications/>
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </div>
   )
 }
 

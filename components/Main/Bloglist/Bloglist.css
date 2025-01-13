@@ -1,0 +1,12 @@
+.bloglist {
+    width: 70vw;
+    padding-top: 50px;
+}
+
+.bloglist h2 {
+    padding-left: 40px;
+}
+
+.bloglist .underlineTitle{
+    width: 305px;
+}

@@ -1,0 +1,64 @@
+nav {
+    width: 100%;
+    background-color: var(--primary-color);
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.tools {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.tools .searchBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tools .searchBar button {
+    background-color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+
+.tools .searchBar button svg {
+    height: 20px;
+    width: 20px;
+    color: var(--title-nav-color);
+}
+
+.tools .searchBar input {
+    height: 10px;
+    width: 250px;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    border: 1px solid var(--title-nav-color);
+    font-family: var(--title-font);
+}
+
+.tools .buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.tools .buttons button {
+    border: none;
+    cursor: pointer;
+    background-color: var(--primary-color);
+}
+
+.tools .buttons button svg {
+    height: 30px;
+    width: 30px;
+    color: var(--title-nav-color);
+}

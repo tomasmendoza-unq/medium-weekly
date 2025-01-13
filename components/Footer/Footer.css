@@ -1,0 +1,29 @@
+.footer {
+    width: 100%;
+    background-color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px -3px 8px;
+    margin-top: 40px;
+}
+
+.containerFooter {
+    display: block;
+    margin: 0 auto;
+    width: 70vw;
+    height: 100%;
+    padding: 50px;
+}
+
+.titleFooter {
+    color: var(--title-nav-color);
+    text-align: center;
+}
+
+.divFoot {
+    margin: 50px 0px;
+    background-color: var(--title-nav-color);
+}
+
+.containerFooter p {
+    text-align: center;
+    color: var(--title-nav-color);
+}
