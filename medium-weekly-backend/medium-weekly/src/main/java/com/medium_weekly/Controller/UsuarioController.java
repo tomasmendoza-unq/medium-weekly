@@ -1,8 +1,9 @@
 package com.medium_weekly.Controller;
 
+import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
 import com.medium_weekly.Service.IUsuarioService;
-import com.medium_weekly.Service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,15 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.FOUND).body(usuarioDTO);
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<?> getLogin(@RequestBody LoginDTO log){
+        UsuarioDTO usuarioDTO = usuarioService.getUsuarioDTOByLogin(log);
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(usuarioDTO);
+    }
+
     @PostMapping("/crear")
-    public ResponseEntity<?> crearCliente(@RequestBody UsuarioDTO nuevoUsuario){
+    public ResponseEntity<?> crearCliente(@Valid @RequestBody UsuarioDTO nuevoUsuario){
         UsuarioDTO usuarioDTO = usuarioService.saveUsuario(nuevoUsuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
@@ -43,7 +51,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/editar/{id_usuario}")
-    public ResponseEntity<?> editCliente(@PathVariable Long id_usuario, @RequestBody UsuarioDTO usuario){
+    public ResponseEntity<?> editCliente(@PathVariable Long id_usuario,@Valid @RequestBody UsuarioDTO usuario){
         usuarioService.editUsuario(id_usuario,usuario);
 
         return new ResponseEntity<>("Se edito el usuario con el id: " + id_usuario, HttpStatus.OK);

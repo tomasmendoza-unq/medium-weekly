@@ -2,6 +2,7 @@ package com.medium_weekly.Model;
 
 import com.medium_weekly.Enums.Rol;
 import jakarta.persistence.*;
+
 import lombok.Data;
 
 @Entity @Data
@@ -11,7 +12,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_usuario;
 
-    private String Nombre;
+    private String nombre;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -22,7 +23,7 @@ public class Usuario {
     }
 
     public Usuario(String nombre, Rol rol, String contrasena) {
-        Nombre = nombre;
+        nombre = nombre;
         this.rol = rol;
         this.contrasena = contrasena;
     }
@@ -32,7 +33,7 @@ public class Usuario {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public Rol getRol() {
@@ -48,7 +49,7 @@ public class Usuario {
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        nombre = nombre;
     }
 
     public void setRol(Rol rol) {
