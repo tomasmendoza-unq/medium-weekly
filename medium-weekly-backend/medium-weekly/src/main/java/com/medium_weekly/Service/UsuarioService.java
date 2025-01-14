@@ -1,6 +1,8 @@
 package com.medium_weekly.Service;
 
+import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
+import com.medium_weekly.Exception.ResourceNotFound;
 import com.medium_weekly.Model.Usuario;
 import com.medium_weekly.Repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,9 @@ public class UsuarioService implements IUsuarioService{
     }
 
     private Usuario findById(long idUsuario){
-        return usuarioRepository.findById(idUsuario).orElse(null);
+        return usuarioRepository.findById(idUsuario).orElseThrow(() ->
+                new ResourceNotFound(idUsuario, "No se encontró al cliente con ID: " + idUsuario)
+        );
     }
 
     @Override
@@ -65,6 +69,11 @@ public class UsuarioService implements IUsuarioService{
         this.updateUsuario(usuario,usuarioDto);
 
         usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public UsuarioDTO getUsuarioDTOByLogin(LoginDTO log) {
+        return this.crearDTO(usuarioRepository.findByNombreAndContrasena(log.getNombre(),log.getContrasena()).orElseThrow());
     }
 
     private void updateUsuario(Usuario usuario, UsuarioDTO usuarioDto) {
