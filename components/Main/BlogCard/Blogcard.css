@@ -1,9 +1,16 @@
 .card {
     width: 50vw;
-    height: 140px;
+    min-height: 140px;
     border-radius: 10px;
     background-color: var(--tertiary-color);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    transition: all 0.5s;
+}
+
+.card:hover {
+    cursor: pointer;
+    scale: 1.03;
 }
 
 .list {
