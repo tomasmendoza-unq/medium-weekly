@@ -34,17 +34,6 @@ nav {
     color: var(--title-nav-color);
 }
 
-.tools .searchBar input {
-    height: 10px;
-    width: 250px;
-    padding: 20px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    border: 1px solid var(--title-nav-color);
-    font-family: var(--title-font);
-}
-
 .tools .buttons {
     display: flex;
     gap: 10px;
@@ -57,7 +46,7 @@ nav {
     background-color: var(--primary-color);
 }
 
-.tools .buttons button svg {
+.tools .buttons a svg {
     height: 30px;
     width: 30px;
     color: var(--title-nav-color);
