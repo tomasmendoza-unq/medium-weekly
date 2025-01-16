@@ -12,17 +12,19 @@ public class UsuarioDTO {
 
     @NotNull(message = "Nombre no puede ser null")
     @NotBlank(message = "NOMBRE REQUIRED")
-    private String Nombre;
+    private String nombre;
 
     @NotNull(message = "El rol no puede ser nulo")
+
     private Rol rol;
 
     @NotNull(message = "La contraseña no puede ser nulo")
+    @NotBlank(message = "CONTRASEÑA REQUIRED")
     private String contrasena;
 
     public UsuarioDTO(Long id,String nombre, Rol rol, String contrasena) {
         this.id_usuario = id;
-        Nombre = nombre;
+        this.nombre = nombre;
         this.rol = rol;
         this.contrasena = contrasena;
     }
@@ -35,7 +37,7 @@ public class UsuarioDTO {
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public void setRol(Rol rol) {
@@ -51,7 +53,7 @@ public class UsuarioDTO {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public Rol getRol() {

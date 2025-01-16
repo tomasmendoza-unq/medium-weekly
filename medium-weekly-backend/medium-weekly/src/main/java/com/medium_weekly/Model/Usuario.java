@@ -23,7 +23,7 @@ public class Usuario {
     }
 
     public Usuario(String nombre, Rol rol, String contrasena) {
-        nombre = nombre;
+        this.nombre = nombre;
         this.rol = rol;
         this.contrasena = contrasena;
     }
@@ -49,7 +49,7 @@ public class Usuario {
     }
 
     public void setNombre(String nombre) {
-        nombre = nombre;
+        this.nombre = nombre;
     }
 
     public void setRol(Rol rol) {
