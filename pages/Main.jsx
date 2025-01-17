@@ -4,8 +4,10 @@ import Bloglist from '../components/Main/Bloglist/Bloglist'
 const Main = () => {
     return (
         <main>
-            <Bloglist/>
-            <Notifications/>
+            <section className='mainContent'>
+                <Bloglist/>
+                <Notifications/>
+            </section>
         </main>
     )
 }

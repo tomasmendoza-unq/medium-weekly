@@ -4,8 +4,11 @@ import './Blogcard.css'
 const Blogcard = ({title, resume}) => {
     return (
         <article className='card'>
-            <h3 className='blogTitle'>{title}</h3>
-            <p>{resume}</p>
+            <div className='cardText'>
+                <h3 className='blogTitle'>{title}</h3>
+                <p>{resume}</p>
+            </div>
+            <img className='imgBlog' src="" alt="" />
         </article>
     )
 }

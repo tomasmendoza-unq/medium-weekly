@@ -1,16 +1,25 @@
 .card {
     width: 50vw;
     min-height: 140px;
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: var(--tertiary-color);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 12px;
     transition: all 0.5s;
+    display: flex;
 }
 
 .card:hover {
     cursor: pointer;
-    scale: 1.03;
+    scale: 0.98;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.cardText {
+    padding: 20px;
+}
+
+.blogTitle {
+    margin-bottom: 15px;
 }
 
 .list {
@@ -21,4 +30,11 @@
     align-items: center;
     gap: 50px;
     flex-direction: column;
+}
+
+.imgBlog {
+    width: 150px;
+    height: 150px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }

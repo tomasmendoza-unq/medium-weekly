@@ -1,26 +1,37 @@
 import React from 'react'
 import Toastify from 'toastify-js'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Register = () => {
 
-    const alert = (text, color) => {
+    const alert = (text) => {
         Toastify({
             text: text,
             duration: 3000,
             position: "center",
-            gravity: "bottom",
+            gravity: "top",
             offset: {
-                "y": 70
+                "y": 50
             },
             style: {
-                background: color,
+                background: "#4D4D4D",
                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                height: "50px",
-                fontSize: "22px",
+                fontSize: "20px",
+                borderRadius: "5px",
+                fontFamily: "Inter",
+                fontWeight: "400",
             },
         }).showToast();
     }
+
+    const [dataUsers, setDataUsers] = useState()
+    useEffect(() => {
+        fetch("http://localhost:8080/user")
+            .then((response) => response.json())
+            .then((data) => {
+                setDataUsers(data)
+            })
+    }, [])
 
     const crearUsuario = async (usuario) => {
         try {
@@ -29,9 +40,10 @@ const Register = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usuario),
             });
-            const data = await response.json();
-            console.log('Usuario creado:', data);
-            alert("Usuario creado correctamente", "#53796c")
+            alert("Usuario creado correctamente")
+            // setTimeout(() => {
+            //     window.location.replace("http://localhost:5174/login")
+            // }, 1000);
         } catch (error) {
             console.error('Error al crear usuario:', error);
         }
@@ -51,17 +63,22 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (dataForm.nombre === "" || dataForm.contrasena === "" || dataForm.repass === "") {
-            alert("Rellena todos los campos", "#bb1a1a")
-        }else {
+            alert("Rellena todos los campos!")
+        } else {
             if (dataForm.contrasena !== dataForm.repass) {
-                alert("Las contraseñas no son iguales", "#bb1a1a")
-            }else if(dataForm.contrasena.length < 8){
-                alert("La contraseña debe de tener un minimo de 8 caracteres", "#bb1a1a")
-            }else {
-                crearUsuario(dataForm)
+                alert("Las contraseñas no son iguales!")
+            } else if (dataForm.contrasena.length < 8) {
+                alert("La contraseña debe de tener un minimo de 8 caracteres!", "#bb1a1a")
+            } else {
+                if (dataUsers.find((e) => { dataForm.nombre === e.nombre })) {
+                    // ! No consigo verificar si el nombre ya existe
+                    alert("El nombre ya esta en uso")
+                } else {
+                    crearUsuario(dataForm)
+                }
             }
         }
-        
+
     }
 
 

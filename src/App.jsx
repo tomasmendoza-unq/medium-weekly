@@ -8,14 +8,6 @@ import Register from '../pages/Register'
 import Login from '../pages/Login'
 
 function App() {
-  // const { data, setData} = useState(null)
-  // useEffect(()=> {
-  //   fetch("http://localhost:8080/user")
-  //     .then((response)=> response.json())
-  //     .then((data) => setData(data))
-  //     .catch((error)=> console.log(error))
-  //   console.log(data)
-  // },[])
   return (
     <div className='app'>
       <BrowserRouter>
