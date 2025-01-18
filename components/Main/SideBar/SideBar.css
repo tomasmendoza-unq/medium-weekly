@@ -1,12 +1,11 @@
-.notifications {
+.sideBar {
     margin-top: 30px;
     padding-top: 20px;
     height: 600px;
-    width: 30vw;
+    width: 10vw;
     background-color: var(--tertiary-color);
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.24) -4px 3px 10px 0px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     position: sticky;
     top: 40px;
 }

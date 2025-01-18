@@ -1,12 +1,8 @@
 .bloglist {
-    width: 70vw;
+    width: 65vw;
     padding-top: 50px;
-}
-
-.bloglist h2 {
-    padding-left: 40px;
-}
-
-.bloglist .underlineTitle{
-    width: 325px;
+    background-color: var(--bg-color);
+    border-radius: 30px;
+    margin: 60px auto;
+    box-shadow: 0px 0px 20px 50px var(--bg-color);
 }

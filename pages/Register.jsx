@@ -4,22 +4,23 @@ import { useState, useEffect } from 'react'
 
 const Register = () => {
 
-    const alert = (text) => {
+    const alert = (text, color) => {
         Toastify({
             text: text,
             duration: 3000,
-            position: "center",
-            gravity: "top",
+            position: "right",
+            gravity: "bottom",
             offset: {
-                "y": 50
+                "y": 50,
+                "x": 50
             },
             style: {
-                background: "#4D4D4D",
+                background: color || "#4D4D4D",
                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                 fontSize: "20px",
                 borderRadius: "5px",
                 fontFamily: "Inter",
-                fontWeight: "400",
+                fontWeight: "300",
             },
         }).showToast();
     }
@@ -40,10 +41,10 @@ const Register = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usuario),
             });
-            alert("Usuario creado correctamente")
-            // setTimeout(() => {
-            //     window.location.replace("http://localhost:5174/login")
-            // }, 1000);
+            alert("Usuario creado correctamente", "#1abb1a")
+            setTimeout(() => {
+                window.location.replace("http://localhost:5173/login")
+            }, 1000);
         } catch (error) {
             console.error('Error al crear usuario:', error);
         }
@@ -63,16 +64,15 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (dataForm.nombre === "" || dataForm.contrasena === "" || dataForm.repass === "") {
-            alert("Rellena todos los campos!")
+            alert("Rellena todos los campos!", "#bb1a1a")
         } else {
             if (dataForm.contrasena !== dataForm.repass) {
-                alert("Las contraseñas no son iguales!")
+                alert("Las contraseñas no son iguales!", "#bb1a1a")
             } else if (dataForm.contrasena.length < 8) {
                 alert("La contraseña debe de tener un minimo de 8 caracteres!", "#bb1a1a")
             } else {
-                if (dataUsers.find((e) => { dataForm.nombre === e.nombre })) {
-                    // ! No consigo verificar si el nombre ya existe
-                    alert("El nombre ya esta en uso")
+                if (dataUsers.find((e) => dataForm.nombre === e.nombre )) {
+                    alert("El nombre ya esta en uso", "#bb1a1a")
                 } else {
                     crearUsuario(dataForm)
                 }

@@ -1,11 +1,11 @@
 nav {
     width: 100%;
-    background: linear-gradient(to top left, #416056, #53796c);
-    height: 100px;
+    background: transparent;
+    height: 40px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.40) 0px 3px 8px;
+    z-index: 1;
 }
 
 .tools {

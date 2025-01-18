@@ -3,7 +3,6 @@ import './Login.css'
 import { Link } from 'react-router-dom'
 import Toastify from 'toastify-js'
 
-
 const Login = () => {
     const [dataUsers, setDataUsers] = useState()
     useEffect(() => {
@@ -18,8 +17,8 @@ const Login = () => {
         Toastify({
             text: text,
             duration: 3000,
-            position: "center",
-            gravity: "top",
+            position: "right",
+            gravity: "bottom",
             offset: {
                 "y": 50
             },
@@ -47,8 +46,10 @@ const Login = () => {
         e.preventDefault()
         if (dataUsers.find((e) => e.nombre === dataForm.nombre && e.contrasena === dataForm.contrasena)) {
             alert("Entrando...")
+            sessionStorage.setItem("logged", true)
+            sessionStorage.setItem("user", dataForm.nombre)
             setTimeout(() => {
-                window.location.replace("http://localhost:5174/")
+                window.location.replace("http://localhost:5173/")
             }, 1000);
         } else {
             alert("Contraseña o nombre incorrectos")

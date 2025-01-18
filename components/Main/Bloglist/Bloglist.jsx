@@ -14,7 +14,6 @@ const Bloglist = () => {
         <div className='bloglist'>
             <div className='titleBlogs'>
                 <h2>Blogs Recomendados</h2>
-                <div className='underlineTitle'></div>
             </div>
             <div className="list">
                 {blogs.map((e)=> (

@@ -8,7 +8,7 @@
 }
 
 :root {
-    --bg-color: #F6F6F6;
+    --bg-color: #fff;
     --primary-color: #53796c;
     --secondary-color: #4D4D4D;
     --tertiary-color: #F0F1F2;
@@ -20,10 +20,45 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    background-image:
+        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+    background-size: 6rem 4rem;
     font-family: var(--text-font);
     width: 98.9vw;
 }
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(to top left, #416056, #53796c);
+    color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    transition: all 0.3s ease;
+}
+
+.header.shrink {
+    padding: 10px 100px;
+    background: linear-gradient(to top left, #416056, #53796c);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 h1 {
     color: var(--title-nav-color);
     font-family: var(--title-font);
@@ -35,7 +70,7 @@ h2 {
     font-family: var(--text-font);
     font-weight: 300;
     color: var(--secondary-color);
-    font-size: 30px
+    font-size: 33px
 }
 
 h3 {
@@ -71,7 +106,28 @@ button {
     margin: 0 auto;
 }
 
-button:hover{
+button:hover {
+    color: var(--bg-color);
+    background-color: var(--secondary-color);
+}
+
+.btnLink {
+    width: 10vw;
+    height: 35px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid var(--secondary-color);
+    font-family: var(--title-font);
+    font-size: 22px;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+.btnLink:hover {
     color: var(--bg-color);
     background-color: var(--secondary-color);
 }
@@ -83,7 +139,7 @@ button:hover{
 }
 
 .underlineTitle {
-    width: 230px;
+    width: 280px;
     height: 2px;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
