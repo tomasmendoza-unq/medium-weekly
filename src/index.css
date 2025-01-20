@@ -8,13 +8,11 @@
 }
 
 :root {
-    --bg-color: #fff;
     --primary-color: #53796c;
     --secondary-color: #4D4D4D;
     --tertiary-color: #F0F1F2;
     --title-nav-color: #dee9e5;
-    --link-color: #fff;
-    --button-hover-color: #fff;
+    --white: #FCFCFC;
     --title-font: "Inika", serif;
     --text-font: "Inter", serif;
 }
@@ -70,7 +68,11 @@ h2 {
     font-family: var(--text-font);
     font-weight: 300;
     color: var(--secondary-color);
-    font-size: 33px
+    font-size: 33px;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 1.4px;
+    text-underline-offset: 8px;
 }
 
 h3 {
@@ -107,7 +109,7 @@ button {
 }
 
 button:hover {
-    color: var(--bg-color);
+    color: var(--white);
     background-color: var(--secondary-color);
 }
 
@@ -128,7 +130,7 @@ button:hover {
 }
 
 .btnLink:hover {
-    color: var(--bg-color);
+    color: var(--white);
     background-color: var(--secondary-color);
 }
 

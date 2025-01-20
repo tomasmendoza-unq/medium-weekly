@@ -46,13 +46,35 @@ const Login = () => {
         e.preventDefault()
         if (dataUsers.find((e) => e.nombre === dataForm.nombre && e.contrasena === dataForm.contrasena)) {
             alert("Entrando...")
+            // ? Aca deberia ir el añadido de cookies
             sessionStorage.setItem("logged", true)
             sessionStorage.setItem("user", dataForm.nombre)
             setTimeout(() => {
                 window.location.replace("http://localhost:5173/")
             }, 1000);
         } else {
-            alert("Contraseña o nombre incorrectos")
+            if (dataForm.contrasena === "") {
+                alert("La contraseña no puede estar vacía")
+            }else 
+            if (dataForm.nombre === "") {
+                alert("El nombre de usuario no puede estar vacío")
+            }else
+            if (dataForm.nombre.length > 16) {
+                alert("El nombre de usuario no puede tener más de 16 caracteres")
+            } 
+            if (dataForm.nombre.length < 6) {
+                alert("El nombre de usuario no puede tener menos de 6 caracteres")
+            }
+            if (dataForm.contrasena.length > 16) {
+                alert("La contraseña no puede tener más de 16 caracteres")
+            }
+            if (dataForm.contrasena.length < 8) {
+                alert("La contraseña no puede tener menos de 8 caracteres")
+            }
+            else {
+                alert("Contraseña o nombre incorrectos")
+            }
+            
         }
     }
 
@@ -62,10 +84,28 @@ const Login = () => {
                 <div className="boxForm">
                     <h2>Bienvenido.</h2>
                     <form id='login' action="" method="post" onSubmit={handleSubmit}>
+
                         <label htmlFor="name">Nombre de usuario</label>
-                        <input type="text" name='nombre' required maxLength="16" placeholder='Ej: Julio Cortázar' onChange={handleInput} />
+                        <input 
+                            type="text" 
+                            name='nombre' 
+                            required
+                            minLength="6"
+                            maxLength="16"
+                            placeholder='Ej: Julio Cortázar' 
+                            onChange={handleInput} 
+                        />
+
                         <label htmlFor="pass">Contraseña</label>
-                        <input type='password' minLength="8" required maxLength="16" name='contrasena' placeholder='*******' onChange={handleInput} />
+                        <input 
+                            type='password' 
+                            minLength="8" 
+                            required 
+                            maxLength="16" 
+                            name='contrasena' 
+                            placeholder='*******' 
+                            onChange={handleInput} 
+                        />
                     </form>
                     <button form='login' type="submit">Log In</button>
                     <Link to="/register" className='linkLogin'>¿No tenes cuenta?</Link>

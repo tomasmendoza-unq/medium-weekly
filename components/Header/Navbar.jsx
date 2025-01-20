@@ -1,8 +1,6 @@
 import React from 'react'
 import './Navbar.css'
-import { FaRegPenToSquare } from "react-icons/fa6";
-import { FaRegUser } from "react-icons/fa6";
-import { FaSistrix } from "react-icons/fa6";
+import { FaRegPenToSquare, FaRegUser, FaSistrix } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -32,10 +30,67 @@ const Navbar = () => {
                         <input type="text" placeholder='Buscar...' />
                         <button><FaSistrix /></button>
                     </div>
-                    <div className='buttons'>
-                        <Link><FaRegPenToSquare /></Link>
-                        <Link to="/login"><FaRegUser /></Link>
+                    {sessionStorage.getItem('logged') === null ?
+                    <div className="menu__bar">
+                        <ul className="navigation hide">
+                            <li>
+                                <button>
+                                    <Link to="/login">
+                                        <FaRegUser />
+                                    </Link>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
+                    :
+                    <div className="menu__bar">
+                    <ul className="navigation hide">
+                        <li>
+                            <button>
+                                <Link>
+                                    <FaRegUser />
+                                </Link>
+                            </button>
+                            <div className="dropdown">
+                                <ul className="list-items-with-description">
+                                    <li>
+                                        <div className="item-title">
+                                            <Link to="/login">
+                                                <h3>Ver Perfil</h3>
+                                            </Link>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="item-title">
+                                            <Link className='logout' to="/login">
+                                                <h3>LogOut</h3>
+                                            </Link>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <button>
+                                <Link to="/login">
+                                    <FaRegPenToSquare />
+                                </Link>
+                            </button>
+                            <div className="dropdown">
+                                <ul className="list-items-with-description">
+                                    <li>
+                                        <div className="item-title">
+                                            <Link to="/login">
+                                                <h3>Redactar</h3>
+                                            </Link>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    </div>
+                    }
                 </section>
             </nav>
         </header>

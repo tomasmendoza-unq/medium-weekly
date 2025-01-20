@@ -10,7 +10,7 @@ const Main = () => {
             <section className='mainContent'>
                 {sessionStorage.getItem("logged") === null ? 
                             <div className='msgMain'>
-                                <p className='textMain'>Bienvenido a Medium Weekly, Logueate para empezar a leer!</p>
+                                <p className='textMain'>Bienvenido a Medium Weekly, entra para empezar a leer!</p>
                                 <Link to="/login" className='btnLink'>Entrar</Link>
                             </div>
                             : 

@@ -66,6 +66,9 @@ const Register = () => {
         if (dataForm.nombre === "" || dataForm.contrasena === "" || dataForm.repass === "") {
             alert("Rellena todos los campos!", "#bb1a1a")
         } else {
+            if (dataForm.nombre.length < 6) {
+                alert("El nombre debe de tener un minimo de 6 caracteres!", "#bb1a1a")
+            }
             if (dataForm.contrasena !== dataForm.repass) {
                 alert("Las contraseñas no son iguales!", "#bb1a1a")
             } else if (dataForm.contrasena.length < 8) {
@@ -88,12 +91,38 @@ const Register = () => {
                 <div className="boxForm">
                     <h2>Registro.</h2>
                     <form id='login' action="" method="POST" onSubmit={handleSubmit}>
+
                         <label htmlFor="nombre">Nombre de usuario</label>
-                        <input type="text" name='nombre' placeholder='Ej: Julio Cortázar' onChange={handleInput} />
+                        <input 
+                            type="text" 
+                            name='nombre'
+                            required
+                            minLength="6"
+                            maxLength="16" 
+                            placeholder='Ej: Julio Cortázar' 
+                            onChange={handleInput} 
+                        />
+
                         <label htmlFor="contrasena">Contraseña</label>
-                        <input type='password' name='contrasena' placeholder='*******' onChange={handleInput} />
+                        <input 
+                            type='password' 
+                            name='contrasena' 
+                            required 
+                            maxLength="16" 
+                            placeholder='*******' 
+                            onChange={handleInput} 
+                        />
+
                         <label htmlFor="pass">Repetir Contraseña</label>
-                        <input type='password' name='repass' placeholder='*******' onChange={handleInput} />
+                        <input 
+                            type='password' 
+                            required 
+                            maxLength="16" 
+                            minLength="8" 
+                            name='repass' 
+                            placeholder='*******' 
+                            onChange={handleInput} 
+                        />
                     </form>
                     <button form='login' type="submit">Registrarse</button>
                 </div>
