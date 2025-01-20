@@ -6,6 +6,7 @@ import './App.css'
 import Main from '../pages/Main'
 import Register from '../pages/Register'
 import Login from '../pages/Login'
+import NotFound from '../pages/NotFound'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Main />}></Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
+            <Route path='*' element={<NotFound />}></Route>
           </Routes>
         <footer>
           <Footer />

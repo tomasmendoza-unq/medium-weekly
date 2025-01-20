@@ -1,0 +1,37 @@
+.not-found {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.errorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 40vw;
+    margin: 0 auto;
+    border: 2px solid var(--secondary-color);
+    border-radius: 30px;
+    padding: 30px;
+    max-height: 400px;
+    background-color: var(--white);
+}
+
+.errorTitle {
+    font-size: 70px;
+    margin: 0;
+    color: var(--secondary-color);
+}
+
+.errorSubTitle {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.errorP {
+    font-size: 18px;
+    margin: 20px 0;
+}
