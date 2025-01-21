@@ -32,12 +32,6 @@ body {
     width: 98.9vw;
 }
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
 .header {
     position: sticky;
     top: 0;
@@ -57,14 +51,14 @@ header {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.title1 {
     color: var(--title-nav-color);
     font-family: var(--title-font);
     font-size: 36px;
     font-weight: 400;
 }
 
-h2 {
+.title2 {
     font-family: var(--text-font);
     font-weight: 300;
     color: var(--secondary-color);
@@ -75,7 +69,7 @@ h2 {
     text-underline-offset: 8px;
 }
 
-h3 {
+.title3 {
     font-size: 22px;
 }
 
@@ -94,7 +88,7 @@ input {
     font-family: var(--title-font);
 }
 
-button {
+.btn {
     width: 10vw;
     height: 40px;
     background-color: transparent;
@@ -108,7 +102,7 @@ button {
     margin: 0 auto;
 }
 
-button:hover {
+.btn:hover {
     color: var(--white);
     background-color: var(--secondary-color);
 }

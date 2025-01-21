@@ -13,7 +13,7 @@ const Bloglist = () => {
     return (
         <div className='bloglist'>
             <div className='titleBlogs'>
-                <h2>Blogs Recomendados</h2>
+                <h2 className='title2'>Blogs Recomendados</h2>
             </div>
             <div className="list">
                 {blogs.map((e)=> (

@@ -7,6 +7,7 @@ import Main from '../pages/Main'
 import Register from '../pages/Register'
 import Login from '../pages/Login'
 import NotFound from '../pages/NotFound'
+import Yoopta from '../testFront/Yoopta'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
             <Route path='*' element={<NotFound />}></Route>
+            <Route path='/yoopta' element={<Yoopta />}></Route>
           </Routes>
         <footer>
           <Footer />

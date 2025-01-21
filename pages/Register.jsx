@@ -89,7 +89,7 @@ const Register = () => {
         <div className="containerLogin">
             <div className='containerForm'>
                 <div className="boxForm">
-                    <h2>Registro.</h2>
+                    <h2 className='title2'>Registro.</h2>
                     <form id='login' action="" method="POST" onSubmit={handleSubmit}>
 
                         <label htmlFor="nombre">Nombre de usuario</label>
@@ -124,7 +124,7 @@ const Register = () => {
                             onChange={handleInput} 
                         />
                     </form>
-                    <button form='login' type="submit">Registrarse</button>
+                    <button className='btn' form='login' type="submit">Registrarse</button>
                 </div>
             </div>
             <div className='svgs'>

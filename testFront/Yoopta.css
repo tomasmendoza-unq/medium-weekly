@@ -1,0 +1,17 @@
+.box {
+    max-width: 800px;
+    min-height: 300px;
+    margin: 20px auto; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff ;
+}
+
+.box:hover {
+    cursor: text;
+}
+
+.yoopta-editor {
+    width: 100%;
+}

@@ -82,7 +82,7 @@ const Login = () => {
         <div className="containerLogin">
             <div className='containerForm'>
                 <div className="boxForm">
-                    <h2>Bienvenido.</h2>
+                    <h2 className='title2'>Bienvenido.</h2>
                     <form id='login' action="" method="post" onSubmit={handleSubmit}>
 
                         <label htmlFor="name">Nombre de usuario</label>
@@ -107,7 +107,7 @@ const Login = () => {
                             onChange={handleInput} 
                         />
                     </form>
-                    <button form='login' type="submit">Log In</button>
+                    <button className='btn' form='login' type="submit">Log In</button>
                     <Link to="/register" className='linkLogin'>¿No tenes cuenta?</Link>
                 </div>
             </div>

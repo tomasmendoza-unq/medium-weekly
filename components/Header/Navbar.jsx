@@ -24,17 +24,17 @@ const Navbar = () => {
     return (
         <header className={`header ${isShrunk ? "shrink" : ""}`}>
             <nav>
-                <Link to="/"><h1>Medium Weekly</h1></Link>
+                <Link to="/"><h1 className='title1'>Medium Weekly</h1></Link>
                 <section className="tools">
                     <div className='searchBar'>
                         <input type="text" placeholder='Buscar...' />
-                        <button><FaSistrix /></button>
+                        <button className='btn'><FaSistrix /></button>
                     </div>
                     {sessionStorage.getItem('logged') === null ?
                     <div className="menu__bar">
                         <ul className="navigation hide">
                             <li>
-                                <button>
+                                <button className='btn'>
                                     <Link to="/login">
                                         <FaRegUser />
                                     </Link>
@@ -46,7 +46,7 @@ const Navbar = () => {
                     <div className="menu__bar">
                     <ul className="navigation hide">
                         <li>
-                            <button>
+                            <button className='btn'>
                                 <Link>
                                     <FaRegUser />
                                 </Link>
@@ -71,7 +71,7 @@ const Navbar = () => {
                             </div>
                         </li>
                         <li>
-                            <button>
+                            <button className='btn'>
                                 <Link to="/login">
                                     <FaRegPenToSquare />
                                 </Link>

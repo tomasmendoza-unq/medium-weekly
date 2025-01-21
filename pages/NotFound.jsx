@@ -10,7 +10,7 @@ const NotFound = () => {
                 <h2 className='errorSubTitle'>Perdón, esta pagina no esta disponible.</h2>
                 <p className='errorP'>Es posible que el enlace que siguió esté roto o que la página haya sido eliminada.</p>
                 <Link to="/">
-                    <button>Inicio</button>
+                    <button className='btn'>Inicio</button>
                 </Link>
             </div>
         </div>

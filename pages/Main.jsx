@@ -13,7 +13,7 @@ const Main = () => {
                                 <Link to="/login" className='btnLink'>Entrar</Link>
                             </div>
                             : 
-                            <h2 className="class2">Bienvenido {userName}</h2>}
+                            <h2 className="class2 title2">Bienvenido {userName}</h2>}
                 <Bloglist/>
             </section>
         </main>
