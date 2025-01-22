@@ -28,7 +28,7 @@ public class PosteosService implements IPosteosService{
     private List<PosteoDTO> createDTOs(List<Posteos> all) {
         List<PosteoDTO> posteoDTOList = new ArrayList<>();
 
-        for (Posteos posteo: posteosRepository.findAll()){
+        for (Posteos posteo: all){
             posteoDTOList.add(this.createDTO(posteo));
         }
 

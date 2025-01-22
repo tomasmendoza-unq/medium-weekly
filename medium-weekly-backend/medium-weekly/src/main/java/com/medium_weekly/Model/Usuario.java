@@ -22,7 +22,7 @@ public class Usuario {
 
     private String contrasena;
 
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "autor", fetch = FetchType.EAGER)
     private List<Posteos> posts;
 
 
