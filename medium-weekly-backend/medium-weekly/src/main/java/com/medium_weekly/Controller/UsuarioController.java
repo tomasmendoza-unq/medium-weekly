@@ -4,9 +4,16 @@ import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
 import com.medium_weekly.Service.IUsuarioService;
 import jakarta.validation.Valid;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+/*
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.User;
+*/
+
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,11 +24,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UsuarioController {
     @Autowired
-    IUsuarioService usuarioService;
+    private IUsuarioService usuarioService;
+
 
     @GetMapping
-    public List<UsuarioDTO> getClientes(){
-        return usuarioService.getClientes();
+    public ResponseEntity<?> getClientes(){
+        return ResponseEntity.ok(usuarioService.getClientes());
     }
 
 

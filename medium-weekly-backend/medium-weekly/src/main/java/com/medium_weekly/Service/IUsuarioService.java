@@ -2,6 +2,8 @@ package com.medium_weekly.Service;
 
 import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
+import com.medium_weekly.Model.Posteos;
+import com.medium_weekly.Model.Usuario;
 
 import java.util.List;
 
@@ -17,4 +19,8 @@ public interface IUsuarioService {
     void editUsuario(Long idUsuario, UsuarioDTO usuario);
 
     UsuarioDTO getUsuarioDTOByLogin(LoginDTO log);
+
+    Usuario findById(Long idUsuario);
+
+    List<Posteos> findPost(Long idUsuario);
 }

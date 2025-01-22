@@ -3,6 +3,7 @@ package com.medium_weekly.Service;
 import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
 import com.medium_weekly.Exception.ResourceNotFound;
+import com.medium_weekly.Model.Posteos;
 import com.medium_weekly.Model.Usuario;
 import com.medium_weekly.Repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +31,20 @@ public class UsuarioService implements IUsuarioService{
         return new UsuarioDTO(
              usuario.getId_usuario(),
             usuario.getNombre(),
-            usuario.getRol(),
                 usuario.getContrasena()
         );
     }
 
-    private Usuario findById(long idUsuario){
+    @Override
+    public Usuario findById(Long idUsuario){
         return usuarioRepository.findById(idUsuario).orElseThrow(() ->
                 new ResourceNotFound(idUsuario, "No se encontró al cliente con ID: " + idUsuario)
         );
+    }
+
+    @Override
+    public List<Posteos> findPost(Long idUsuario) {
+        return this.findById(idUsuario).getPosts();
     }
 
     @Override
@@ -51,7 +57,7 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public UsuarioDTO saveUsuario(UsuarioDTO nuevoUsuario) {
-        Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getRol(),nuevoUsuario.getContrasena());
+        Usuario usuario = new Usuario(nuevoUsuario.getNombre(),nuevoUsuario.getContrasena());
         Usuario usuarioSave = usuarioRepository.save(usuario);
 
         return this.crearDTO(usuarioSave);
@@ -76,9 +82,11 @@ public class UsuarioService implements IUsuarioService{
         return this.crearDTO(usuarioRepository.findByNombreAndContrasena(log.getNombre(),log.getContrasena()).orElseThrow());
     }
 
+
+
     private void updateUsuario(Usuario usuario, UsuarioDTO usuarioDto) {
         usuario.setNombre(usuarioDto.getNombre());
-        usuario.setRol(usuarioDto.getRol());
+
         usuario.setContrasena(usuarioDto.getContrasena());
     }
 }
