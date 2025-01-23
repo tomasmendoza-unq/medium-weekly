@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import YooptaEditor, { createYooptaEditor, YooptaContentValue } from "@yoopta/editor";
 // Pluggins
 import Paragraph from "@yoopta/paragraph";
@@ -38,9 +38,10 @@ const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 type YooptaProps = {
     value: YooptaContentValue;
     setValue: (value: YooptaContentValue) => void;
+    block: boolean
 };
 
-const Yoopta = ({ value, setValue }: YooptaProps) => {
+const Yoopta = ({ value, setValue, block }: YooptaProps) => {
     const editor = useMemo(() => createYooptaEditor(), []);
 
     const onChange = (value: YooptaContentValue) => {
@@ -59,6 +60,7 @@ const Yoopta = ({ value, setValue }: YooptaProps) => {
                     tools={TOOLS}
                     marks={MARKS}
                     style={{ width: "100%" }}
+                    readOnly={block}
                 />
             </div>
         </section>

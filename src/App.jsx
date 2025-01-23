@@ -22,7 +22,11 @@ function App() {
             <Route path='/register' element={<Register />}></Route>
             <Route path='*' element={<NotFound />}></Route>
             <Route path='/newblog' element={<NewBlog/>}></Route>
-            <Route path='/blog/:id' element={"Proceso"}></Route>
+            {sessionStorage.getItem("id") ? 
+            <Route path='/blog/:id' element={<BlogContent/>}></Route>
+            :
+            null}
+            
           </Routes>
         <footer>
           <Footer />

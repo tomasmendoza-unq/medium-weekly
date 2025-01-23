@@ -34,7 +34,7 @@ const NewBlog = () => {
     const [dataBlog, setDataBlog] = useState({
         "titulo": '',
         "resumen": '',
-        "contenido": "Esto es contenido de prueba porque los valores que se guardan en el estado value son muy pesados y actualmente no se pueden guardar en el servidor",
+        "contenido": "",
         "src": './img/coffe.jpg',
         "idAutor": sessionStorage.getItem('id'),
     });
@@ -87,7 +87,7 @@ const NewBlog = () => {
                     />
 
                     <label className='title2NewBlog' htmlFor="content">Contenido:</label>
-                    <Yoopta value={value} setValue={setValue}/>
+                    <Yoopta value={value} setValue={setValue} block={false}/>
                 </form>
                 <button className='btn' form='formBlog' type="submit">Enviar</button>
             </div>
