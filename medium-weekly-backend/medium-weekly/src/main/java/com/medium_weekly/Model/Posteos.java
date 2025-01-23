@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "posteo")
 @Data
@@ -26,7 +28,10 @@ public class Posteos {
 
     private String src;
 
+    @Lob
     private String contenido;
+
+    private LocalDate created;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")

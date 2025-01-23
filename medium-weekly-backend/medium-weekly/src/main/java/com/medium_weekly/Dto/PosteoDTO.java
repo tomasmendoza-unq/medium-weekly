@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -31,6 +33,8 @@ public class PosteoDTO {
     @NotNull(message = "Contenido no puede ser null")
     @NotBlank(message = "Contenido REQUIRED")
     private String contenido;
+
+    private LocalDate created;
 
     private Long idAutor;
 }

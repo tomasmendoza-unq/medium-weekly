@@ -42,6 +42,7 @@ public class PosteosService implements IPosteosService{
                 .resumen(posteo.getResumen())
                 .src(posteo.getSrc())
                 .contenido(posteo.getContenido())
+                .created(posteo.getCreated())
                 .idAutor(posteo.getAutor().getId_usuario())
                 .build();
     }
