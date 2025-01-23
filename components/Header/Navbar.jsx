@@ -28,13 +28,13 @@ const Navbar = () => {
                 <section className="tools">
                     <div className='searchBar'>
                         <input type="text" placeholder='Buscar...' />
-                        <button className='btn'><FaSistrix /></button>
+                        <button className='search'><FaSistrix /></button>
                     </div>
                     {sessionStorage.getItem('logged') === null ?
                     <div className="menu__bar">
                         <ul className="navigation hide">
                             <li>
-                                <button className='btn'>
+                                <button>
                                     <Link to="/login">
                                         <FaRegUser />
                                     </Link>
@@ -46,7 +46,7 @@ const Navbar = () => {
                     <div className="menu__bar">
                     <ul className="navigation hide">
                         <li>
-                            <button className='btn'>
+                            <button>
                                 <Link>
                                     <FaRegUser />
                                 </Link>
@@ -71,8 +71,8 @@ const Navbar = () => {
                             </div>
                         </li>
                         <li>
-                            <button className='btn'>
-                                <Link to="/login">
+                            <button>
+                                <Link to="/newblog">
                                     <FaRegPenToSquare />
                                 </Link>
                             </button>
@@ -80,7 +80,7 @@ const Navbar = () => {
                                 <ul className="list-items-with-description">
                                     <li>
                                         <div className="item-title">
-                                            <Link to="/login">
+                                            <Link to="/newblog">
                                                 <h3>Redactar</h3>
                                             </Link>
                                         </div>

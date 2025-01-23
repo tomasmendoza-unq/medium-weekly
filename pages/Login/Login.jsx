@@ -49,8 +49,9 @@ const Login = () => {
             // ? Aca deberia ir el añadido de cookies
             sessionStorage.setItem("logged", true)
             sessionStorage.setItem("user", dataForm.nombre)
+            sessionStorage.setItem("id", dataUsers.find((e) => e.nombre === dataForm.nombre).id_usuario)
             setTimeout(() => {
-                window.location.replace("http://localhost:5173/")
+                window.location.replace("http://localhost:5174/")
             }, 1000);
         } else {
             if (dataForm.contrasena === "") {
@@ -77,6 +78,7 @@ const Login = () => {
             
         }
     }
+
 
     return (
         <div className="containerLogin">

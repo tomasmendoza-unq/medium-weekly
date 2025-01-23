@@ -3,7 +3,7 @@ import YooptaEditor, { createYooptaEditor, YooptaContentValue } from "@yoopta/ed
 // Pluggins
 import Paragraph from "@yoopta/paragraph";
 import Blockquote from "@yoopta/blockquote";
-import { HeadingOne, HeadingTwo, HeadingThree } from '@yoopta/headings';
+import { HeadingTwo, HeadingThree } from '@yoopta/headings';
 import Code from "@yoopta/code";
 import Embed from "@yoopta/embed";
 import Link from "@yoopta/link";
@@ -16,7 +16,7 @@ import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/ma
 // Styles
 import './Yoopta.css'
 
-const plugins = [Paragraph, Blockquote, Code, HeadingOne, HeadingTwo, HeadingThree, Embed, Link];
+const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link];
 
 const TOOLS = {
     Toolbar: {
@@ -35,16 +35,17 @@ const TOOLS = {
 
 const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 
-const Yoopta = () => {
+type YooptaProps = {
+    value: YooptaContentValue;
+    setValue: (value: YooptaContentValue) => void;
+};
+
+const Yoopta = ({ value, setValue }: YooptaProps) => {
     const editor = useMemo(() => createYooptaEditor(), []);
-    const [value, setValue] = useState<YooptaContentValue>();
 
     const onChange = (value: YooptaContentValue) => {
         setValue(value);
     };
-    const handleSend = () => {
-        console.log(value);
-    }
 
     return (
         <section className="contenedor">
@@ -57,9 +58,9 @@ const Yoopta = () => {
                     onChange={onChange}
                     tools={TOOLS}
                     marks={MARKS}
+                    style={{ width: "100%" }}
                 />
             </div>
-            <button className="btn" onClick={handleSend}>Enviar</button>
         </section>
     );
 };

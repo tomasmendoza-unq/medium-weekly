@@ -1,5 +1,5 @@
 .box {
-    max-width: 800px;
+    max-width: 80%;
     min-height: 300px;
     margin: 20px auto; 
     padding: 20px;
@@ -10,8 +10,4 @@
 
 .box:hover {
     cursor: text;
-}
-
-.yoopta-editor {
-    width: 100%;
 }

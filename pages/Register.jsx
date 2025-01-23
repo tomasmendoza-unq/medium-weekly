@@ -43,7 +43,7 @@ const Register = () => {
             });
             alert("Usuario creado correctamente", "#1abb1a")
             setTimeout(() => {
-                window.location.replace("http://localhost:5173/login")
+                window.location.replace("http://localhost:5174/login")
             }, 1000);
         } catch (error) {
             console.error('Error al crear usuario:', error);

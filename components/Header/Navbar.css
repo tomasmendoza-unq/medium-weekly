@@ -204,3 +204,7 @@ nav {
     display: flex;
     opacity: 1;
 }
+
+.search {
+    background-color: transparent;
+}
