@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -34,7 +35,7 @@ public class PosteoDTO {
     @NotBlank(message = "Contenido REQUIRED")
     private String contenido;
 
-    private LocalDate created;
+    private LocalDateTime created;
 
     private Long idAutor;
 }

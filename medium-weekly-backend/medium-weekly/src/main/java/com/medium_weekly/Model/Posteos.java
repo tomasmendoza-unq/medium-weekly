@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "posteo")
@@ -31,7 +33,9 @@ public class Posteos {
     @Lob
     private String contenido;
 
-    private LocalDate created;
+    
+    @CreationTimestamp
+    private LocalDateTime created;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
