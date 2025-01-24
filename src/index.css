@@ -107,8 +107,6 @@ input {
 }
 
 .btnLink {
-    width: 10vw;
-    height: 35px;
     background-color: transparent;
     border-radius: 10px;
     border: 2px solid var(--secondary-color);

@@ -1,10 +1,26 @@
 import './NewBlog.css'
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Yoopta from '../../components/Yoopta/Yoopta'
 import { YooptaContentValue } from "@yoopta/editor";
 
 const NewBlog = () => {
-    
+
+    const [value, setValue] = useState<YooptaContentValue>({});
+    const [dataBlog, setDataBlog] = useState({
+        "titulo": '',
+        "resumen": '',
+        "contenido": "",
+        "src": './img/coffe.png',
+        "idAutor": sessionStorage.getItem('id')
+    });
+
+    const padStart = (str: string, targetLength: number, padString: string = "0"): string => {
+        while (str.length < targetLength) {
+            str = padString + str;
+        }
+        return str;
+    };
+
     const crearPost = async (blog: {}) => {
         try {
             const res = await fetch('http://localhost:8080/posteos/crear', {
@@ -14,30 +30,22 @@ const NewBlog = () => {
                 },
                 body: JSON.stringify(blog),
             });
-
+            
             if (!res.ok) {
                 console.log(blog)
                 const errorDetails = await res.json();
                 console.error('Error details:', errorDetails);
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
-
+            setTimeout(() => {
+                window.location.replace("http://localhost:5174/")
+            }, 1000);
             const data = await res.json();
             console.log('Post created successfully:', data);
         } catch (error) {
             console.error('Error creating post:', error);
         }
     }
-
-    const [value, setValue] = useState<YooptaContentValue>({});
-
-    const [dataBlog, setDataBlog] = useState({
-        "titulo": '',
-        "resumen": '',
-        "contenido": "",
-        "src": './img/coffe.jpg',
-        "idAutor": sessionStorage.getItem('id'),
-    });
 
     const updateContent = () => {
         setDataBlog((prev) => ({
@@ -85,9 +93,8 @@ const NewBlog = () => {
                         className='inputNewBlog resumeNewBlog'
                         cols={30}
                     />
-
                     <label className='title2NewBlog' htmlFor="content">Contenido:</label>
-                    <Yoopta value={value} setValue={setValue} block={false}/>
+                    <Yoopta value={value} setValue={setValue} block={false} />
                 </form>
                 <button className='btn' form='formBlog' type="submit">Enviar</button>
             </div>
