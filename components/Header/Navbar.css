@@ -113,7 +113,7 @@ nav {
     position: absolute;
     top: 42px;
     min-width: 105px;
-    border-radius: 8px;
+    border-radius: 3px;
     background-color: var(--white);
     display: none;
     flex-direction: column;

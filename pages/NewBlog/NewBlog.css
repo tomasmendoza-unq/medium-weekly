@@ -23,13 +23,16 @@
 }
 
 .inputNewBlog {
-    width: 80%;
+    width: 100%;
     margin-top: 1rem;
     padding: 0 1rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border-left: 3px solid var(--secondary-color);
     font-family: var(--text-font);
     margin: 1rem auto;
+}
+
+textarea {
+    border: none;
 }
 
 .titleNewBlog {
@@ -44,7 +47,7 @@
 
 .resumeNewBlog {
     resize: none;
-    height: 200px;
+    height: 100px;
     padding: 10px;
     font-size: 20px;
     font-weight: 500;

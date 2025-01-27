@@ -27,7 +27,7 @@ const Navbar = () => {
                 <Link to="/"><h1 className='title1'>Medium Weekly</h1></Link>
                 <section className="tools">
                     <div className='searchBar'>
-                        <input type="text" placeholder='Buscar...' />
+                        <input className='input' type="text" placeholder='Buscar...' />
                         <button className='search'><FaSistrix /></button>
                     </div>
                     {sessionStorage.getItem('logged') === null ?

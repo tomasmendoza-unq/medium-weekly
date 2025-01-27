@@ -78,6 +78,15 @@ a {
 }
 
 input {
+    border: none;
+    outline: none;
+}
+
+textarea {
+    outline: none;
+}
+
+.input {
     height: 10px;
     width: 250px;
     padding: 15px;
