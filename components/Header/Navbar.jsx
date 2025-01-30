@@ -55,7 +55,7 @@ const Navbar = () => {
                                 <ul className="list-items-with-description">
                                     <li>
                                         <div className="item-title">
-                                            <Link to="/login">
+                                            <Link to="/user">
                                                 <h3>Ver Perfil</h3>
                                             </Link>
                                         </div>

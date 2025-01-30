@@ -94,7 +94,7 @@ const BlogContent = () => {
         <section className="blogContent">
             <div className="headBlog">
                 <h1 className="titleBlog">{dataPost.titulo}</h1>
-                <p className="textHead">{autor}</p>
+                <RouterLink to={`/user/${dataPost.idAutor}`}><p className="textHead">{autor}</p></RouterLink>
                 <span className="flex">
                     <p className="textHead">{dataPost.created || "Fecha no disponible"}</p>
                     <p className="textHead">{calculateReadingTime(dataPost.contenido)}</p>
