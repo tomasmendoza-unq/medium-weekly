@@ -1,12 +1,14 @@
 import React from 'react'
 import './Navbar.css'
-import { FaRegPenToSquare, FaRegUser, FaSistrix } from "react-icons/fa6";
+import { FaRegPenToSquare, FaRegUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Search from "../Search"
 
 const Navbar = () => {
 
     const [isShrunk, setIsShrunk] = useState(false);
+    const id = sessionStorage.getItem("id")
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,10 +28,7 @@ const Navbar = () => {
             <nav>
                 <Link to="/"><h1 className='title1'>Medium Weekly</h1></Link>
                 <section className="tools">
-                    <div className='searchBar'>
-                        <input className='input' type="text" placeholder='Buscar...' />
-                        <button className='search'><FaSistrix /></button>
-                    </div>
+                <Search className={`results ${isShrunk ? "shrinkSearch": ""}`}/>
                     {sessionStorage.getItem('logged') === null ?
                     <div className="menu__bar">
                         <ul className="navigation hide">
@@ -55,7 +54,7 @@ const Navbar = () => {
                                 <ul className="list-items-with-description">
                                     <li>
                                         <div className="item-title">
-                                            <Link to="/user">
+                                            <Link to={`/user/${id}`}>
                                                 <h3>Ver Perfil</h3>
                                             </Link>
                                         </div>

@@ -22,7 +22,8 @@ function App() {
           <Route path='*' element={<NotFound />}></Route>
           <Route path='/newblog' element={<NewBlog />}></Route>
           <Route path='/user/:id' element={<UserPage/>}></Route>
-          {sessionStorage.getItem("id") ?
+          {sessionStorage.getItem("id") 
+            ?
             <Route path='/blog/:id' element={<BlogContent />}></Route>
             :
             <Route path='/login' element={<Login />}></Route>
