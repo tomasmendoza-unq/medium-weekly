@@ -3,6 +3,7 @@ import './Navbar.css'
 import { FaRegPenToSquare, FaRegUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { FaQuoteRight } from "react-icons/fa6";
 import Search from "../Search"
 
 const Navbar = () => {
@@ -26,7 +27,10 @@ const Navbar = () => {
     return (
         <header className={`header ${isShrunk ? "shrink" : ""}`}>
             <nav>
-                <Link to="/"><h1 className='title1'>Medium Weekly</h1></Link>
+                <Link className='logo' to="/">
+                    <h1 className='title1'>Medium Weekly</h1>
+                    <FaQuoteRight color='#dee9e5'/>
+                </Link>
                 <section className="tools">
                 <Search className={`results ${isShrunk ? "shrinkSearch": ""}`}/>
                     {sessionStorage.getItem('logged') === null ?

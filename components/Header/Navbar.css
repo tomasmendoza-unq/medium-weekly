@@ -12,6 +12,11 @@ header {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.logo {
+    display: flex;
+    gap: 10px;
+}
+
 .results {
     position: absolute;
     display: flex;
@@ -227,6 +232,17 @@ header {
 .item-title a {
     color: var(--secondary-color);
     transition: all 0.2s ease-in-out;
+}
+
+.logout {
+    background-color: none;
+    cursor: pointer;
+    border: none;
+    color: var(--secondary-color);
+    font-weight: 200;
+    transition: all 0.2s ease-in-out;
+    background-color: transparent;
+    font-family: var(--text-font);
 }
 
 .item-title a:hover {
