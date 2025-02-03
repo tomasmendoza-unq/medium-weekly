@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { FaSistrix } from 'react-icons/fa6'
 
 const Search = ({ className }) => {
     const [dataPost, setDataPost] = useState([])
@@ -14,7 +13,6 @@ const Search = ({ className }) => {
     }, [])
     const handleSearch = (e) => {
         setQuery(e.target.value)
-        console.log(dataPost)
     }
 
     const resultadosFiltrados = dataPost.filter(post =>
@@ -30,21 +28,48 @@ const Search = ({ className }) => {
                     placeholder='Buscar...'
                     onChange={handleSearch}
                 />
-                <FaSistrix />
             </div>
-            {query.length === 0 
+            {
+            sessionStorage.getItem("logged") === "true"
+                ?
+                query.length === 0 
                 ?
                 ""
                 : 
                 <ul className={className}>
-                    {resultadosFiltrados.length > 0 ? (
-                        resultadosFiltrados.map(post => (
-                            <Link className='postResult' to={`/blog/${post.id_posteo}`} key={post.id_posteo}>{post.titulo}</Link>
+                    {
+                    resultadosFiltrados.length > 0 
+                    ?
+                    (resultadosFiltrados.slice(0, 5).map(post => (
+                            <Link className='postResult' to={`/blog/${post.id_posteo}`} key={post.id_posteo}><img src={post.src} alt="" />{post.titulo}</Link>
                         ))
-                    ) : (
+                    )
+                    :
+                    (
                         <p>No se encontraron resultados</p>
                     )}
                 </ul> 
+                :
+                query.length === 0 
+                ?
+                ""
+                : 
+                <ul className={className}>
+                    {
+                    resultadosFiltrados.length > 0 
+                    ?
+                    (resultadosFiltrados.slice(0, 5).map(post => (
+                            <p className='postResult' key={post.id_posteo}><img src={post.src} alt="" />{post.titulo}</p>
+                        ))
+                    )
+                    :
+                    (
+                        <p>No se encontraron resultados</p>
+                    )}
+                </ul> 
+            }
+            {
+
             }
         </div>
     )
