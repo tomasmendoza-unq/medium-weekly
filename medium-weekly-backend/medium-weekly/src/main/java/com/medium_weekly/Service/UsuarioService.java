@@ -6,6 +6,7 @@ import com.medium_weekly.Exception.ResourceNotFound;
 import com.medium_weekly.Model.Posteos;
 import com.medium_weekly.Model.Usuario;
 import com.medium_weekly.Repository.IUsuarioRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,22 +18,17 @@ public class UsuarioService implements IUsuarioService{
     @Autowired
     IUsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public List<UsuarioDTO> getClientes() {
         List<UsuarioDTO> usuarioDTOList = new ArrayList<>();
 
         usuarioRepository.findAll().forEach(usuario -> {
-            usuarioDTOList.add(this.crearDTO(usuario));
+            usuarioDTOList.add(modelMapper.map(usuario,UsuarioDTO.class));
         });
         return usuarioDTOList;
-    }
-
-    private UsuarioDTO crearDTO(Usuario usuario){
-        return new UsuarioDTO(
-             usuario.getId_usuario(),
-            usuario.getNombre(),
-                usuario.getContrasena()
-        );
     }
 
     @Override
@@ -54,7 +50,7 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public UsuarioDTO getUsuarioDTOById(Long idUsuario) {
-        UsuarioDTO usuarioDTO = this.crearDTO(this.findById(idUsuario));
+        UsuarioDTO usuarioDTO = modelMapper.map(this.findById(idUsuario),UsuarioDTO.class);
 
         return usuarioDTO;
     }
@@ -62,10 +58,9 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public UsuarioDTO saveUsuario(UsuarioDTO nuevoUsuario) {
-        Usuario usuario = new Usuario(nuevoUsuario.getNombre(),nuevoUsuario.getContrasena());
-        Usuario usuarioSave = usuarioRepository.save(usuario);
+        Usuario usuarioSave = usuarioRepository.save(modelMapper.map(nuevoUsuario,Usuario.class));
 
-        return this.crearDTO(usuarioSave);
+        return modelMapper.map(usuarioSave,UsuarioDTO.class);
     }
 
     @Override
@@ -77,21 +72,21 @@ public class UsuarioService implements IUsuarioService{
     @Override
     public void editUsuario(Long idUsuario, UsuarioDTO usuarioDto) {
         Usuario usuario = this.findById(idUsuario);
-        this.updateUsuario(usuario,usuarioDto);
+        modelMapper.map(usuarioDto,usuario);
 
         usuarioRepository.save(usuario);
     }
 
     @Override
     public UsuarioDTO getUsuarioDTOByLogin(LoginDTO log) {
-        return this.crearDTO(usuarioRepository.findByNombreAndContrasena(log.getNombre(),log.getContrasena()).orElseThrow());
+        return modelMapper.map(this.findByLog(log),UsuarioDTO.class);
+    }
+
+    private  Usuario findByLog(LoginDTO log) {
+
+        return usuarioRepository.findByNombreAndContrasena(log.getNombre(),log.getContrasena()).orElseThrow();
     }
 
 
 
-    private void updateUsuario(Usuario usuario, UsuarioDTO usuarioDto) {
-        usuario.setNombre(usuarioDto.getNombre());
-
-        usuario.setContrasena(usuarioDto.getContrasena());
-    }
 }
