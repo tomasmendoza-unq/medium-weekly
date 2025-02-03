@@ -63,10 +63,6 @@ body {
     font-weight: 300;
     color: var(--secondary-color);
     font-size: 33px;
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-decoration-thickness: 1.4px;
-    text-underline-offset: 8px;
 }
 
 .title3 {

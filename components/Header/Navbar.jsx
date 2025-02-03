@@ -61,9 +61,9 @@ const Navbar = () => {
                                     </li>
                                     <li>
                                         <div className="item-title">
-                                            <Link className='logout' to="/login">
+                                            <button onClick={()=>{sessionStorage.clear() ;location.reload()}} className='logout' to="/login">
                                                 <h3>LogOut</h3>
-                                            </Link>
+                                            </button>
                                         </div>
                                     </li>
                                 </ul>

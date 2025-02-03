@@ -19,12 +19,6 @@ const Bloglist = () => {
             })
     }, [])
 
-    const mapData = () => {
-        return dataPost.map((e) => {
-            return <Blogcard key={e.id_posteo} title={e.titulo} resume={e.resumen} src={e.src} id={e.id_posteo} />;
-        });
-    };
-
     return (
         <div className='bloglist'>
             <div className='titleBlogs'>
