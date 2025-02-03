@@ -1,5 +1,5 @@
 .blogContent {
-    width: 65vw;
+    width: 55vw;
     background-color: var(--white);
     border-radius: 30px;
     margin: 60px auto;
@@ -25,7 +25,7 @@
 }
 
 .headBlog {
-    padding-bottom: 30px;
+    padding-bottom: 40px;
     border-bottom: 2px solid var(--secondary-color);
     margin-bottom: 20px;
 }
@@ -44,13 +44,21 @@
 
 .contentBlog {
     margin: 30px 0px;
+    border-bottom: 2px solid var(--secondary-color);
 }
 
 .textBlog {
     margin: 10px 0px;
 }
 
+.yoopta-paragraph {
+    padding-left: 15px;
+}
+
 .subTitleBlog {
     font-weight: 600;
     color: #2c2c2c;
+}
+.linkBlog {
+    max-width: 40%;
 }

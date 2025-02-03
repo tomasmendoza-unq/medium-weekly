@@ -8,6 +8,57 @@ nav {
     z-index: 1;
 }
 
+header {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.logo {
+    display: flex;
+    gap: 10px;
+}
+
+.results {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    top: 80px;
+    padding: 30px;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: all 0.3s;
+    width: 500px;
+    background: rgba(245, 245, 245, 0.74);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.7px);
+    -webkit-backdrop-filter: blur(4.7px);
+}
+
+.postResult {
+    padding: 5px;
+    background-color: var(--white);
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+}
+
+.postResult:hover {
+    transform: scale(1.02);
+}
+
+.postResult img {
+    height: 70px;
+}
+
+.shrinkSearch {
+    top: 60px;
+}
+
 .tools {
     display: flex;
     align-items: center;
@@ -113,7 +164,7 @@ nav {
     position: absolute;
     top: 42px;
     min-width: 105px;
-    border-radius: 8px;
+    border-radius: 3px;
     background-color: var(--white);
     display: none;
     flex-direction: column;
@@ -183,6 +234,17 @@ nav {
     transition: all 0.2s ease-in-out;
 }
 
+.logout {
+    background-color: none;
+    cursor: pointer;
+    border: none;
+    color: var(--secondary-color);
+    font-weight: 200;
+    transition: all 0.2s ease-in-out;
+    background-color: transparent;
+    font-family: var(--text-font);
+}
+
 .item-title a:hover {
     filter: opacity(0.75);
 }
@@ -205,6 +267,3 @@ nav {
     opacity: 1;
 }
 
-.search {
-    background-color: transparent;
-}

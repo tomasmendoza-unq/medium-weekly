@@ -13,7 +13,7 @@ const Login = () => {
             })
     }, [])
 
-    const alert = (text) => {
+    const alert = (text, color) => {
         Toastify({
             text: text,
             duration: 3000,
@@ -23,7 +23,7 @@ const Login = () => {
                 "y": 50
             },
             style: {
-                background: "#4D4D4D",
+                background: "#4D4D4D" || color,
                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                 fontSize: "20px",
                 borderRadius: "5px",
@@ -55,25 +55,25 @@ const Login = () => {
             }, 1000);
         } else {
             if (dataForm.contrasena === "") {
-                alert("La contraseña no puede estar vacía")
+                alert("La contraseña no puede estar vacía", "#bb1a1a")
             }else 
             if (dataForm.nombre === "") {
-                alert("El nombre de usuario no puede estar vacío")
+                alert("El nombre de usuario no puede estar vacío", "#bb1a1a")
             }else
             if (dataForm.nombre.length > 16) {
-                alert("El nombre de usuario no puede tener más de 16 caracteres")
+                alert("El nombre de usuario no puede tener más de 16 caracteres", "#bb1a1a")
             } 
             if (dataForm.nombre.length < 6) {
-                alert("El nombre de usuario no puede tener menos de 6 caracteres")
+                alert("El nombre de usuario no puede tener menos de 6 caracteres", "#bb1a1a")
             }
             if (dataForm.contrasena.length > 16) {
-                alert("La contraseña no puede tener más de 16 caracteres")
+                alert("La contraseña no puede tener más de 16 caracteres", "#bb1a1a")
             }
             if (dataForm.contrasena.length < 8) {
-                alert("La contraseña no puede tener menos de 8 caracteres")
+                alert("La contraseña no puede tener menos de 8 caracteres", "#bb1a1a")
             }
             else {
-                alert("Contraseña o nombre incorrectos")
+                alert("Contraseña o nombre incorrectos", "#bb1a1a")
             }
             
         }
@@ -95,7 +95,8 @@ const Login = () => {
                             minLength="6"
                             maxLength="16"
                             placeholder='Ej: Julio Cortázar' 
-                            onChange={handleInput} 
+                            onChange={handleInput}
+                            className='input'
                         />
 
                         <label htmlFor="pass">Contraseña</label>
@@ -106,7 +107,8 @@ const Login = () => {
                             maxLength="16" 
                             name='contrasena' 
                             placeholder='*******' 
-                            onChange={handleInput} 
+                            onChange={handleInput}
+                            className='input'
                         />
                     </form>
                     <button className='btn' form='login' type="submit">Log In</button>

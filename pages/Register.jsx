@@ -100,7 +100,8 @@ const Register = () => {
                             minLength="6"
                             maxLength="16" 
                             placeholder='Ej: Julio Cortázar' 
-                            onChange={handleInput} 
+                            onChange={handleInput}
+                            className='input'
                         />
 
                         <label htmlFor="contrasena">Contraseña</label>
@@ -110,7 +111,8 @@ const Register = () => {
                             required 
                             maxLength="16" 
                             placeholder='*******' 
-                            onChange={handleInput} 
+                            onChange={handleInput}
+                            className='input'
                         />
 
                         <label htmlFor="pass">Repetir Contraseña</label>
@@ -121,7 +123,8 @@ const Register = () => {
                             minLength="8" 
                             name='repass' 
                             placeholder='*******' 
-                            onChange={handleInput} 
+                            onChange={handleInput}
+                            className='input'
                         />
                     </form>
                     <button className='btn' form='login' type="submit">Registrarse</button>

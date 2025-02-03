@@ -48,7 +48,7 @@ body {
 .header.shrink {
     padding: 10px 100px;
     background: linear-gradient(to top left, #416056, #53796c);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .title1 {
@@ -63,10 +63,6 @@ body {
     font-weight: 300;
     color: var(--secondary-color);
     font-size: 33px;
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-decoration-thickness: 1.4px;
-    text-underline-offset: 8px;
 }
 
 .title3 {
@@ -78,6 +74,15 @@ a {
 }
 
 input {
+    border: none;
+    outline: none;
+}
+
+textarea {
+    outline: none;
+}
+
+.input {
     height: 10px;
     width: 250px;
     padding: 15px;
@@ -86,6 +91,7 @@ input {
     font-size: 16px;
     border: 1px solid var(--title-nav-color);
     font-family: var(--title-font);
+    margin-right: 5px;
 }
 
 .btn {
@@ -107,8 +113,6 @@ input {
 }
 
 .btnLink {
-    width: 10vw;
-    height: 35px;
     background-color: transparent;
     border-radius: 10px;
     border: 2px solid var(--secondary-color);
@@ -148,4 +152,8 @@ input {
 
 a {
     color: var(--secondary-color);
+}
+
+.search {
+    background-color: transparent;
 }
