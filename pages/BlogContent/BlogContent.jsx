@@ -5,6 +5,7 @@ import { FaBookmark } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
 import { Link as RouterLink } from 'react-router-dom';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
+import Comments from "../../components/Comments"
 // Plugins
 import Paragraph from "@yoopta/paragraph";
 import Blockquote from "@yoopta/blockquote";
@@ -121,6 +122,7 @@ const BlogContent = () => {
                     <p>Cargando contenido del editor...</p>
                 )}
             </div>
+            <Comments />
             <div className='footerBlog'>
                 <RouterLink to="/" className="btnLink linkBlog">Volver al inicio</RouterLink>
             </div>

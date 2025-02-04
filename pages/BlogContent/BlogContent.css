@@ -57,8 +57,133 @@
 
 .subTitleBlog {
     font-weight: 600;
-    color: #2c2c2c;
+    color: var(--secondary-color);
 }
 .linkBlog {
     max-width: 40%;
+}
+
+.comments {
+    border-bottom: 2px solid var(--secondary-color);
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
+.createComment {
+    display: block;
+    width: 80%;
+    height: 40px;
+    background-color: var(--white);
+    border: 2px solid var(--secondary-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: text;
+}
+
+.createComment p {
+    font-weight: 300;
+    font-style: italic;
+    color: #6f6f6f;
+}
+
+.inputComment {
+    resize: none;
+    display: block;
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    position: relative;
+    bottom: 60px;
+    transition: all 0.5s;
+    padding: 10px;
+    font-size: 16px;
+    font-family: var(--text-font);
+    border: 2px solid var(--secondary-color);
+    border-bottom: none;
+}
+
+.inputComment::placeholder {
+    font-weight: 300;
+    font-style: italic;
+    color: #6f6f6f;
+}
+
+.containerComments {
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+    height: 0px;
+}
+
+.inpActivated {
+    opacity: 1;
+    visibility: visible;
+    height: 200px;
+}
+
+.toolsComments {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    bottom: 60px;
+    border: 2px solid var(--secondary-color);
+    padding: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.send {
+    border: 1px solid var(--secondary-color);
+    font-family: var(--text-font);
+    font-weight: 600;
+    color: var(--secondary-color);
+    height: 30px;
+    width: 80px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all 0.2s;
+}
+
+.send:hover {
+    background-color: var(--primary-color);
+    color: var(--title-nav-color);
+    border: none;
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+.cancel {
+    height: 30px;
+    width: 90px;
+    border: 1px solid var(--secondary-color);
+    font-family: var(--text-font);
+    color: var(--secondary-color);
+    font-weight: 600;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all 0.2s;
+}
+
+.cancel:hover {
+    background-color: #bb1a1a;
+    color: var(--title-nav-color);
+    border: none;
+    box-shadow: none;
+    transform: scale(0.98);
 }
