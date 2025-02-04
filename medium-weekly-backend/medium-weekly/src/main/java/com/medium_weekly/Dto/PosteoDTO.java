@@ -1,5 +1,6 @@
 package com.medium_weekly.Dto;
 
+import com.medium_weekly.Model.Comentario;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -34,7 +37,9 @@ public class PosteoDTO {
     @NotBlank(message = "Contenido REQUIRED")
     private String contenido;
 
-    private LocalDate created;
+    private LocalDateTime created;
 
     private Long idAutor;
+
+    private List<ComentarioDTO> comentarios;
 }

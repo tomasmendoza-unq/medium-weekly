@@ -4,9 +4,14 @@ import com.medium_weekly.Dto.ComentarioDTO;
 import com.medium_weekly.Exception.ResourceNotFound;
 import com.medium_weekly.Model.Comentario;
 import com.medium_weekly.Repository.IComentarioRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ComentarioService implements IComentarioService {
@@ -14,6 +19,7 @@ public class ComentarioService implements IComentarioService {
     @Autowired
     private IUsuarioService usuarioService;
 
+    @Lazy
     @Autowired
     private IPosteosService posteosService;
 
@@ -40,6 +46,25 @@ public class ComentarioService implements IComentarioService {
 
         modelMapper.map(comentarioDTO,comentario);
         comentarioRepository.save(comentario);
+    }
+
+    @Override
+    public List<ComentarioDTO> findComentariosByPost(Long idPosteo) {
+        List<Comentario> comentarioList= posteosService.getComentarios(idPosteo);
+
+        return this.comentariosToDTO(comentarioList);
+    }
+
+    @Transactional
+    @Override
+    public List<ComentarioDTO> comentariosToDTO(List<Comentario> comentarioList) {
+        List<ComentarioDTO> comentarioDTOS = new ArrayList<>();
+        comentarioList.forEach(comentario -> {
+            comentarioDTOS.add(modelMapper.map(comentario, ComentarioDTO.class));
+        });
+
+        comentarioDTOS.size();
+        return comentarioDTOS;
     }
 
     private Comentario saveByDTO(ComentarioDTO comentarioDTO) {
