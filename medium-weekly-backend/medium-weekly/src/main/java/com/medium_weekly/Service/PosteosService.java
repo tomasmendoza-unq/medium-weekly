@@ -2,11 +2,14 @@ package com.medium_weekly.Service;
 
 import com.medium_weekly.Dto.PosteoDTO;
 import com.medium_weekly.Exception.ResourceNotFound;
+import com.medium_weekly.Model.Comentario;
 import com.medium_weekly.Model.Posteos;
 import com.medium_weekly.Model.Usuario;
 import com.medium_weekly.Repository.IPosteosRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +17,10 @@ import java.util.List;
 
 @Service
 public class PosteosService implements IPosteosService{
+    @Lazy
+    @Autowired
+    private IComentarioService comentarioService;
+
     @Autowired
     private IPosteosRepository posteosRepository;
 
@@ -49,6 +56,7 @@ public class PosteosService implements IPosteosService{
         posteosRepository.delete(this.findById(idPosteo));
     }
 
+    @Transactional
     @Override
     public List<PosteoDTO> getPosteosByUser(Long idUsuario) {
 
@@ -60,11 +68,15 @@ public class PosteosService implements IPosteosService{
         return modelMapper.map(this.findById(idPosteo), PosteoDTO.class);
     }
 
+    @Transactional
+
     private List<PosteoDTO> createDTOs(List<Posteos> all) {
         List<PosteoDTO> posteoDTOList = new ArrayList<>();
 
         for (Posteos posteo: all){
-            posteoDTOList.add(modelMapper.map(posteo, PosteoDTO.class));
+            PosteoDTO posteoDTO = modelMapper.map(posteo, PosteoDTO.class);
+            posteoDTO.setComentarios(comentarioService.comentariosToDTO(posteo.getComentario()));
+            posteoDTOList.add(posteoDTO);
         }
 
         return posteoDTOList;
@@ -91,6 +103,16 @@ public class PosteosService implements IPosteosService{
         return posteosRepository.findById(idPosteo).orElseThrow(() ->
                 new ResourceNotFound(idPosteo, "No se encontró el posteo con ID: " + idPosteo)
         );
+    }
+
+    @Override
+    @Transactional
+    public List<Comentario> getComentarios(Long idPosteo) {
+        Posteos post = this.findById(idPosteo);
+
+        post.getComentario().size();
+
+        return post.getComentario();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.medium_weekly.Controller;
 
 import com.medium_weekly.Dto.PosteoDTO;
+import com.medium_weekly.Service.IComentarioService;
 import com.medium_weekly.Service.IPosteosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class PosteosController {
     @Autowired
     IPosteosService posteosService;
+
+    @Autowired
+    IComentarioService comentarioService;
 
     @GetMapping
     public ResponseEntity<?> getPosteos(){
@@ -25,7 +29,9 @@ public class PosteosController {
 
     @GetMapping("/{id_posteo}")
     public ResponseEntity<?> getPosteosById (@PathVariable Long id_posteo){
-        return ResponseEntity.status(HttpStatus.FOUND).body(posteosService.getPosteoById(id_posteo));
+        PosteoDTO posteoDTO = posteosService.getPosteoById(id_posteo);
+        posteoDTO.setComentarios(comentarioService.findComentariosByPost(id_posteo));
+        return ResponseEntity.status(HttpStatus.FOUND).body(posteoDTO);
     }
 
     @PostMapping("/crear")
