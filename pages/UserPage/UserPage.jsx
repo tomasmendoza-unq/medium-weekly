@@ -31,8 +31,14 @@ const UserPage = () => {
     return (
         <div className='containerUser'>
             <section className='userDetails boxUser'>
-                <h2 className='fontUser'>{dataUser.nombre}</h2>
-                <img className='userImg' src="./img/coffe.png" alt="" />
+                <div className='infoUser'>
+                    <h2 className='fontUser'>{dataUser.nombre}</h2>
+                    <img className='userImg' src="./img/coffe.png" alt="" />
+                </div>
+                <div className='statsUser'>
+                    <h3 className='statsText'><span>Blogs creados:</span> {dataPost.length}</h3>
+                    <h3 className='statsText'><span>Id del usuario:</span> {dataUser.id_usuario}</h3>
+                </div>
             </section>
             <section className='userBlogs boxUser'>
                 <h2 className='fontUser'>Blogs</h2>

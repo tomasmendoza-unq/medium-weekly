@@ -102,7 +102,6 @@ const BlogContent = () => {
                 </span>
             </div>
             <div className="navBlog">
-                <FaBookmark fill="#4D4D4D" />
                 <FaPaperPlane fill="#4D4D4D" />
             </div>
             <div className="contentBlog">

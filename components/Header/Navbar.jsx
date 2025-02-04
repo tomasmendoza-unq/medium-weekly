@@ -79,17 +79,6 @@ const Navbar = () => {
                                     <FaRegPenToSquare />
                                 </Link>
                             </button>
-                            <div className="dropdown">
-                                <ul className="list-items-with-description">
-                                    <li>
-                                        <div className="item-title">
-                                            <Link to="/newblog">
-                                                <h3>Redactar</h3>
-                                            </Link>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                     </ul>
                     </div>
