@@ -9,11 +9,12 @@ const UserPage = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        fetch(`http://localhost:8080/posteos/user/${id}`) 
-            .then((response) => response.json())
-            .then((data) => {
-                setDataPost(data)
-            })
+        fetch(`http://localhost:8080/posteos/user/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+            setDataPost(data);
+        })
+
         fetch(`http://localhost:8080/user/${id}`)
             .then((res) => res.json())
             .then((data)=> {
@@ -33,7 +34,7 @@ const UserPage = () => {
             <section className='userDetails boxUser'>
                 <div className='infoUser'>
                     <h2 className='fontUser'>{dataUser.nombre}</h2>
-                    <img className='userImg' src="./img/coffe.png" alt="" />
+                    <img className='userImg' src="/img/coffe.png" alt="" />
                 </div>
                 <div className='statsUser'>
                     <h3 className='statsText'><span>Blogs creados:</span> {dataPost.length}</h3>
@@ -43,7 +44,12 @@ const UserPage = () => {
             <section className='userBlogs boxUser'>
                 <h2 className='fontUser'>Blogs</h2>
                 <div className="list">
-                    {mapData()}
+                    {dataPost.length < 0
+                    ?
+                    "El usuario no Tiene blogs creados..."
+                    :
+                    mapData()
+                    }
                 </div>
             </section>
         </div>

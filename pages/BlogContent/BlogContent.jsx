@@ -20,6 +20,7 @@ import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 // Marks
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 import './BlogContent.css'
+import Blogcard from '../../components/Main/BlogCard/Blogcard';
 
 // * Yoopta
 const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link];
@@ -42,6 +43,7 @@ const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 const BlogContent = () => {
     const { id } = useParams();
     const [dataPost, setDataPost] = useState(null);
+    const [morePosts, setMorePosts] = useState(null)
     const [dataUsers, setDataUsers] = useState([]);
     const [autor, setAutor] = useState(null);
     const [value, setValue] = useState({});
@@ -54,6 +56,7 @@ const BlogContent = () => {
             .then((data) => {
                 const post = data.find((e) => e.id_posteo === JSON.parse(id));
                 setDataPost(post);
+                setMorePosts(data)
             });
         fetch("http://localhost:8080/user")
             .then((response) => response.json())
@@ -66,7 +69,7 @@ const BlogContent = () => {
             const author = dataUsers.find((user) => user.id_usuario === dataPost.idAutor);
             setAutor(author ? author.nombre : "Autor desconocido");
         }
-    }, [dataPost, dataUsers]);
+    }, [dataPost, dataUsers]);  
 
     // Configuración del contenido
     useEffect(() => {
@@ -88,7 +91,10 @@ const BlogContent = () => {
     };
 
     if (!dataPost) {
-        return <p>Cargando contenido...</p>;
+        return(
+        <section className='containerLoading'>
+            <div className="spinner"></div>
+        </section>)
     }
 
     return (
@@ -118,10 +124,18 @@ const BlogContent = () => {
                         readOnly
                     />
                 ) : (
-                    <p>Cargando contenido del editor...</p>
+                    <div className="spinner"></div>
                 )}
             </div>
-            <Comments />
+            <Comments dataPost={dataPost} idAutor={sessionStorage.getItem("id")} idPost={dataPost.id_posteo}/>
+            <h2 className='subTitleBlog'>Leer mas...</h2>
+            <div className='moreContent'>
+                {morePosts.slice(0, 4).map((e)=> {
+                    return(
+                        <Blogcard clase={"miniCard"} key={e.id_posteo} title={e.titulo} resume={e.resumen} src={e.src} id={e.id_posteo}/>
+                    )
+                })}
+            </div>
             <div className='footerBlog'>
                 <RouterLink to="/" className="btnLink linkBlog">Volver al inicio</RouterLink>
             </div>

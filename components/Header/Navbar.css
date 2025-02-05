@@ -163,7 +163,7 @@ header {
 .dropdown {
     position: absolute;
     top: 42px;
-    min-width: 105px;
+    min-width: 154.1px;
     border-radius: 10px;
     background-color: var(--white);
     display: none;
@@ -267,3 +267,7 @@ header {
     opacity: 1;
 }
 
+.userBtn a {
+    display: flex;
+    align-items: center;
+}

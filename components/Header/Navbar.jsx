@@ -49,13 +49,20 @@ const Navbar = () => {
                     <div className="menu__bar">
                     <ul className="navigation hide">
                         <li>
-                            <button>
+                            <button className='userBtn'>
                                 <Link>
                                     <FaRegUser />
                                 </Link>
                             </button>
                             <div className="dropdown">
                                 <ul className="list-items-with-description">
+                                    <li>
+                                        <div className="item-title">
+                                            <Link>
+                                                <h3>{sessionStorage.getItem("user")}</h3>
+                                            </Link>
+                                        </div>
+                                    </li>
                                     <li>
                                         <div className="item-title">
                                             <Link to={`/user/${id}`}>

@@ -1,9 +1,11 @@
 .box {
     min-height: 200px;
     margin: 20px auto; 
-    padding: 20px;
+    padding: 10px;
+    border-radius: 10px;
     border-left: 3px solid var(--secondary-color);
-    background-color: #fff ;
+    background-color: var(--tertiary-color);
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .box:hover {

@@ -23,7 +23,7 @@ const Login = () => {
                 "y": 50
             },
             style: {
-                background: "#4D4D4D" || color,
+                background: color || "#4D4D4D",
                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                 fontSize: "20px",
                 borderRadius: "5px",
@@ -45,7 +45,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (dataUsers.find((e) => e.nombre === dataForm.nombre && e.contrasena === dataForm.contrasena)) {
-            alert("Entrando...")
+            alert("Entrando...", "#53796c")
             // ? Aca deberia ir el añadido de cookies
             sessionStorage.setItem("logged", true)
             sessionStorage.setItem("user", dataForm.nombre)
