@@ -13,8 +13,6 @@ import ActionMenu, { DefaultActionMenuRender } from '@yoopta/action-menu-list';
 import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 // Marks
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
-// Styles
-import './Yoopta.css'
 
 const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link];
 
@@ -49,21 +47,17 @@ const Yoopta = ({ value, setValue, block }: YooptaProps) => {
     };
 
     return (
-        <section className="contenedor">
-            <div className="box">
-                <YooptaEditor
-                    editor={editor}
-                    plugins={plugins}
-                    placeholder="Escribe algo..."
-                    value={value}
-                    onChange={onChange}
-                    tools={TOOLS}
-                    marks={MARKS}
-                    style={{ width: "100%" }}
-                    readOnly={block}
-                />
-            </div>
-        </section>
+        <YooptaEditor
+            editor={editor}
+            plugins={plugins}
+            placeholder="Escribe algo..."
+            value={value}
+            onChange={onChange}
+            tools={TOOLS}
+            marks={MARKS}
+            style={{ width: "100%" }}
+            readOnly={block}
+        />
     );
 };
 

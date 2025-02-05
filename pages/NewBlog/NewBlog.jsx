@@ -5,26 +5,7 @@ import Toastify from 'toastify-js'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-const NewBlog = () => {
-    const alert = (text, color) => {
-        Toastify({
-            text: text,
-            duration: 800,
-            position: "center",
-            gravity: "top",
-            offset: {
-                "y": 100,
-            },
-            style: {
-                background: color || "#4D4D4D",
-                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                fontSize: "20px",
-                borderRadius: "5px",
-                fontFamily: "Inter",
-                fontWeight: "300",
-            },
-        }).showToast();
-    }
+const NewBlog = ({ alert }) => {
 
     const showSwal = () => {
         withReactContent(Swal).fire({
@@ -168,7 +149,11 @@ const NewBlog = () => {
                             maxLength={130}
                             autoComplete="off"
                         />
-                        <Yoopta value={value} setValue={setValue} block={false} />
+                        <section className="contenedor">
+                            <div className="box">
+                                <Yoopta value={value} setValue={setValue} block={false} />
+                            </div>
+                        </section>
                     </form>
                     <button className='btn' form='formBlog' type="submit">Enviar</button>
                 </div>

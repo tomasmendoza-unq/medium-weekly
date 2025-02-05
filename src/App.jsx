@@ -43,7 +43,7 @@ function App() {
           <Route path='/' element={<Main />}></Route>
           <Route path='/register' element={<Register alert={alert} />}></Route>
           <Route path='*' element={<NotFound />}></Route>
-          <Route path='/newblog' element={<NewBlog />}></Route>
+          <Route path='/newblog' element={<NewBlog alert={alert} />}></Route>
           <Route path='/user/:id' element={<UserPage />}></Route>
           {sessionStorage.getItem("id")
             ?

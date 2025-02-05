@@ -4,7 +4,7 @@ import { FaRegPenToSquare, FaRegUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FaQuoteRight } from "react-icons/fa6";
-import Search from "../Search"
+import Search from "./Search"
 
 const Navbar = () => {
 

@@ -4,41 +4,11 @@ import { data, useParams } from 'react-router-dom';
 import { FaBookmark } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
 import { Link as RouterLink } from 'react-router-dom';
+import Yoopta from '../../components/Yoopta/Yoopta';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
 import Comments from "../../components/Comments/Comments"
-// Plugins
-import Paragraph from "@yoopta/paragraph";
-import Blockquote from "@yoopta/blockquote";
-import { HeadingTwo, HeadingThree } from '@yoopta/headings';
-import Code from "@yoopta/code";
-import Embed from "@yoopta/embed";
-import Link from "@yoopta/link";
-// Tools
-import LinkTool, { DefaultLinkToolRender } from "@yoopta/link-tool";
-import ActionMenu, { DefaultActionMenuRender } from '@yoopta/action-menu-list';
-import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
-// Marks
-import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 import './BlogContent.css'
 import Blogcard from '../../components/Bloglist/BlogCard/Blogcard';
-
-// * Yoopta
-const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link];
-const TOOLS = {
-    Toolbar: {
-        tool: Toolbar,
-        render: DefaultToolbarRender,
-    },
-    ActionMenu: {
-        tool: ActionMenu,
-        render: DefaultActionMenuRender,
-    },
-    LinkTool: {
-        tool: LinkTool,
-        render: DefaultLinkToolRender,
-    },
-};
-const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 
 const BlogContent = () => {
     const { id } = useParams();
@@ -47,7 +17,6 @@ const BlogContent = () => {
     const [dataUsers, setDataUsers] = useState([]);
     const [autor, setAutor] = useState(null);
     const [value, setValue] = useState({});
-    const editor = useMemo(() => createYooptaEditor(), []);
 
     // Fetch de datos
     useEffect(() => {
@@ -90,6 +59,8 @@ const BlogContent = () => {
         return `${readingTime} min`;
     };
 
+
+
     if (!dataPost) {
         return(
         <section className='containerLoading'>
@@ -103,7 +74,7 @@ const BlogContent = () => {
                 <h1 className="titleBlog">{dataPost.titulo}</h1>
                 <RouterLink to={`/user/${dataPost.idAutor}`}><p className="textHead">{autor}</p></RouterLink>
                 <span className="flex">
-                    <p className="textHead">{dataPost.created || "Fecha no disponible"}</p>
+                    <p className="textHead">{dataPost.created.replace("T", " ") || "Fecha no disponible"}</p>
                     <p className="textHead">{calculateReadingTime(dataPost.contenido)}</p>
                 </span>
             </div>
@@ -111,21 +82,12 @@ const BlogContent = () => {
                 <FaPaperPlane fill="#4D4D4D" />
             </div>
             <div className="contentBlog">
-                {Object.keys(value).length > 0 ? (
-                    <YooptaEditor
-                        editor={editor}
-                        plugins={plugins}
-                        placeholder="Escribe algo..."
-                        value={value}
-                        onChange={(updatedValue) => setValue(updatedValue)}
-                        tools={TOOLS}
-                        marks={MARKS}
-                        style={{ width: "100%" }}
-                        readOnly
-                    />
-                ) : (
-                    <div className="spinner"></div>
-                )}
+                {Object.keys(value).length > 0 
+                ? 
+                <Yoopta value={value} block={true} />
+                : 
+                <div className="spinner"></div>
+                }
             </div>
             <Comments dataPost={dataPost} idAutor={sessionStorage.getItem("id")} idPost={dataPost.id_posteo}/>
             <h2 className='subTitleBlog'>Leer mas...</h2>
