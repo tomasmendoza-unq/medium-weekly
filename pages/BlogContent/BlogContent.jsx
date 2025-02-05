@@ -5,7 +5,7 @@ import { FaBookmark } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
 import { Link as RouterLink } from 'react-router-dom';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
-import Comments from "../../components/Comments"
+import Comments from "../../components/Comments/Comments"
 // Plugins
 import Paragraph from "@yoopta/paragraph";
 import Blockquote from "@yoopta/blockquote";
@@ -20,7 +20,7 @@ import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 // Marks
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 import './BlogContent.css'
-import Blogcard from '../../components/Main/BlogCard/Blogcard';
+import Blogcard from '../../components/Bloglist/BlogCard/Blogcard';
 
 // * Yoopta
 const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link];

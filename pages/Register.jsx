@@ -1,29 +1,8 @@
 import React from 'react'
-import Toastify from 'toastify-js'
+
 import { useState, useEffect } from 'react'
 
-const Register = () => {
-
-    const alert = (text, color) => {
-        Toastify({
-            text: text,
-            duration: 3000,
-            position: "right",
-            gravity: "bottom",
-            offset: {
-                "y": 50,
-                "x": 50
-            },
-            style: {
-                background: color || "#4D4D4D",
-                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                fontSize: "20px",
-                borderRadius: "5px",
-                fontFamily: "Inter",
-                fontWeight: "300",
-            },
-        }).showToast();
-    }
+const Register = ({ alert }) => {
 
     const [dataUsers, setDataUsers] = useState()
     useEffect(() => {

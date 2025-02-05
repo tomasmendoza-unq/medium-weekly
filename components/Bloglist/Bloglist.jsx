@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './Bloglist.css'
-import Blogcard from '../BlogCard/Blogcard'
+import Blogcard from './BlogCard/Blogcard'
 import { data } from 'react-router-dom'
 
 const Bloglist = () => {

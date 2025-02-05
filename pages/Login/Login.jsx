@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
-import Toastify from 'toastify-js'
 
-const Login = () => {
+const Login = ({ alert }) => {
     const [dataUsers, setDataUsers] = useState()
     useEffect(() => {
         fetch("http://localhost:8080/user")
@@ -12,26 +11,6 @@ const Login = () => {
                 setDataUsers(data)
             })
     }, [])
-
-    const alert = (text, color) => {
-        Toastify({
-            text: text,
-            duration: 3000,
-            position: "right",
-            gravity: "bottom",
-            offset: {
-                "y": 50
-            },
-            style: {
-                background: color || "#4D4D4D",
-                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                fontSize: "20px",
-                borderRadius: "5px",
-                fontFamily: "Inter",
-                fontWeight: "400",
-            },
-        }).showToast();
-    }
 
     const [dataForm, setDataForm] = useState({
         nombre: "",

@@ -1,6 +1,6 @@
 import './UserPage.css'
 import { useState, useEffect } from 'react'
-import Blogcard from '../../components/Main/BlogCard/Blogcard'
+import Blogcard from '../../components/Bloglist/BlogCard/Blogcard'
 import { useParams } from 'react-router-dom'
 
 const UserPage = () => {

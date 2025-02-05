@@ -1,5 +1,5 @@
-import Bloglist from '../../components/Main/Bloglist/Bloglist'
 import { Link } from 'react-router-dom'
+import Bloglist from '../../components/Bloglist/Bloglist'
 import './Main.css'
 
 const Main = () => {
