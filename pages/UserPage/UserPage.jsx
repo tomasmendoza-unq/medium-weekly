@@ -28,6 +28,9 @@ const UserPage = () => {
         });
     };
 
+    useEffect(()=>{
+        document.title = `Medium Weekly | ${dataUser.nombre}`
+    },[dataUser])
 
     return (
         <div className='containerUser'>

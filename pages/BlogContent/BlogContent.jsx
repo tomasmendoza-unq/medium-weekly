@@ -46,6 +46,7 @@ const BlogContent = () => {
             try {
                 const parsedContent = JSON.parse(dataPost.contenido); // Asegura que el contenido sea válido
                 setValue(parsedContent);
+                document.title = dataPost.titulo
             } catch (error) {
                 console.error("Error al parsear el contenido:", error);
             }
@@ -58,8 +59,6 @@ const BlogContent = () => {
         const readingTime = Math.ceil(words / 200);
         return `${readingTime} min`;
     };
-
-
 
     if (!dataPost) {
         return(

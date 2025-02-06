@@ -58,6 +58,7 @@
 .subTitleBlog {
     font-weight: 600;
     color: var(--secondary-color);
+    margin-bottom: 30px;
 }
 .linkBlog {
     max-width: 40%;

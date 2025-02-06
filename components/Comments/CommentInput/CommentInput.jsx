@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
 import './CommentInput.css'
@@ -36,9 +36,18 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
         sendPost(dataComentario)
         location.reload()
     };
+    const updateContent = () => {
+        setDataComentario((prev) => ({
+            ...prev,
+            "text": comentario,
+        }));
+    };
+    
+    useEffect(()=>{
+        updateContent()
+    },[comentario])
     return (
         <>
-            <h2 className='subTitleBlog'>Comentarios ({dataPost.comentarios.length})</h2>
             <div className='writeComment'>
                 <div className='createComment' onClick={handleClick}>
                     <p>¿Que opinas?</p>
@@ -62,6 +71,7 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
                     </div>
                 </div>
             </div>
+            <h2 className='subTitleBlog'>Comentarios ({dataPost.comentarios.length})</h2>
         </>
     )
 }

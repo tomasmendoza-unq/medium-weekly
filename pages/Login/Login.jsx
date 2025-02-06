@@ -58,6 +58,9 @@ const Login = ({ alert }) => {
         }
     }
 
+    useEffect(()=>{
+        document.title = "Medium Weekly | Login"
+    },[])
 
     return (
         <div className="containerLogin">

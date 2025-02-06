@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import Bloglist from '../../components/Bloglist/Bloglist'
 import './Main.css'
 
 const Main = () => {
     const userName = sessionStorage.getItem("user")
-
+    useEffect(()=>{
+        document.title = "Medium Weekly | Inicio"
+    },[])
     return (
         <main>
             <section className='mainContent'>

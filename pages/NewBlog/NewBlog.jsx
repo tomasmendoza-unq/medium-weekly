@@ -74,7 +74,7 @@ const NewBlog = ({ alert }) => {
         "titulo": '',
         "resumen": '',
         "contenido": "",
-        "src": './img/coffe.png',
+        "src": '/img/coffe.png',
         "idAutor": sessionStorage.getItem('id')
     });
 
@@ -90,6 +90,9 @@ const NewBlog = ({ alert }) => {
         updateContent();
     }, [value]);
 
+    useEffect(()=>{
+        document.title = "Medium Weekly | Crear Blog"
+    },[])
     const handleInput = (e) => {
         setDataBlog({
             ...dataBlog,
@@ -110,7 +113,7 @@ const NewBlog = ({ alert }) => {
             if (result.isConfirmed) {
                 if (dataBlog.titulo.length <= 6) {
                     alert("El título debe tener un minimo de 6 caracteres", "#bb1a1a")
-                } else if (dataBlog.titulo.length >= 45) {
+                } else if (dataBlog.titulo.length >= 55) {
                     alert("El título debe tener como maximo 45 caracteres", "#bb1a1a")
                 } else if (dataBlog.resumen.length <= 10) {
                     alert("La descripción debe de tener un minimo de 10 caracteres", "#bb1a1a")
@@ -136,7 +139,7 @@ const NewBlog = ({ alert }) => {
                             className='inputNewBlog titleNewBlog'
                             placeholder='Título'
                             autoComplete="off"
-                            maxLength={45}
+                            maxLength={55}
                         />
 
                         <textarea

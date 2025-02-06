@@ -95,12 +95,13 @@ textarea {
 }
 
 .btn {
-    padding: 10px;
+    height: 40px;
+    padding: 0 10px;
     background-color: transparent;
     border-radius: 10px;
     border: 2px solid var(--secondary-color);
     font-family: var(--title-font);
-    font-size: 22px;
+    font-size: 19px;
     transition: all 0.3s;
     cursor: pointer;
     display: block;

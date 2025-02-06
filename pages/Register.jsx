@@ -63,6 +63,9 @@ const Register = ({ alert }) => {
 
     }
 
+    useEffect(()=>{
+        document.title = "Medium Weekly | Registro"
+    },[])
 
     return (
         <div className="containerLogin">
