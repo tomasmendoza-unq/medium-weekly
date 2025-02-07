@@ -28,7 +28,7 @@ const CommentList = ({ dataPost }) => {
                     return (
                         <div className='comentario' key={e.id}>
                             <div className='infoUserComentario'>
-                                <img src="" alt="" className='miniIcon' />
+                                <img src="/img/coffe.png" alt="" className='miniIcon' />
                                 <Link to={`/user/${e.autor}`}>{nombreAutor}</Link>
                             </div>
                             <p>{e.text}</p>

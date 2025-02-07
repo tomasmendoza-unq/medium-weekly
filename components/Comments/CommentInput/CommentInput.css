@@ -1,7 +1,7 @@
 .comments {
     border-bottom: 2px solid var(--secondary-color);
-    margin-bottom: 30px;
-    padding-bottom: 30px;
+    margin-bottom: 60px;
+    padding-bottom: 60px;
 }
 
 .createComment {
@@ -135,5 +135,5 @@
 }
 
 .writeComment {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }

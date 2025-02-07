@@ -132,6 +132,25 @@ textarea {
     background-color: var(--secondary-color);
 }
 
+.btnAlt {
+    height: 40px;
+    padding: 0 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid var(--primary-color);
+    font-family: var(--title-font);
+    font-size: 19px;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+.btnAlt:hover {
+    color: var(--white);
+    background-color: var(--primary-color);
+}
+
 .divider {
     width: 100%;
     height: 1px;
@@ -157,43 +176,4 @@ a {
 
 .search {
     background-color: transparent;
-}
-
-.containerLoading {
-    height: 60vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.spinner {
-    width: 46px;
-    height: 46px;
-    display: grid;
-    animation: spinner-plncf9 3s infinite;
-}
-
-.spinner::before,
-.spinner::after {
-    content: "";
-    grid-area: 1/1;
-    border: 9px solid;
-    border-radius: 50%;
-    border-color: var(--primary-color) var(--primary-color) #0000 #0000;
-    mix-blend-mode: darken;
-    animation: spinner-plncf9 1s infinite linear;
-}
-
-.spinner::after {
-    border-color: #0000 #0000 #dbdcef #dbdcef;
-    animation-direction: reverse;
-}
-
-@keyframes spinner-plncf9 {
-    100% {
-        transform: rotate(1turn);
-    }
 }

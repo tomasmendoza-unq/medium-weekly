@@ -7,6 +7,7 @@ import { HeadingTwo, HeadingThree } from '@yoopta/headings';
 import Code from "@yoopta/code";
 import Embed from "@yoopta/embed";
 import Link from "@yoopta/link";
+import Image from "@yoopta/image";
 // Tools
 import LinkTool, { DefaultLinkToolRender } from "@yoopta/link-tool";
 import ActionMenu, { DefaultActionMenuRender } from '@yoopta/action-menu-list';
@@ -14,8 +15,7 @@ import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 // Marks
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 
-const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link];
-
+const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link, Image];
 const TOOLS = {
     Toolbar: {
         tool: Toolbar,
@@ -30,9 +30,7 @@ const TOOLS = {
         render: DefaultLinkToolRender,
     },
 };
-
 const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
-
 type YooptaProps = {
     value: YooptaContentValue;
     setValue: (value: YooptaContentValue) => void;
@@ -55,7 +53,7 @@ const Yoopta = ({ value, setValue, block }: YooptaProps) => {
             onChange={onChange}
             tools={TOOLS}
             marks={MARKS}
-            style={{ width: "100%" }}
+            style={{ width: "100%"}}
             readOnly={block}
         />
     );

@@ -2,7 +2,7 @@ import React from 'react'
 import './Blogcard.css'
 import { Link } from 'react-router-dom'
 
-const Blogcard = ({ clase, title, resume, src, id, className }) => {
+const Blogcard = ({ clase, title, resume, src, id, className, onClick }) => {
     return (
         <>
             {sessionStorage.getItem("id") ?

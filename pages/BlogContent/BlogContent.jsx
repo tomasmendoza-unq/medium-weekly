@@ -9,6 +9,8 @@ import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
 import Comments from "../../components/Comments/Comments"
 import './BlogContent.css'
 import Blogcard from '../../components/Bloglist/BlogCard/Blogcard';
+import Loading from '../../components/Loading/Loading'
+import Bloglist from '../../components/Bloglist/Bloglist';
 
 const BlogContent = () => {
     const { id } = useParams();
@@ -61,10 +63,7 @@ const BlogContent = () => {
     };
 
     if (!dataPost) {
-        return(
-        <section className='containerLoading'>
-            <div className="spinner"></div>
-        </section>)
+        return <Loading />
     }
 
     return (
@@ -89,13 +88,9 @@ const BlogContent = () => {
                 }
             </div>
             <Comments dataPost={dataPost} idAutor={sessionStorage.getItem("id")} idPost={dataPost.id_posteo}/>
-            <h2 className='subTitleBlog'>Leer mas...</h2>
-            <div className='moreContent'>
-                {morePosts.slice(0, 4).map((e)=> {
-                    return(
-                        <Blogcard clase={"miniCard"} key={e.id_posteo} title={e.titulo} resume={e.resumen} src={e.src} id={e.id_posteo}/>
-                    )
-                })}
+            <div className='moreContenteContainer'>
+                <h2 className='subTitleBlog'>Mas contenido...</h2>
+                <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"}/>
             </div>
             <div className='footerBlog'>
                 <RouterLink to="/" className="btnLink linkBlog">Volver al inicio</RouterLink>
