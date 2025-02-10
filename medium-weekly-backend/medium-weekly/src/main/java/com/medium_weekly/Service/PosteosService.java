@@ -1,6 +1,7 @@
 package com.medium_weekly.Service;
 
 import com.medium_weekly.Dto.PosteoDTO;
+import com.medium_weekly.Enums.Categoria;
 import com.medium_weekly.Exception.ResourceNotFound;
 import com.medium_weekly.Model.Comentario;
 import com.medium_weekly.Model.Posteos;
@@ -113,6 +114,11 @@ public class PosteosService implements IPosteosService{
         post.getComentario().size();
 
         return post.getComentario();
+    }
+
+    @Override
+    public List<PosteoDTO> getPosteosByCategoria(Categoria categoria) {
+        return this.createDTOs(posteosRepository.findByCategoria(categoria));
     }
 
 }
