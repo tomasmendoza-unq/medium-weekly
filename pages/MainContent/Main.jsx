@@ -36,9 +36,9 @@ const Main = () => {
                     :
                     <h2 className="class2 title2">Bienvenido/a <span className='ital'>{userName}</span></h2>}
                 <div className='bloglist'>
-                    <div className='titleBlogs'>
-                        <h2 className='title2'>Blogs Recomendados</h2>
-                    </div>
+                    <section className='filterByTags'>
+                        
+                    </section>
                     <Bloglist visible={visible} dataPost={dataPost} />
                     {visible < dataPost.length && (
                         <button onClick={cargarMas} className="btn">

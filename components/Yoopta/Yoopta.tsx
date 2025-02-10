@@ -3,7 +3,7 @@ import YooptaEditor, { createYooptaEditor, YooptaContentValue } from "@yoopta/ed
 // Pluggins
 import Paragraph from "@yoopta/paragraph";
 import Blockquote from "@yoopta/blockquote";
-import { HeadingTwo, HeadingThree } from '@yoopta/headings';
+import { HeadingOne, HeadingTwo, HeadingThree } from '@yoopta/headings';
 import Code from "@yoopta/code";
 import Embed from "@yoopta/embed";
 import Link from "@yoopta/link";
@@ -15,7 +15,7 @@ import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 // Marks
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 
-const plugins = [Paragraph, Blockquote, Code, HeadingTwo, HeadingThree, Embed, Link, Image];
+const plugins = [Paragraph, Blockquote, Code, HeadingOne, HeadingTwo, HeadingThree, Embed, Link, Image];
 const TOOLS = {
     Toolbar: {
         tool: Toolbar,

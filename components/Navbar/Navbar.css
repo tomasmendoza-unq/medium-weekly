@@ -172,7 +172,7 @@ header {
 .dropdown {
     position: absolute;
     top: 42px;
-    min-width: 154.1px;
+    min-width: 102.6px;
     border-radius: 10px;
     background-color: var(--white);
     display: none;

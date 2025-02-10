@@ -2,36 +2,49 @@ import './UserPage.css'
 import { useState, useEffect } from 'react'
 import Blogcard from '../../components/Bloglist/BlogCard/Blogcard'
 import { useParams } from 'react-router-dom'
+import Loading from '../../components/Loading/Loading'
 
 const UserPage = () => {
     const [dataUser, setDataUser] = useState([])
     const [dataPost, setDataPost] = useState([])
+    const [error, setError] = useState(null)
     const { id } = useParams()
 
     useEffect(() => {
         fetch(`http://localhost:8080/posteos/user/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-            setDataPost(data);
-        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setDataPost(data);
+                } else {
+                    setDataPost([data]);
+                }
+            })
+            .catch(error => {
+                setDataPost([])
+            });
 
         fetch(`http://localhost:8080/user/${id}`)
             .then((res) => res.json())
-            .then((data)=> {
+            .then((data) => {
                 setDataUser(data)
             })
-    }, [])
+    }, [id])
+
 
     const mapData = () => {
         return dataPost.map((e) => {
-            return <Blogcard key={e.id_posteo} title={e.titulo} resume={e.resumen} src={e.src} id={e.id_posteo}/>;
+            return <Blogcard key={e.id_posteo} title={e.titulo} resume={e.resumen} src={e.src} id={e.id_posteo} />;
         });
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         document.title = `Medium Weekly | ${dataUser.nombre}`
-    },[dataUser])
+    }, [dataUser])
 
+    if (error === true) {
+        return <Loading />
+    }
     return (
         <div className='containerUser'>
             <section className='userDetails boxUser'>
@@ -47,11 +60,11 @@ const UserPage = () => {
             <section className='userBlogs boxUser'>
                 <h2 className='fontUser'>Blogs</h2>
                 <div className="list">
-                    {dataPost.length < 0
-                    ?
-                    "El usuario no Tiene blogs creados..."
-                    :
-                    mapData()
+                    {dataPost.length <= 0
+                        ?
+                        <p>El usuario no Tiene blogs creados...</p>
+                        :
+                        mapData()
                     }
                 </div>
             </section>

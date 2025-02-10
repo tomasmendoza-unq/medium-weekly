@@ -58,13 +58,6 @@ const Navbar = () => {
                                 <ul className="list-items-with-description">
                                     <li>
                                         <div className="item-title">
-                                            <Link>
-                                                <h3>{sessionStorage.getItem("user")}</h3>
-                                            </Link>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item-title">
                                             <Link to={`/user/${id}`}>
                                                 <h3>Ver Perfil</h3>
                                             </Link>
