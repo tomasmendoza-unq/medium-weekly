@@ -1,6 +1,7 @@
 package com.medium_weekly.Service;
 
 import com.medium_weekly.Dto.PosteoDTO;
+import com.medium_weekly.Enums.Categoria;
 import com.medium_weekly.Model.Comentario;
 import com.medium_weekly.Model.Posteos;
 
@@ -23,4 +24,6 @@ public interface IPosteosService {
     public Posteos findById(Long post);
 
     List<Comentario> getComentarios(Long idPosteo);
+
+    public List<PosteoDTO> getPosteosByCategoria(Categoria categoria);
 }

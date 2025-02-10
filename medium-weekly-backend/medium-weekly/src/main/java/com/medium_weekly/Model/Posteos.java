@@ -1,6 +1,7 @@
 package com.medium_weekly.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.medium_weekly.Enums.Categoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,4 +45,7 @@ public class Posteos {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario autor;
+
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 }
