@@ -4,8 +4,10 @@ import Yoopta from '../../components/Yoopta/Yoopta'
 import Toastify from 'toastify-js'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import TagSelector from '../../components/TagSelector/TagSelector'
 
 const NewBlog = ({ alert }) => {
+    const [tagSelected, setTag] = useState("")
 
     const showSwal = () => {
         withReactContent(Swal).fire({
@@ -16,7 +18,7 @@ const NewBlog = ({ alert }) => {
             }
         })
     }
-
+    const [tags, setTags] = useState([]);
     // ? Función para enviar los datos a la base de datos
     const crearPost = async (blog) => {
         try {
@@ -75,7 +77,8 @@ const NewBlog = ({ alert }) => {
         "resumen": '',
         "contenido": "",
         "src": '/img/coffe.png',
-        "idAutor": sessionStorage.getItem('id')
+        "idAutor": sessionStorage.getItem('id'),
+        "categoria": ""
     });
 
     // ? Funcion para actualizar el contenido a enviar a la BDD
@@ -83,23 +86,24 @@ const NewBlog = ({ alert }) => {
         setDataBlog((prev) => ({
             ...prev,
             contenido: JSON.stringify(value),
+            categoria: tagSelected
         }));
     };
 
     useEffect(() => {
         updateContent();
-    }, [value]);
+    }, [value, tagSelected]);
 
     useEffect(()=>{
         document.title = "Medium Weekly | Crear Blog"
     },[])
+
     const handleInput = (e) => {
         setDataBlog({
             ...dataBlog,
             [e.target.name]: e.target.value,
         });
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         Swal.fire({
@@ -157,6 +161,7 @@ const NewBlog = ({ alert }) => {
                                 <Yoopta value={value} setValue={setValue} block={false} />
                             </div>
                         </section>
+                        <TagSelector tagSelected={tagSelected} setTag={setTag}/>
                     </form>
                     <button className='btn' form='formBlog' type="submit">Enviar</button>
                 </div>
