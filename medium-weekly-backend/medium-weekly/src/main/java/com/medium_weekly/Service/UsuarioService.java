@@ -42,9 +42,7 @@ public class UsuarioService implements IUsuarioService{
     public List<Posteos> findPost(Long idUsuario) {
         Usuario usuario = this.findById(idUsuario);
         List<Posteos> posts = usuario.getPosts();
-        if (posts == null || posts.isEmpty()) {
-            throw new ResourceNotFound(idUsuario, "El usuario no tiene posteos asociados");
-        }
+
         return posts;
     }
 
