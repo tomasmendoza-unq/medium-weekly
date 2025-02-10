@@ -1,5 +1,6 @@
 package com.medium_weekly.Dto;
 
+import com.medium_weekly.Enums.Categoria;
 import com.medium_weekly.Model.Comentario;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
@@ -42,4 +43,6 @@ public class PosteoDTO {
     private Long idAutor;
 
     private List<ComentarioDTO> comentarios;
+
+    private Categoria categoria;
 }

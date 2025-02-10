@@ -1,6 +1,7 @@
 package com.medium_weekly.Controller;
 
 import com.medium_weekly.Dto.PosteoDTO;
+import com.medium_weekly.Enums.Categoria;
 import com.medium_weekly.Service.IComentarioService;
 import com.medium_weekly.Service.IPosteosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class PosteosController {
         PosteoDTO posteoDTO = posteosService.getPosteoById(id_posteo);
         posteoDTO.setComentarios(comentarioService.findComentariosByPost(id_posteo));
         return ResponseEntity.status(HttpStatus.FOUND).body(posteoDTO);
+    }
+
+    @GetMapping("/{categoria}")
+    public ResponseEntity<?> getPosteosByCategoria (@PathVariable Categoria categoria){
+        return ResponseEntity.status(HttpStatus.FOUND).body(posteosService.getPosteosByCategoria(categoria));
     }
 
     @PostMapping("/crear")
