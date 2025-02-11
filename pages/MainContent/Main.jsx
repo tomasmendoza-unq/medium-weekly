@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Bloglist from '../../components/Bloglist/Bloglist'
 import Loading from '../../components/Loading/Loading'
+import FilterByTags from '../../components/FilterByTags/FilterByTags'
 import './Main.css'
 
 const Main = () => {
@@ -36,9 +37,7 @@ const Main = () => {
                     :
                     <h2 className="class2 title2">Bienvenido/a <span className='ital'>{userName}</span></h2>}
                 <div className='bloglist'>
-                    <section className='filterByTags'>
-                        
-                    </section>
+                    <FilterByTags />
                     <Bloglist visible={visible} dataPost={dataPost} />
                     {visible < dataPost.length && (
                         <button onClick={cargarMas} className="btn">

@@ -31,9 +31,3 @@
     margin: 40px auto;
     background-color: var(--tertiary-color);
 }
-
-.filterByTags {
-    border-top: 2px solid var(--secondary-color);
-    height: 40px;
-    border-bottom: 2px solid var(--secondary-color);
-}
