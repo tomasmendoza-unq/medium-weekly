@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface IPosteosRepository extends JpaRepository<Posteos, Long> {
     @EntityGraph(attributePaths = {"comentario"})
     List<Posteos> findAll();
-
+    @EntityGraph(attributePaths = {"comentario"})
     List<Posteos> findByCategoria(Categoria categoria);
 }
