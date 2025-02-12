@@ -37,14 +37,18 @@
     color: black;
 }
 
-.scroll-content span {
+.tagLink {
     color: var(--secondary-color);
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s;
 }
 
-.scroll-content span:hover {
+.tagLink:hover {
+    color: black;
+}
+
+.tagActive {
     color: black;
 }
 
