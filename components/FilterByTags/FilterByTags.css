@@ -2,20 +2,21 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    width: 100%;
-    background: white;
+    width: 80%;
+    background: var(--white);
     padding: 10px;
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
+    margin: 0 auto;
 }
 
 .scroll-content {
     display: flex;
     gap: 20px;
+    padding-left: 27px;
     overflow-x: auto;
     scroll-behavior: smooth;
     white-space: nowrap;
     scrollbar-width: none;
+    height: 30px;
 }
 
 .scroll-content::-webkit-scrollbar {
@@ -40,6 +41,7 @@
     color: var(--secondary-color);
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
 .scroll-content span:hover {

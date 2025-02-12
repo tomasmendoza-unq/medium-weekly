@@ -5,6 +5,7 @@ import Toastify from 'toastify-js'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import TagSelector from '../../components/TagSelector/TagSelector'
+import { data } from 'react-router-dom'
 
 const NewBlog = ({ alert }) => {
     const [tagSelected, setTag] = useState("")
@@ -119,11 +120,15 @@ const NewBlog = ({ alert }) => {
                     alert("El título debe tener un minimo de 6 caracteres", "#bb1a1a")
                 } else if (dataBlog.titulo.length >= 55) {
                     alert("El título debe tener como maximo 45 caracteres", "#bb1a1a")
+                } else if(JSON.stringify(dataBlog.contenido) === "{}"){
+                    alert("El blog no puede estar vacio", "#bb1a1a")
                 } else if (dataBlog.resumen.length <= 10) {
                     alert("La descripción debe de tener un minimo de 10 caracteres", "#bb1a1a")
                 } else if (dataBlog.resumen.length > 130) {
                     alert("La descripción debe de tener como maximo 130 caracteres", "#bb1a1a")
-                } else {
+                } else if(dataBlog.categoria === "") {
+                    alert("Selecciona una categoria para tu blog", "#bb1a1a")
+                }else {
                     crearPost(dataBlog)
                 }
             }})
@@ -135,6 +140,7 @@ const NewBlog = ({ alert }) => {
                 </div>
                 <div className='contentNewBlog'>
                     <form onSubmit={handleSubmit} id='formBlog' className='formNewBlog' action="post">
+                        <h3 className='subTitle3'>Empieza por darle un titulo a tu blog.</h3>
                         <input
                             onChange={handleInput}
                             type="text"
@@ -146,6 +152,14 @@ const NewBlog = ({ alert }) => {
                             maxLength={55}
                         />
 
+                        <h3 className='subTitle3'>Redacta el cuerpo de tu blog.</h3>
+                        <section className="contenedor">
+                            <div className="box">
+                                <Yoopta value={value} setValue={setValue} block={false} />
+                            </div>
+                        </section>
+
+                        <h3 className='subTitle3'>Crea un resumen de tu blog.</h3>
                         <textarea
                             onChange={handleInput}
                             name='resumen'
@@ -156,14 +170,11 @@ const NewBlog = ({ alert }) => {
                             maxLength={130}
                             autoComplete="off"
                         />
-                        <section className="contenedor">
-                            <div className="box">
-                                <Yoopta value={value} setValue={setValue} block={false} />
-                            </div>
-                        </section>
+                        <h3 className='subTitle3'>Selecciona una categoria.</h3>
                         <TagSelector tagSelected={tagSelected} setTag={setTag}/>
+
                     </form>
-                    <button className='btn' form='formBlog' type="submit">Enviar</button>
+                    <button className='btn' form='formBlog' type="submit">Crear</button>
                 </div>
             </section>
         )

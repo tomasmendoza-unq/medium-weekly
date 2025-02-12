@@ -9,10 +9,11 @@
     display: block;
     text-align: center;
     color: #2c2c2c;
-    margin: 40px 0px;
-    font-size: 40px;
+    margin: 60px 0px 40px 0px;
+    font-size: 44px;
     text-decoration: none;
     font-weight: 600;
+    cursor: default;
 }
 
 .textMain {

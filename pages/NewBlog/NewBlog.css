@@ -7,7 +7,7 @@
     background-color: var(--white);
     border-radius: 30px;
     box-shadow: 0px 0px 20px 50px var(--white);
-    padding: 50px;
+    padding: 20px;
 }
 
 .formNewBlog {
@@ -24,11 +24,9 @@
 
 .inputNewBlog {
     width: 100%;
-    margin-top: 1rem;
-    padding: 0 1rem;
     border-left: 3px solid var(--secondary-color);
     font-family: var(--text-font);
-    margin: 1rem auto;
+    margin: 0 auto;
     background-color: var(--tertiary-color);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -40,11 +38,9 @@ textarea {
 
 .titleNewBlog {
     height: 55px;
-    font-size: 38px;
     padding: 15px;
     font-size: 2.25rem;
     font-weight: 600;
-    margin-top: 1rem;
     line-height: 2.5rem;
 }
 
@@ -58,7 +54,7 @@ textarea {
 
 .box {
     min-height: 200px;
-    margin: 20px auto; 
+    margin: 0 auto; 
     padding: 10px;
     border-radius: 10px;
     border-left: 3px solid var(--secondary-color);
@@ -68,4 +64,14 @@ textarea {
 
 .box:hover {
     cursor: text;
+}
+
+.subTitle3 {
+    margin: 60px 0px 20px 0px;
+    color: #2c2c2c;
+    font-size: 22px;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1.7px;
 }

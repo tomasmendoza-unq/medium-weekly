@@ -2,19 +2,20 @@ import { useRef } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
 import './FilterByTags.css'
+import { Link } from "react-router-dom";
 
-const ScrollBar = () => {
+const FilterByTags = () => {
     const scrollRef = useRef(null);
-
+    const categorias = [ "DESARROLLO_WEB", "CIBERSEGURIDAD", "ECONOMIA_Y_FINANZAS", "SALUD_Y_BIENESTAR", "PSICOLOGIA_Y_DESARROLLO_PERSONAL", "CIENCIA_Y_TECNOLOGIA", "HISTORIA_Y_CULTURA", "LITERATURA_Y_ESCRITURA_CREATIVA", "CINE_Y_SERIES", "MUSICA_Y_ENTRETENIMIENTO", "VIAJES_Y_TURISMO", "FOTOGRAFIA_Y_ARTE_DIGITAL", "MEDIO_AMBIENTE_Y_SOSTENIBILIDAD", "DEPORTES_Y_FITNESS", "EMPRENDIMIENTO_Y_NEGOCIOS"]
     const scrollLeft = () => {
         if (scrollRef.current) {
-            scrollRef.current.scrollLeft -= 100; // Ajusta el desplazamiento
+            scrollRef.current.scrollLeft -= 200; // Ajusta el desplazamiento
         }
     };
 
     const scrollRight = () => {
         if (scrollRef.current) {
-            scrollRef.current.scrollLeft += 100;
+            scrollRef.current.scrollLeft += 200;
         }
     };
 
@@ -24,14 +25,13 @@ const ScrollBar = () => {
                 <FaAngleLeft />
             </button>
             <div className="scroll-content" ref={scrollRef}>
-                <span>Coding</span>
-                <span>Coding</span>
-                <span>Coding</span>
-                <span>Coding</span>
-                <span>Coding</span>
-                <span>Coding</span>
-                <span>Coding</span>
-                <span>Coding</span>
+                <Link to='/'><span>Todos Los Blogs</span></Link>
+                {categorias.map((e)=>{
+                    return(
+                    <Link to={`/filter/${e}`}>
+                        <span>{e.toLowerCase().replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</span>
+                    </Link>)
+                })}
             </div>
             <button className="scroll-btn right" onClick={scrollRight}>
                 <FaAngleRight />
@@ -40,4 +40,4 @@ const ScrollBar = () => {
     );
 };
 
-export default ScrollBar;
+export default FilterByTags;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Bloglist from '../../components/Bloglist/Bloglist'
 import Loading from '../../components/Loading/Loading'
@@ -6,6 +6,7 @@ import FilterByTags from '../../components/FilterByTags/FilterByTags'
 import './Main.css'
 
 const Main = () => {
+    const idCategory = useParams()
     const [dataPost, setDataPost] = useState(null)
     const userName = sessionStorage.getItem("user")
     const [visible, setVisible] = useState(5);
