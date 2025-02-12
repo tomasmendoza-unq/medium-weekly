@@ -73,5 +73,6 @@ textarea {
     text-decoration: underline;
     text-decoration-style: wavy;
     text-underline-offset: 6px;
-    text-decoration-thickness: 1.7px;
+    text-decoration-thickness: 1.5px;
+    font-weight: 400;
 }

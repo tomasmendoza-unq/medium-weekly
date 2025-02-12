@@ -24,13 +24,13 @@ const Main = () => {
             fetch(`http://localhost:8080/posteos/categoria/${idCategory}`)
                 .then((response) => response.json())
                 .then((dataFil) => {
-                    setDataFiltered(dataFil)
+                    setDataFiltered(dataFil.reverse())
                 })
         } else {
             fetch("http://localhost:8080/posteos")
                 .then((response) => response.json())
                 .then((data) => {
-                    setDataPost(data)
+                    setDataPost(data.reverse())
                 })
             document.title = "Medium Weekly | Inicio"
         }
