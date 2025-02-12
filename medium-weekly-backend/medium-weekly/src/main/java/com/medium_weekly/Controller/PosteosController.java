@@ -35,7 +35,7 @@ public class PosteosController {
         return ResponseEntity.status(HttpStatus.FOUND).body(posteoDTO);
     }
 
-    @GetMapping("/{categoria}")
+    @GetMapping("/categoria/{categoria}")
     public ResponseEntity<?> getPosteosByCategoria (@PathVariable Categoria categoria){
         return ResponseEntity.status(HttpStatus.FOUND).body(posteosService.getPosteosByCategoria(categoria));
     }
