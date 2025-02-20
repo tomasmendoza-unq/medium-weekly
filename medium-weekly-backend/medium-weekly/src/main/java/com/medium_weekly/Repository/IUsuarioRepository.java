@@ -12,4 +12,13 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
 
 
     Optional<Usuario> findByNombreAndContrasena(String Nombre, String contrasena);
+
+
+    Optional<Usuario> findByNombre(String nombre);
+
+    Optional<Usuario> findByEmail(String email);
+
+
+
+
 }
