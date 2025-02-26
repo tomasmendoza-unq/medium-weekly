@@ -1,14 +1,24 @@
-# Usa una imagen base de Java
-FROM openjdk:21-jdk-slim
+# Etapa 1: Construcción del JAR
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
-# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia el archivo JAR de tu aplicación al contenedor
-COPY target/medium-weekly.jar app.jar
+# Copiar archivos del proyecto
+COPY . .
 
-# Expone el puerto en el que tu aplicación escucha
+# Construir la aplicación
+RUN mvn clean package -DskipTests
+
+# Etapa 2: Imagen ligera para ejecución
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+# Copiar el .jar generado en la etapa anterior
+COPY --from=build /app/target/medium-weekly-0.0.1.jar app.jar
+
+# Exponer el puerto de la aplicación
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
+# Ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
