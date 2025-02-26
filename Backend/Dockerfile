@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 
 # Construir el proyecto sin ejecutar pruebas
-RUN mvn clean package -DskipTests -Dmaven.test.skip=true
+RUN mvn clean package 
 
 # Crear la imagen base para la ejecución
 FROM openjdk:21-jdk-slim
