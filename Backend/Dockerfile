@@ -1,24 +1,23 @@
-# Etapa 1: Construcción del JAR
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-# Copiar archivos del proyecto
+# Copiar el código fuente
 COPY . .
 
-# Construir la aplicación
-RUN mvn clean package -DskipTests
+# Construir el proyecto sin ejecutar pruebas
+RUN mvn clean package -DskipTests -Dmaven.test.skip=true
 
-# Etapa 2: Imagen ligera para ejecución
+# Crear la imagen base para la ejecución
 FROM openjdk:21-jdk-slim
 
 WORKDIR /app
 
-# Copiar el .jar generado en la etapa anterior
+# Copiar el archivo JAR del contenedor anterior
 COPY --from=build /app/target/medium-weekly-0.0.1.jar app.jar
 
-# Exponer el puerto de la aplicación
+# Exponer el puerto en el que corre la app
 EXPOSE 8080
 
-# Ejecutar la aplicación directamente sin run.sh
+# Ejecutar el JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
