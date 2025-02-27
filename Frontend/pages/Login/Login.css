@@ -10,7 +10,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transform: scale(1.3);
     padding: 30px;
     border-radius: 10px;
     border: 1px solid var(--secondary-color);
@@ -30,6 +29,7 @@
 .containerLogin .boxForm form label {
     align-self: baseline;
     font-family: var(--title-font);
+    font-size: 1.2rem;
     margin-top: 10px;
 }
 
@@ -56,4 +56,18 @@
 .svgs img {
     width: 30vw;
     display: block;
+}
+
+@media screen and (max-width: 800px) {
+    .containerLogin {
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0px;
+        gap: 20px;
+        height: auto;
+    }
+    .svgs img {
+        width: 30vw;
+        display: none;
+    }
 }

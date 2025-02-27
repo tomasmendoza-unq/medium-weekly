@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Blogcard from '../../components/Bloglist/BlogCard/Blogcard'
 import { useParams } from 'react-router-dom'
 import Loading from '../../components/Loading/Loading'
-const apiUrl = process.env.REACT_APP_API_URL;
+// const apiUrl = process.env.REACT_APP_API_URL;
 
 const UserPage = () => {
     const [dataUser, setDataUser] = useState([])

@@ -76,3 +76,7 @@ textarea {
     text-decoration-thickness: 1.5px;
     font-weight: 400;
 }
+
+.containerNewBlog {
+    width: 90%;
+}

@@ -15,7 +15,6 @@ import Bloglist from '../../components/Bloglist/Bloglist';
 const BlogContent = () => {
     const { id } = useParams();
     const [dataPost, setDataPost] = useState(null);
-    const [morePosts, setMorePosts] = useState(null)
     const [dataUsers, setDataUsers] = useState([]);
     const [autor, setAutor] = useState(null);
     const [value, setValue] = useState({});
@@ -27,7 +26,6 @@ const BlogContent = () => {
             .then((data) => {
                 const post = data.find((e) => e.id_posteo === JSON.parse(id));
                 setDataPost(post);
-                setMorePosts(data)
             });
         fetch("http://localhost:8080/user")
             .then((response) => response.json())
@@ -88,10 +86,6 @@ const BlogContent = () => {
                 }
             </div>
             <Comments dataPost={dataPost} idAutor={sessionStorage.getItem("id")} idPost={dataPost.id_posteo}/>
-            <div className='moreContenteContainer'>
-                <h2 className='subTitleBlog'>Mas contenido...</h2>
-                <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"}/>
-            </div>
             <div className='footerBlog'>
                 <RouterLink to="/" className="btnLink linkBlog">Volver al inicio</RouterLink>
             </div>

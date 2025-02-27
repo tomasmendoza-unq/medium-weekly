@@ -66,7 +66,7 @@ const Login = ({ alert }) => {
         <div className="containerLogin">
             <div className='containerForm'>
                 <div className="boxForm">
-                    <h2 className='title2'>Bienvenido.</h2>
+                    <h2 className='titleForm'>Bienvenido.</h2>
                     <form id='login' action="" method="post" onSubmit={handleSubmit}>
 
                         <label htmlFor="name">Nombre de usuario</label>
@@ -78,7 +78,7 @@ const Login = ({ alert }) => {
                             maxLength="16"
                             placeholder='Ej: Julio Cortázar' 
                             onChange={handleInput}
-                            className='input'
+                            className='inputForm'
                         />
 
                         <label htmlFor="pass">Contraseña</label>
@@ -90,7 +90,7 @@ const Login = ({ alert }) => {
                             name='contrasena' 
                             placeholder='*******' 
                             onChange={handleInput}
-                            className='input'
+                            className='inputForm'
                         />
                     </form>
                     <button className='btn' form='login' type="submit">Log In</button>

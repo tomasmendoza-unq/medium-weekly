@@ -36,7 +36,7 @@ const Main = () => {
         }
     }, [idCategory])
 
-    if (!dataPost) {
+    if (dataFiltered.length === 0) {
         return <Loading />
     }
 

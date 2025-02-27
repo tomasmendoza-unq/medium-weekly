@@ -61,3 +61,9 @@
     box-shadow: 20px 0px 20px 4px var(--white);
     z-index: 1;
 }
+
+@media screen and (max-width: 800px) {
+    .scroll-container {
+        width: 100%;
+    }
+}

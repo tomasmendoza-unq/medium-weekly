@@ -95,3 +95,12 @@
     border-bottom: 4px solid var(--secondary-color);
     transition: all 0.5s;
 }
+
+@media screen and (max-width: 800px) {
+    .card {
+        width: 90vw;
+    }
+    .block {
+        width: 90vw;
+    }
+}

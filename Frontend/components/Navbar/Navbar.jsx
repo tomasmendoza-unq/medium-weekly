@@ -4,11 +4,14 @@ import { FaRegPenToSquare, FaRegUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FaQuoteRight } from "react-icons/fa6";
+import { IoCloseOutline } from "react-icons/io5";
+import { FaArrowRightToBracket } from "react-icons/fa6";
 import Search from "./Search"
 
 const Navbar = () => {
 
     const [isShrunk, setIsShrunk] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const id = sessionStorage.getItem("id")
 
     useEffect(() => {
@@ -24,6 +27,10 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     return (
         <header className={`header ${isShrunk ? "shrink" : ""}`}>
             <nav>
@@ -31,56 +38,116 @@ const Navbar = () => {
                     <h1 className='title1'>Medium Weekly</h1>
                     <FaQuoteRight color='#dee9e5'/>
                 </Link>
-                <section className="tools">
-                <Search className={`results ${isShrunk ? "shrinkSearch": ""}`}/>
+                <div className="hamburger" onClick={toggleMenu}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <section className={`tools ${isMenuOpen ? 'active' : ''}`}>
+                <Search toggleMenu={toggleMenu} className={`results ${isShrunk ? "shrinkSearch": ""}`}/>
                     {sessionStorage.getItem('logged') === null ?
                     <div className="menu__bar">
-                        <ul className="navigation hide">
-                            <li>
-                                <button>
-                                    <Link to="/login">
-                                        <FaRegUser />
-                                    </Link>
-                                </button>
-                            </li>
-                        </ul>
+                            {isMenuOpen 
+                            ?
+                            <ul className='navigation hide'>
+                                <li>
+                                    <button onClick={toggleMenu}>
+                                        <IoCloseOutline/>
+                                        <p className='pLink'>Cerrar</p>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button className='userBtn'>
+                                        <Link onClick={toggleMenu} to={`/login`}>
+                                            <FaRegUser />
+                                            <p className='pLink'>Entrar</p>
+                                        </Link>
+                                    </button>
+                                </li>
+                            </ul>
+                            :
+                            <ul className='navigation hide'>
+                                <li>
+                                    <button>
+                                        <Link to="/login">
+                                            <FaRegUser />
+                                        </Link>
+                                    </button>
+                                </li>
+                            </ul>}
                     </div>
                     :
                     <div className="menu__bar">
-                    <ul className="navigation hide">
-                        <li>
-                            <button className='userBtn'>
-                                <Link>
-                                    <FaRegUser />
-                                </Link>
-                            </button>
-                            <div className="dropdown">
-                                <ul className="list-items-with-description">
-                                    <li>
-                                        <div className="item-title">
-                                            <Link to={`/user/${id}`}>
-                                                <h3>Ver Perfil</h3>
-                                            </Link>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="item-title">
-                                            <button onClick={()=>{sessionStorage.clear() ;location.reload()}} className='logout' to="/login">
-                                                <h3>LogOut</h3>
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <button>
-                                <Link to="/newblog">
-                                    <FaRegPenToSquare />
-                                </Link>
-                            </button>
-                        </li>
-                    </ul>
+                        {isMenuOpen ?
+                            <ul className="navigation hide">
+                                <li>
+                                    <button className='userBtn' onClick={toggleMenu}>
+                                        <Link>
+                                            <IoCloseOutline/>
+                                            <p className='pLink'>Cerrar</p>
+                                        </Link>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button className='userBtn'>
+                                        <Link onClick={toggleMenu} to={`/user/${id}`}>
+                                            <FaRegUser />
+                                            <p className='pLink'>Ver Perfil</p>
+                                        </Link>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button className='userBtn'>
+                                        <Link onClick={toggleMenu} to="/newblog">
+                                            <FaRegPenToSquare />
+                                            <p className='pLink'>Redactar un Blog</p>
+                                        </Link>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onClick={()=>{sessionStorage.clear() ;location.reload()}} className='userBtn' to="/login">
+                                        <Link>
+                                            <FaArrowRightToBracket/>
+                                            <p className='pLink'>LogOut</p>
+                                        </Link>
+                                    </button>
+                                </li>
+                            </ul>
+                        :
+                            <ul className="navigation hide">
+                                <li>
+                                    <button className='userBtn'>
+                                        <Link>
+                                            <FaRegUser />
+                                        </Link>
+                                    </button>
+                                    <div className="dropdown">
+                                        <ul className="list-items-with-description">
+                                            <li>
+                                                <div className="item-title">
+                                                    <Link to={`/user/${id}`}>
+                                                        <h3>Ver Perfil</h3>
+                                                    </Link>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="item-title">
+                                                    <button onClick={()=>{sessionStorage.clear() ;location.reload()}} className='logout' to="/login">
+                                                        <h3>LogOut</h3>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button>
+                                        <Link to="/newblog">
+                                            <FaRegPenToSquare />
+                                        </Link>
+                                    </button>
+                                </li>
+                            </ul>}
                     </div>
                     }
                 </section>
