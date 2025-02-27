@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import Bloglist from '../../components/Bloglist/Bloglist'
-import Loading from '../../components/Loading/Loading'
-import FilterByTags from '../../components/FilterByTags/FilterByTags'
+import Bloglist from '../../src/components/Bloglist/Bloglist'
+import Loading from '../../src/components/Loading/Loading'
+import FilterByTags from '../../src/components/FilterByTags/FilterByTags'
 import './Main.css'
 
 const Main = () => {

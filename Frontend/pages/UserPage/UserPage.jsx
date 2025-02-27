@@ -1,8 +1,8 @@
 import './UserPage.css'
 import { useState, useEffect } from 'react'
-import Blogcard from '../../components/Bloglist/BlogCard/Blogcard'
+import Blogcard from '../../src/components/Bloglist/BlogCard/Blogcard'
 import { useParams } from 'react-router-dom'
-import Loading from '../../components/Loading/Loading'
+import Loading from '../../src/components/Loading/Loading'
 // const apiUrl = process.env.REACT_APP_API_URL;
 
 const UserPage = () => {

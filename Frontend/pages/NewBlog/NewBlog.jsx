@@ -1,10 +1,10 @@
 import './NewBlog.css'
 import { useEffect, useState } from 'react'
-import Yoopta from '../../components/Yoopta/Yoopta'
+import Yoopta from '../../src/components/Yoopta/Yoopta'
 import Toastify from 'toastify-js'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import TagSelector from '../../components/TagSelector/TagSelector'
+import TagSelector from '../../src/components/TagSelector/TagSelector'
 import { data } from 'react-router-dom'
 
 const NewBlog = ({ alert }) => {

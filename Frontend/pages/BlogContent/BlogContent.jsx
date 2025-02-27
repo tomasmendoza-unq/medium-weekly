@@ -4,13 +4,13 @@ import { data, useParams } from 'react-router-dom';
 import { FaBookmark } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
 import { Link as RouterLink } from 'react-router-dom';
-import Yoopta from '../../components/Yoopta/Yoopta';
+import Yoopta from '../../src/components/Yoopta/Yoopta';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
-import Comments from "../../components/Comments/Comments"
+import Comments from "../../src/components/Comments/Comments"
 import './BlogContent.css'
-import Blogcard from '../../components/Bloglist/BlogCard/Blogcard';
-import Loading from '../../components/Loading/Loading'
-import Bloglist from '../../components/Bloglist/Bloglist';
+import Blogcard from '../../src/components/Bloglist/BlogCard/Blogcard';
+import Loading from '../../src/components/Loading/Loading'
+import Bloglist from '../../src/components/Bloglist/Bloglist';
 
 const BlogContent = () => {
     const { id } = useParams();
