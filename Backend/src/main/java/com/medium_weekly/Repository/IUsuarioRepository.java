@@ -10,13 +10,7 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
     @EntityGraph(attributePaths = {"posts"})
     Optional<Usuario> findById(Long id);
 
-
-    Optional<Usuario> findByNombreAndContrasena(String Nombre, String contrasena);
-
-
     Optional<Usuario> findByNombre(String nombre);
-
-    Optional<Usuario> findByEmail(String email);
 
 
 

@@ -18,9 +18,9 @@ public interface IUsuarioService {
 
     void editUsuario(Long idUsuario, UsuarioDTO usuario);
 
-    UsuarioDTO getUsuarioDTOByLogin(LoginDTO log);
-
     Usuario findById(Long idUsuario);
 
     List<Posteos> findPost(Long idUsuario);
+
+    String uthenticateAndGenerateToken(LoginDTO loginDTO);
 }
