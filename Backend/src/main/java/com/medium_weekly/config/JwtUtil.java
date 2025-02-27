@@ -1,5 +1,6 @@
 package com.medium_weekly.config;
 
+import com.medium_weekly.Model.Usuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -20,12 +21,12 @@ public class JwtUtil {
     private long expirationTime;
 
     private Key getKey() {
-        return Keys.hmacShaKeyFor(secretKey.getBytes());
+        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
-
-    public String generarToken(String email) {
+    public String generarToken(Usuario usuario) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(usuario.getId_usuario().toString())
+                .claim("nombre", usuario.getNombre())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(getKey(), SignatureAlgorithm.HS256)

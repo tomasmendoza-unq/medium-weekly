@@ -18,7 +18,6 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-        // Configuración personalizada para mapear idAutor
         modelMapper.addMappings(new PropertyMap<Posteos, PosteoDTO>() {
             @Override
             protected void configure() {
@@ -26,11 +25,10 @@ public class ModelMapperConfig {
             }
         });
 
-        // Mapeo de PosteoDTO a Posteos
+
         modelMapper.addMappings(new PropertyMap<PosteoDTO, Posteos>() {
             @Override
             protected void configure() {
-                // Aquí evitamos que se intente mapear automáticamente el autor
                 skip(destination.getAutor());
             }
         });

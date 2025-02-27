@@ -1,6 +1,8 @@
 package com.medium_weekly.Controller;
 
+import com.medium_weekly.Exception.AuthenticationException;
 import com.medium_weekly.Exception.ResourceNotFound;
+import com.medium_weekly.Exception.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,13 +23,34 @@ public class GlobalControllerAdvice {
     public Map<String, String> handleConstraintViolationException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField(); // REALIZA UN CASTING A ERROR, TRANSFORMANDOLO A UN TIPO FIELDERROR
-            String errorMessage = error.getDefaultMessage(); // OBTIENE EL MESSAGE DEL DTO
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
 
-            errors.put(fieldName,errorMessage); // AGREGA AL MAP EL ERROR
+            errors.put(fieldName,errorMessage);
         });
         return errors;
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public Map<String, String> handlerUserAlreadyExistsException(UserAlreadyExistsException ex){
+        Map<String, String> error = new HashMap<>();
+
+        error.put("Message", ex.getMessage());
+
+        return error;
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AuthenticationException.class)
+    public Map<String,String> handlerAuthenticationException(AuthenticationException ex){
+        Map<String, String> error = new HashMap<>();
+
+        error.put("Message", ex.getMessage());
+
+        return error;
+    }
+
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFound.class)

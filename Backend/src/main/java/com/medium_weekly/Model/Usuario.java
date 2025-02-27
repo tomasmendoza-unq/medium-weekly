@@ -22,34 +22,12 @@ public class Usuario {
 
     private String nombre;
 
-    // Email para identificar al usuario (único)
-    @Column(unique = true, nullable = false)
-    private String email;
-
     private String contrasena;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuario_roles",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id")
-    )
 
-    private Set<Rol> roles = new HashSet<>(); // Relación con roles
-
-
-
-    //Relacion user -> Post
     @OneToMany(mappedBy = "autor", fetch = FetchType.EAGER)
     private List<Posteos> posts;
 
 
-
-
-    public Usuario(String nombre, String email, String contrasena) {
-        this.nombre = nombre;
-        this.email = email;
-        this.contrasena = contrasena;
-    }
 
 }
