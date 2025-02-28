@@ -32,7 +32,7 @@ const Login = ({ alert }) => {
             sessionStorage.setItem("user", dataForm.nombre)
             sessionStorage.setItem("id", dataUsers.find((e) => e.nombre === dataForm.nombre).id_usuario)
             setTimeout(() => {
-                window.location.replace("http://localhost:5174/")
+                window.location.replace("https://www.mediumweekly.com.ar/")
             }, 1000);
         } else {
             if (dataForm.contrasena === "") {
