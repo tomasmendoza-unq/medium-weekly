@@ -41,7 +41,7 @@ const Search = ({ className, toggleMenu }) => {
                                 resultadosFiltrados.length > 0
                                     ?
                                     (resultadosFiltrados.slice(0, 5).map(post => (
-                                        <Link onClick={toggleMenu} className='postResult' to={`/blog/${post.id_posteo}`} key={post.id_posteo}><img src={post.src} alt="" />{post.titulo}</Link>
+                                        <Link onClick={window.innerWidth < 800 ? toggleMenu : null} className='postResult' to={`/blog/${post.id_posteo}`} key={post.id_posteo}><img src={post.src} alt="" />{post.titulo}</Link>
                                     ))
                                     )
                                     :
