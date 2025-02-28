@@ -8,6 +8,7 @@ import TagSelector from '../../src/components/TagSelector/TagSelector'
 import { data } from 'react-router-dom'
 
 const NewBlog = ({ alert }) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [tagSelected, setTag] = useState("")
 
     const showSwal = () => {
@@ -23,7 +24,7 @@ const NewBlog = ({ alert }) => {
     // ? Función para enviar los datos a la base de datos
     const crearPost = async (blog) => {
         try {
-            const res = await fetch('http://localhost:8080/posteos/crear', {
+            const res = await fetch(`${apiUrl}/posteos/crear`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

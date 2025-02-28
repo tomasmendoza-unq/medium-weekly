@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const Search = ({ className, toggleMenu }) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [dataPost, setDataPost] = useState([])
     const [query, setQuery] = useState('')
     useEffect(() => {
-        fetch("http://localhost:8080/posteos")
+        fetch(`${apiUrl}/posteos`)
             .then((response) => response.json())
             .then((data) => {
                 setDataPost(data)

@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 import Blogcard from '../../src/components/Bloglist/BlogCard/Blogcard'
 import { useParams } from 'react-router-dom'
 import Loading from '../../src/components/Loading/Loading'
-const apiUrl = import.meta.env.VITE_API_URL;
 
 const UserPage = () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [dataUser, setDataUser] = useState([])
     const [dataPost, setDataPost] = useState([])
     const [isLoading, setIsLoading] = useState(true)

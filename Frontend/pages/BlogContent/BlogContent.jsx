@@ -20,12 +20,14 @@ const BlogContent = () => {
     const [autor, setAutor] = useState(null);
     const [value, setValue] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const apiUrl = import.meta.env.VITE_API_URL;
+
 
     // Fetch de datos
     useEffect(() => {
         setIsLoading(true);
         Promise.all([
-            fetch("http://localhost:8080/posteos")
+            fetch(`${apiUrl}/posteos`)
                 .then((response) => response.json())
                 .then((data) => {
                     const post = data.find((e) => e.id_posteo === JSON.parse(id));
@@ -43,7 +45,7 @@ const BlogContent = () => {
                         setValue({});
                     }
                 }),
-            fetch("http://localhost:8080/user")
+            fetch(`${apiUrl}/user`)
                 .then((response) => response.json())
                 .then((data) => setDataUsers(data))
         ]).finally(() => {

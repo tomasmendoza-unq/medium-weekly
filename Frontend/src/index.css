@@ -30,6 +30,7 @@ body {
     background-size: 6rem 4rem;
     font-family: var(--text-font);
     width: 99.2vw;
+    overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {

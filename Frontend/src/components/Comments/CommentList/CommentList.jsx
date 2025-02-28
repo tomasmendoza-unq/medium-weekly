@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './CommentList.css'
 
 const CommentList = ({ dataPost }) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [dataUser, setDataUser] = useState([])
     const [autor, setAutor] = useState(null);
     const [visible, setVisible] = useState(3);
@@ -11,7 +12,7 @@ const CommentList = ({ dataPost }) => {
     }
     
     useEffect(() => {
-        fetch("http://localhost:8080/user")
+        fetch(`${apiUrl}/user`)
             .then((res) => res.json())
             .then((e) => { setDataUser(e) })
     }, [])

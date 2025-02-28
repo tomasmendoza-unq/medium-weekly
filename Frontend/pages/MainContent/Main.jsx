@@ -6,6 +6,7 @@ import FilterByTags from '../../src/components/FilterByTags/FilterByTags'
 import './Main.css'
 
 const Main = () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const { idCategory } = useParams()
     const [dataPost, setDataPost] = useState([])
     const [dataFiltered, setDataFiltered] = useState([])
@@ -21,13 +22,13 @@ const Main = () => {
 
     useEffect(() => {
         if (idCategory) {
-            fetch(`http://localhost:8080/posteos/categoria/${idCategory}`)
+            fetch(`${apiUrl}/posteos/categoria/${idCategory}`)
                 .then((response) => response.json())
                 .then((dataFil) => {
                     setDataFiltered(dataFil.reverse())
                 })
         } else {
-            fetch("http://localhost:8080/posteos")
+            fetch(`${apiUrl}/posteos`)
                 .then((response) => response.json())
                 .then((data) => {
                     setDataPost(data.reverse())

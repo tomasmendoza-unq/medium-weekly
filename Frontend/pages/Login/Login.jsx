@@ -3,9 +3,11 @@ import './Login.css'
 import { Link } from 'react-router-dom'
 
 const Login = ({ alert }) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [dataUsers, setDataUsers] = useState()
+    
     useEffect(() => {
-        fetch("http://localhost:8080/user")
+        fetch(`${apiUrl}/user`)
             .then((response) => response.json())
             .then((data) => {
                 setDataUsers(data)
