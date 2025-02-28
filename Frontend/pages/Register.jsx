@@ -1,12 +1,12 @@
 import React from 'react'
-
 import { useState, useEffect } from 'react'
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Register = ({ alert }) => {
 
     const [dataUsers, setDataUsers] = useState()
     useEffect(() => {
-        fetch("http://localhost:8080/user")
+        fetch(`${apiUrl}/user`)
             .then((response) => response.json())
             .then((data) => {
                 setDataUsers(data)
@@ -15,14 +15,14 @@ const Register = ({ alert }) => {
 
     const crearUsuario = async (usuario) => {
         try {
-            const response = await fetch('http://localhost:8080/user/crear', {
+            const response = await fetch(`${apiUrl}/user/crear`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usuario),
             });
             alert("Usuario creado correctamente", "#1abb1a")
             setTimeout(() => {
-                window.location.replace("http://localhost:5174/login")
+                window.location.replace(`${apiUrl}/login`)
             }, 1000);
         } catch (error) {
             console.error('Error al crear usuario:', error);
