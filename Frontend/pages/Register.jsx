@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-const apiUrl = import.meta.env.VITE_API_URL;
 
 const Register = ({ alert }) => {
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const webUrl = import.meta.env.VITE_WEB_URL;
     const [dataUsers, setDataUsers] = useState()
+    
     useEffect(() => {
         fetch(`${apiUrl}/user`)
             .then((response) => response.json())
@@ -14,26 +16,25 @@ const Register = ({ alert }) => {
     }, [])
 
     const crearUsuario = async (usuario) => {
-        try {
-            const response = await fetch(`${apiUrl}/user/crear`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(usuario),
-            });
-            alert("Usuario creado correctamente", "#1abb1a")
-            setTimeout(() => {
-                window.location.replace(`${apiUrl}/login`)
-            }, 1000);
-        } catch (error) {
-            console.error('Error al crear usuario:', error);
-        }
+        fetch("http://localhost:8080/user/crear", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Usuario creado:", data);
+                alert("Usuario creado correctamente!", "#1abb9c")
+                // window.location.href = `${webUrl}/login`
+            })
+            .catch(error => console.error("Error:", error));
     };
 
     const [dataForm, setDataForm] = useState({
         "nombre": "",
         "contrasena": "",
-        "rol": "REDACTOR",
-        "repass": ""
     })
 
     const handleInput = (e) => {
@@ -56,6 +57,7 @@ const Register = ({ alert }) => {
                 if (dataUsers.find((e) => dataForm.nombre === e.nombre )) {
                     alert("El nombre ya esta en uso", "#bb1a1a")
                 } else {
+                    console.log(dataForm)
                     crearUsuario(dataForm)
                 }
             }
