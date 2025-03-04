@@ -26,7 +26,7 @@ const Register = ({ alert }) => {
             .then(response => response.json())
             .then(data => {
                 alert("Usuario creado correctamente!", "#1abb9c")
-                window.location.href = `${webUrl}login`
+                // window.location.href = `${webUrl}login`
             })
             .catch(error => console.error("Error:", error));
     };
