@@ -15,7 +15,7 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
     })
     const sendPost = async (comentario) => {
         try {
-            const response = await fetch('${apiUrl}/comentario/crear', {
+            const response = await fetch(`${apiUrl}/comentario/crear`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(comentario),

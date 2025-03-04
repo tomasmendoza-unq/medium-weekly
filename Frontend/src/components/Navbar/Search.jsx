@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const Search = ({ className, toggleMenu }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -31,7 +32,7 @@ const Search = ({ className, toggleMenu }) => {
                 />
             </div>
             {
-                sessionStorage.getItem("logged") === "true"
+                Cookies.get("logged") === "true"
                     ?
                     query.length === 0
                         ?

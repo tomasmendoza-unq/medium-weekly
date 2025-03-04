@@ -2,24 +2,56 @@ import { useEffect, useState } from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
 
-const Login = ({ alert }) => {
+const Login = ({ alert, Cookies }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const webUrl = import.meta.env.VITE_WEB_URL;
 
-    const login = async (usuario) => {
-        fetch("http://localhost:8080/user/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(usuario)
+    const [dataUsers, setDataUsers] = useState()
+
+    useEffect(() => {
+        fetch(`${apiUrl}/user`)
+        .then((response) => response.json())
+        .then((data) => {
+            setDataUsers(data)
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Token recibido:", data);
-                localStorage.setItem("token", JSON.stringify(data));
-            })
-            .catch(error => console.error("Error:", error));
+    }, [])
+
+    const login = async (usuario) => {
+        try {
+            const response = await fetch(`${apiUrl}/user/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(usuario)
+            });
+    
+            const data = await response.text();
+            
+            if (!response.ok) {
+                throw new Error(data);
+            }
+    
+            switch (data) {
+                case "Usuario no encontrado":
+                    alert("El usuario no existe", "#bb1a1a");
+                    break;
+                case "Usuario o contraseña incorrectos":
+                    alert("Usuario o contraseña incorrectos", "#bb1a1a");
+                    break;
+                default:
+                    // Cookies
+                    Cookies.set("token", data);
+                    Cookies.set("logged", true);
+                    Cookies.set("user", usuario.nombre);
+                    Cookies.set("id", dataUsers.find((e) => e.nombre === usuario.nombre).id_usuario);
+                    alert("Bienvenido!", "#1abb9c");
+                    window.location.href = `${webUrl}`;
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error al intentar iniciar sesión", "#bb1a1a");
+        }
     }
 
     const [dataForm, setDataForm] = useState({

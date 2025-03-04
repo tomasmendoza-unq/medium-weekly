@@ -25,9 +25,8 @@ const Register = ({ alert }) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log("Usuario creado:", data);
                 alert("Usuario creado correctamente!", "#1abb9c")
-                // window.location.href = `${webUrl}/login`
+                window.location.href = `${webUrl}login`
             })
             .catch(error => console.error("Error:", error));
     };
@@ -43,21 +42,19 @@ const Register = ({ alert }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (dataForm.nombre === "" || dataForm.contrasena === "" || dataForm.repass === "") {
+        if (dataForm.nombre === "" || dataForm.contrasena === "") {
             alert("Rellena todos los campos!", "#bb1a1a")
         } else {
             if (dataForm.nombre.length < 6) {
                 alert("El nombre debe de tener un minimo de 6 caracteres!", "#bb1a1a")
             }
-            if (dataForm.contrasena !== dataForm.repass) {
-                alert("Las contraseñas no son iguales!", "#bb1a1a")
-            } else if (dataForm.contrasena.length < 8) {
+
+            else if (dataForm.contrasena.length < 8) {
                 alert("La contraseña debe de tener un minimo de 8 caracteres!", "#bb1a1a")
             } else {
                 if (dataUsers.find((e) => dataForm.nombre === e.nombre )) {
                     alert("El nombre ya esta en uso", "#bb1a1a")
                 } else {
-                    console.log(dataForm)
                     crearUsuario(dataForm)
                 }
             }
@@ -99,17 +96,7 @@ const Register = ({ alert }) => {
                             className='input'
                         />
 
-                        <label htmlFor="pass">Repetir Contraseña</label>
-                        <input 
-                            type='password' 
-                            required 
-                            maxLength="16" 
-                            minLength="8" 
-                            name='repass' 
-                            placeholder='*******' 
-                            onChange={handleInput}
-                            className='input'
-                        />
+
                     </form>
                     <button className='btn' form='login' type="submit">Registrarse</button>
                 </div>

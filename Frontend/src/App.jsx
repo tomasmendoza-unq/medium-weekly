@@ -12,6 +12,7 @@ import Yoopta from './components/Yoopta/Yoopta'
 import UserPage from '../pages/UserPage/UserPage'
 import Toastify from 'toastify-js'
 import FilterByTags from './components/FilterByTags/FilterByTags'
+import Cookies from 'js-cookie'
 
 function App() {
 
@@ -44,14 +45,14 @@ function App() {
           <Route path='/' element={<Main />}></Route>
           <Route path='/register' element={<Register alert={alert} />}></Route>
           <Route path='*' element={<NotFound />}></Route>
-          <Route path='/newblog' element={<NewBlog alert={alert} />}></Route>
+          <Route path='/newblog' element={<NewBlog alert={alert} Cookies={Cookies} />}></Route>
           <Route path='/user/:id' element={<UserPage />}></Route>
           <Route path='/filter/:idCategory' element={<Main />}></Route>
-          {sessionStorage.getItem("id")
+          {Cookies.get("id")
             ?
             <Route path='/blog/:id' element={<BlogContent />}></Route>
             :
-            <Route path='/login' element={<Login alert={alert} />}></Route>
+            <Route path='/login' element={<Login alert={alert} Cookies={Cookies} />}></Route>
           }
         </Routes>
         <footer>

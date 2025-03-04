@@ -3,7 +3,7 @@ import './Bloglist.css'
 import Blogcard from './BlogCard/Blogcard'
 import { data } from 'react-router-dom'
 
-const Bloglist = ({ dataPost, visible, clase, claseBC }) => {
+const Bloglist = ({ dataPost, visible, clase, claseBC, Cookies }) => {
 
     return (
         <div className={clase || "list"} >

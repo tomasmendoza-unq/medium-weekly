@@ -1,9 +1,11 @@
 import React from 'react'
 import './Blogcard.css'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types' 
+import PropTypes from 'prop-types'
+import Cookies from 'js-cookie'
 
-const Blogcard = ({ clase, title, resume, category, src, id, className, onClick }) => {
+
+const Blogcard = ({ clase, title, resume, category, src, id, className, onClick}) => {
     const formatCategory = (cat) => {
         return cat
             ? cat.toLowerCase().replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())
@@ -11,7 +13,7 @@ const Blogcard = ({ clase, title, resume, category, src, id, className, onClick 
     }
     return (
         <>
-            {sessionStorage.getItem("id") ?
+            {Cookies.get("id") ?
                 <Link to={`/blog/${id}`}>
                     <article className={clase || 'card'}>
                         <div className='cardCont'>

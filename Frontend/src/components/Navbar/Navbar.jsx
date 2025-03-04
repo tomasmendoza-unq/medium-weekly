@@ -7,12 +7,14 @@ import { FaQuoteRight } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import Search from "./Search"
+import Cookies from 'js-cookie'
 
 const Navbar = () => {
 
     const [isShrunk, setIsShrunk] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const id = sessionStorage.getItem("id")
+    const id = Cookies.get("id")
+    const webUrl = import.meta.env.VITE_WEB_URL;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -31,6 +33,12 @@ const Navbar = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const clearCookies = () => {
+        Object.keys(Cookies.get()).forEach(cookie => {
+            Cookies.remove(cookie);
+        });
+    }
+
     return (
         <header className={`header ${isShrunk ? "shrink" : ""}`}>
             <nav>
@@ -45,7 +53,7 @@ const Navbar = () => {
                 </div>
                 <section className={`tools ${isMenuOpen ? 'active' : ''}`}>
                 <Search toggleMenu={toggleMenu} className={`results ${isShrunk ? "shrinkSearch": ""}`}/>
-                    {sessionStorage.getItem('logged') === null ?
+                    {Cookies.get('logged') === undefined ?
                     <div className="menu__bar">
                             {isMenuOpen 
                             ?
@@ -105,7 +113,7 @@ const Navbar = () => {
                                     </button>
                                 </li>
                                 <li>
-                                    <button onClick={()=>{sessionStorage.clear() ;location.reload()}} className='userBtn' to="/login">
+                                    <button onClick={()=>{clearCookies() ;window.location.href = webUrl}} className='userBtn' to="/login">
                                         <Link>
                                             <FaArrowRightToBracket/>
                                             <p className='pLink'>LogOut</p>
@@ -132,7 +140,7 @@ const Navbar = () => {
                                             </li>
                                             <li>
                                                 <div className="item-title">
-                                                    <button onClick={()=>{sessionStorage.clear() ;location.reload()}} className='logout' to="/login">
+                                                    <button onClick={()=>{clearCookies() ;window.location.href = webUrl}} className='logout' to="/login">
                                                         <h3>LogOut</h3>
                                                     </button>
                                                 </div>

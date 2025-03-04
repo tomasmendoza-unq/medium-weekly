@@ -7,7 +7,7 @@ import withReactContent from 'sweetalert2-react-content'
 import TagSelector from '../../src/components/TagSelector/TagSelector'
 import { data } from 'react-router-dom'
 
-const NewBlog = ({ alert }) => {
+const NewBlog = ({ alert, Cookies }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [tagSelected, setTag] = useState("")
 
@@ -79,7 +79,7 @@ const NewBlog = ({ alert }) => {
         "resumen": '',
         "contenido": "",
         "src": '/img/coffe.png',
-        "idAutor": sessionStorage.getItem('id'),
+        "idAutor": Cookies.get('id'),
         "categoria": ""
     });
 

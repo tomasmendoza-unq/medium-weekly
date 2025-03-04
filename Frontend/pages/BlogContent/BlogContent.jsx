@@ -11,6 +11,7 @@ import './BlogContent.css'
 import Blogcard from '../../src/components/Bloglist/BlogCard/Blogcard';
 import Loading from '../../src/components/Loading/Loading'
 import Bloglist from '../../src/components/Bloglist/Bloglist';
+import Cookies from 'js-cookie';
 
 const BlogContent = () => {
     const { id } = useParams();
@@ -21,9 +22,7 @@ const BlogContent = () => {
     const [value, setValue] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const apiUrl = import.meta.env.VITE_API_URL;
-
-
-    // Fetch de datos
+    
     useEffect(() => {
         setIsLoading(true);
         Promise.all([
@@ -107,7 +106,7 @@ const BlogContent = () => {
                     <div className="spinner"></div>
                 )}
             </div>
-            <Comments dataPost={dataPost} idAutor={sessionStorage.getItem("id")} idPost={dataPost.id_posteo}/>
+            <Comments dataPost={dataPost} idAutor={Cookies.get("id")} idPost={dataPost.id_posteo}/>
             <div className='moreContenteContainer'>
                 <h2 className='subTitleBlog'>Mas contenido...</h2>
                 <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"}/>
