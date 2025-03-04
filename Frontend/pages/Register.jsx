@@ -16,7 +16,7 @@ const Register = ({ alert }) => {
     }, [])
 
     const crearUsuario = async (usuario) => {
-        fetch(`${apiUrl}user/crear`, {
+        fetch(`${apiUrl}/user/crear`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
