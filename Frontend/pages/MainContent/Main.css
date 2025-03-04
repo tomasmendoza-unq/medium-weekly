@@ -32,3 +32,12 @@
     margin: 40px auto;
     background-color: var(--tertiary-color);
 }
+
+@media screen and (max-width: 800px) {
+    .msgMain {
+        width: 90%;
+    }
+    .mainContent {
+        align-items: center;
+    }
+}

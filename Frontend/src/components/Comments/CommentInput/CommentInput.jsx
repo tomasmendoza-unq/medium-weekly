@@ -4,6 +4,7 @@ import { FaPaperPlane } from "react-icons/fa6";
 import './CommentInput.css'
 
 const CommentInput = ({ idAutor, idPost, dataPost }) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [comentario, setComentario] = useState("")
     const [read, setRead] = useState(false)
     const [input, setInput] = useState("")
@@ -14,7 +15,7 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
     })
     const sendPost = async (comentario) => {
         try {
-            const response = await fetch('http://localhost:8080/comentario/crear', {
+            const response = await fetch(`${apiUrl}/comentario/crear`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(comentario),

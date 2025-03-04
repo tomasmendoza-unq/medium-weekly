@@ -1,15 +1,17 @@
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import Bloglist from '../../components/Bloglist/Bloglist'
-import Loading from '../../components/Loading/Loading'
-import FilterByTags from '../../components/FilterByTags/FilterByTags'
+import Bloglist from '../../src/components/Bloglist/Bloglist'
+import Loading from '../../src/components/Loading/Loading'
+import FilterByTags from '../../src/components/FilterByTags/FilterByTags'
+import Cookies from 'js-cookie'
 import './Main.css'
 
 const Main = () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const { idCategory } = useParams()
     const [dataPost, setDataPost] = useState([])
     const [dataFiltered, setDataFiltered] = useState([])
-    const userName = sessionStorage.getItem("user")
+    const userName = Cookies.get("user")
     const [visible, setVisible] = useState(5);
     const cargarMas = () => {
         setVisible((prevVisible) => prevVisible + 5);
@@ -21,13 +23,13 @@ const Main = () => {
 
     useEffect(() => {
         if (idCategory) {
-            fetch(`http://localhost:8080/posteos/categoria/${idCategory}`)
+            fetch(`${apiUrl}/posteos/categoria/${idCategory}`)
                 .then((response) => response.json())
                 .then((dataFil) => {
                     setDataFiltered(dataFil.reverse())
                 })
         } else {
-            fetch("http://localhost:8080/posteos")
+            fetch(`${apiUrl}/posteos`)
                 .then((response) => response.json())
                 .then((data) => {
                     setDataPost(data.reverse())
@@ -36,29 +38,31 @@ const Main = () => {
         }
     }, [idCategory])
 
-    if (!dataPost) {
-        return <Loading />
-    }
-
     return (
         <main>
             <section className='mainContent'>
-                {sessionStorage.getItem("logged") === null ?
+                {Cookies.get("logged") === undefined ?
                     <div className='msgMain'>
                         <p className='textMain'>Bienvenido a Medium Weekly, entra para empezar a leer!</p>
                         <Link to="/login" className='btnLink'>Entrar</Link>
                     </div>
                     :
                     <h2 className="class2 title2">Bienvenido/a <span className='ital'>{userName}</span></h2>}
-                <div className='bloglist'>
-                    <FilterByTags idParam={idCategory} />
-                    <Bloglist visible={visible} dataPost={dataFiltered} />
-                    {visible < dataFiltered.length && (
-                        <button onClick={cargarMas} className="btn">
-                            Ver más...
-                        </button>
-                    )}
-                </div>
+                    <div className='bloglist'>
+                        <FilterByTags idParam={idCategory} />
+                        {dataFiltered.length === 0 ? (
+                            <Loading />
+                        ) : (
+                            <>
+                                <Bloglist visible={visible} dataPost={dataFiltered} Cookies={Cookies} />
+                                {visible < dataFiltered.length && (
+                                    <button onClick={cargarMas} className="btn">
+                                        Ver más...
+                                    </button>
+                                )}
+                            </>
+                        )}
+                    </div>
             </section>
         </main>
     )

@@ -22,6 +22,7 @@
     "@yoopta/marks": "^4.9.4",
     "@yoopta/paragraph": "^4.9.4",
     "@yoopta/toolbar": "^4.9.4",
+    "js-cookie": "^3.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",

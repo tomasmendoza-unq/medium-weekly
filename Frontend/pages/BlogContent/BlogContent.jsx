@@ -4,13 +4,14 @@ import { data, useParams } from 'react-router-dom';
 import { FaBookmark } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
 import { Link as RouterLink } from 'react-router-dom';
-import Yoopta from '../../components/Yoopta/Yoopta';
+import Yoopta from '../../src/components/Yoopta/Yoopta';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
-import Comments from "../../components/Comments/Comments"
+import Comments from "../../src/components/Comments/Comments"
 import './BlogContent.css'
-import Blogcard from '../../components/Bloglist/BlogCard/Blogcard';
-import Loading from '../../components/Loading/Loading'
-import Bloglist from '../../components/Bloglist/Bloglist';
+import Blogcard from '../../src/components/Bloglist/BlogCard/Blogcard';
+import Loading from '../../src/components/Loading/Loading'
+import Bloglist from '../../src/components/Bloglist/Bloglist';
+import Cookies from 'js-cookie';
 
 const BlogContent = () => {
     const { id } = useParams();
@@ -19,22 +20,38 @@ const BlogContent = () => {
     const [dataUsers, setDataUsers] = useState([]);
     const [autor, setAutor] = useState(null);
     const [value, setValue] = useState({});
-
-    // Fetch de datos
+    const [isLoading, setIsLoading] = useState(true);
+    const apiUrl = import.meta.env.VITE_API_URL;
+    
     useEffect(() => {
-        fetch("http://localhost:8080/posteos")
-            .then((response) => response.json())
-            .then((data) => {
-                const post = data.find((e) => e.id_posteo === JSON.parse(id));
-                setDataPost(post);
-                setMorePosts(data)
-            });
-        fetch("http://localhost:8080/user")
-            .then((response) => response.json())
-            .then((data) => setDataUsers(data));
+        setIsLoading(true);
+        Promise.all([
+            fetch(`${apiUrl}/posteos`)
+                .then((response) => response.json())
+                .then((data) => {
+                    const post = data.find((e) => e.id_posteo === JSON.parse(id));
+                    setDataPost(post);
+                    setMorePosts(data)
+                    if (post?.contenido) {
+                        try {
+                            const parsedContent = JSON.parse(post.contenido);
+                            setValue(parsedContent);
+                        } catch (error) {
+                            console.error("Error al parsear el contenido:", error);
+                            setValue({});
+                        }
+                    } else {
+                        setValue({});
+                    }
+                }),
+            fetch(`${apiUrl}/user`)
+                .then((response) => response.json())
+                .then((data) => setDataUsers(data))
+        ]).finally(() => {
+            setIsLoading(false);
+        });
     }, [id]);
 
-    // Configuración del autor
     useEffect(() => {
         if (dataPost && dataUsers.length) {
             const author = dataUsers.find((user) => user.id_usuario === dataPost.idAutor);
@@ -42,11 +59,10 @@ const BlogContent = () => {
         }
     }, [dataPost, dataUsers]);  
 
-    // Configuración del contenido
     useEffect(() => {
         if (dataPost?.contenido) {
             try {
-                const parsedContent = JSON.parse(dataPost.contenido); // Asegura que el contenido sea válido
+                const parsedContent = JSON.parse(dataPost.contenido);
                 setValue(parsedContent);
                 document.title = dataPost.titulo
             } catch (error) {
@@ -62,7 +78,7 @@ const BlogContent = () => {
         return `${readingTime} min`;
     };
 
-    if (!dataPost) {
+    if (isLoading || !dataPost) {
         return <Loading />
     }
 
@@ -80,14 +96,17 @@ const BlogContent = () => {
                 <FaPaperPlane fill="#4D4D4D" />
             </div>
             <div className="contentBlog">
-                {Object.keys(value).length > 0 
-                ? 
-                <Yoopta value={value} block={true} />
-                : 
-                <div className="spinner"></div>
-                }
+                {Object.keys(value).length > 0 ? (
+                    <Yoopta 
+                        value={value} 
+                        setValue={setValue} 
+                        block={true} 
+                    />
+                ) : (
+                    <div className="spinner"></div>
+                )}
             </div>
-            <Comments dataPost={dataPost} idAutor={sessionStorage.getItem("id")} idPost={dataPost.id_posteo}/>
+            <Comments dataPost={dataPost} idAutor={Cookies.get("id")} idPost={dataPost.id_posteo}/>
             <div className='moreContenteContainer'>
                 <h2 className='subTitleBlog'>Mas contenido...</h2>
                 <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"}/>

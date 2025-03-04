@@ -2,15 +2,57 @@ import { useEffect, useState } from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
 
-const Login = ({ alert }) => {
+const Login = ({ alert, Cookies }) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const webUrl = import.meta.env.VITE_WEB_URL;
+
     const [dataUsers, setDataUsers] = useState()
+
     useEffect(() => {
-        fetch("http://localhost:8080/user")
-            .then((response) => response.json())
-            .then((data) => {
-                setDataUsers(data)
-            })
+        fetch(`${apiUrl}/user`)
+        .then((response) => response.json())
+        .then((data) => {
+            setDataUsers(data)
+        })
     }, [])
+
+    const login = async (usuario) => {
+        try {
+            const response = await fetch(`${apiUrl}/user/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(usuario)
+            });
+    
+            const data = await response.text();
+            
+            if (!response.ok) {
+                throw new Error(data);
+            }
+    
+            switch (data) {
+                case "Usuario no encontrado":
+                    alert("El usuario no existe", "#bb1a1a");
+                    break;
+                case "Usuario o contraseña incorrectos":
+                    alert("Usuario o contraseña incorrectos", "#bb1a1a");
+                    break;
+                default:
+                    // Cookies
+                    Cookies.set("token", data);
+                    Cookies.set("logged", true);
+                    Cookies.set("user", usuario.nombre);
+                    Cookies.set("id", dataUsers.find((e) => e.nombre === usuario.nombre).id_usuario);
+                    alert("Bienvenido!", "#1abb9c");
+                    window.location.href = `${webUrl}`;
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error al intentar iniciar sesión", "#bb1a1a");
+        }
+    }
 
     const [dataForm, setDataForm] = useState({
         nombre: "",
@@ -23,74 +65,64 @@ const Login = ({ alert }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (dataUsers.find((e) => e.nombre === dataForm.nombre && e.contrasena === dataForm.contrasena)) {
-            alert("Entrando...", "#53796c")
-            // ? Aca deberia ir el añadido de cookies
-            sessionStorage.setItem("logged", true)
-            sessionStorage.setItem("user", dataForm.nombre)
-            sessionStorage.setItem("id", dataUsers.find((e) => e.nombre === dataForm.nombre).id_usuario)
-            setTimeout(() => {
-                window.location.replace("http://localhost:5174/")
-            }, 1000);
+        if (dataForm.nombre === "" || dataForm.contrasena === "") {
+            alert("Rellena todos los campos!", "#bb1a1a")
+        }
+        if (dataForm.contrasena === "") {
+            alert("La contraseña no puede estar vacía", "#bb1a1a")
+        }
+        if (dataForm.nombre === "") {
+            alert("El nombre de usuario no puede estar vacío", "#bb1a1a")
+        }
+        if (dataForm.nombre.length > 16) {
+            alert("El nombre de usuario no puede tener más de 16 caracteres", "#bb1a1a")
+        }
+        if (dataForm.nombre.length < 6) {
+            alert("El nombre de usuario no puede tener menos de 6 caracteres", "#bb1a1a")
+        }
+        if (dataForm.contrasena.length > 16) {
+            alert("La contraseña no puede tener más de 16 caracteres", "#bb1a1a")
+        }
+        if (dataForm.contrasena.length < 8) {
+            alert("La contraseña no puede tener menos de 8 caracteres", "#bb1a1a")
         } else {
-            if (dataForm.contrasena === "") {
-                alert("La contraseña no puede estar vacía", "#bb1a1a")
-            }else 
-            if (dataForm.nombre === "") {
-                alert("El nombre de usuario no puede estar vacío", "#bb1a1a")
-            }else
-            if (dataForm.nombre.length > 16) {
-                alert("El nombre de usuario no puede tener más de 16 caracteres", "#bb1a1a")
-            } 
-            if (dataForm.nombre.length < 6) {
-                alert("El nombre de usuario no puede tener menos de 6 caracteres", "#bb1a1a")
-            }
-            if (dataForm.contrasena.length > 16) {
-                alert("La contraseña no puede tener más de 16 caracteres", "#bb1a1a")
-            }
-            if (dataForm.contrasena.length < 8) {
-                alert("La contraseña no puede tener menos de 8 caracteres", "#bb1a1a")
-            }
-            else {
-                alert("Contraseña o nombre incorrectos", "#bb1a1a")
-            }
-            
+            login(dataForm)
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         document.title = "Medium Weekly | Login"
-    },[])
+    }, [])
 
     return (
         <div className="containerLogin">
             <div className='containerForm'>
                 <div className="boxForm">
-                    <h2 className='title2'>Bienvenido.</h2>
+                    <h2 className='titleForm'>Bienvenido.</h2>
                     <form id='login' action="" method="post" onSubmit={handleSubmit}>
 
                         <label htmlFor="name">Nombre de usuario</label>
-                        <input 
-                            type="text" 
-                            name='nombre' 
+                        <input
+                            type="text"
+                            name='nombre'
                             required
                             minLength="6"
                             maxLength="16"
-                            placeholder='Ej: Julio Cortázar' 
+                            placeholder='Ej: Julio Cortázar'
                             onChange={handleInput}
-                            className='input'
+                            className='inputForm'
                         />
 
                         <label htmlFor="pass">Contraseña</label>
-                        <input 
-                            type='password' 
-                            minLength="8" 
-                            required 
-                            maxLength="16" 
-                            name='contrasena' 
-                            placeholder='*******' 
+                        <input
+                            type='password'
+                            minLength="8"
+                            required
+                            maxLength="16"
+                            name='contrasena'
+                            placeholder='*******'
                             onChange={handleInput}
-                            className='input'
+                            className='inputForm'
                         />
                     </form>
                     <button className='btn' form='login' type="submit">Log In</button>
@@ -105,3 +137,5 @@ const Login = ({ alert }) => {
 }
 
 export default Login
+
+
