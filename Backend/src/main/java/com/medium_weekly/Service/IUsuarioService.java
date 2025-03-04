@@ -8,11 +8,6 @@ import com.medium_weekly.Model.Usuario;
 import java.util.List;
 
 public interface IUsuarioService {
-    List<UsuarioDTO> getClientes();
-
-    UsuarioDTO getUsuarioDTOById(Long idUsuario);
-
-    UsuarioDTO saveUsuario(UsuarioDTO nuevoUsuario);
 
     void deleteUsuario(Long idUsuario);
 
@@ -22,5 +17,4 @@ public interface IUsuarioService {
 
     List<Posteos> findPost(Long idUsuario);
 
-    String uthenticateAndGenerateToken(LoginDTO loginDTO);
 }

@@ -1,4 +1,4 @@
-package com.medium_weekly.Service;
+package com.medium_weekly.Service.impl;
 
 import com.medium_weekly.Dto.PosteoDTO;
 import com.medium_weekly.Enums.Categoria;
@@ -7,6 +7,11 @@ import com.medium_weekly.Model.Comentario;
 import com.medium_weekly.Model.Posteos;
 import com.medium_weekly.Model.Usuario;
 import com.medium_weekly.Repository.IPosteosRepository;
+import com.medium_weekly.Service.IComentarioService;
+import com.medium_weekly.Service.IPosteosService;
+import com.medium_weekly.Service.IUsuarioService;
+import com.medium_weekly.security.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PosteosService implements IPosteosService{
+public class PosteosService implements IPosteosService {
     @Lazy
     @Autowired
     private IComentarioService comentarioService;
@@ -31,6 +36,9 @@ public class PosteosService implements IPosteosService{
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @Override
     public List<PosteoDTO> getPosteos() {
 
@@ -38,14 +46,14 @@ public class PosteosService implements IPosteosService{
     }
 
     @Override
-    public PosteoDTO savePosteo(PosteoDTO posteoDTO) {
-        Posteos posteo = this.save(this.DTOtoPosteo(posteoDTO));
+    public PosteoDTO savePosteo(PosteoDTO posteoDTO, HttpServletRequest request) {
+        Posteos posteo = this.save(this.DTOtoPosteo(posteoDTO, jwtUtil.extraerToken(request)));
         return modelMapper.map(posteo, PosteoDTO.class);
     }
 
 
     @Override
-    public void editPosteo(PosteoDTO posteoDTO) {
+    public void editPosteo(PosteoDTO posteoDTO, HttpServletRequest request) {
         Posteos posteo = this.findById(posteoDTO.getId_posteo());
         modelMapper.map(posteoDTO,posteo);
 
@@ -53,7 +61,7 @@ public class PosteosService implements IPosteosService{
     }
 
     @Override
-    public void deletePosteo(Long idPosteo) {
+    public void deletePosteo(Long idPosteo, HttpServletRequest request) {
         posteosRepository.delete(this.findById(idPosteo));
     }
 
@@ -87,10 +95,10 @@ public class PosteosService implements IPosteosService{
         return posteosRepository.save(posteo);
     }
 
-    private Posteos DTOtoPosteo(PosteoDTO posteoDTO) {
+    private Posteos DTOtoPosteo(PosteoDTO posteoDTO, String token) {
         Posteos posteos = modelMapper.map(posteoDTO, Posteos.class);
 
-        posteos.setAutor(this.findAutor(posteoDTO.getIdAutor()));
+        posteos.setAutor(this.findAutor(jwtUtil.extraerId(token)));
 
         return posteos;
     }

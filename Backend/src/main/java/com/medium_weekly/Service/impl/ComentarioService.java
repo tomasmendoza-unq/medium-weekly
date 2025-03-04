@@ -1,9 +1,12 @@
-package com.medium_weekly.Service;
+package com.medium_weekly.Service.impl;
 
 import com.medium_weekly.Dto.ComentarioDTO;
 import com.medium_weekly.Exception.ResourceNotFound;
 import com.medium_weekly.Model.Comentario;
 import com.medium_weekly.Repository.IComentarioRepository;
+import com.medium_weekly.Service.IComentarioService;
+import com.medium_weekly.Service.IPosteosService;
+import com.medium_weekly.Service.IUsuarioService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

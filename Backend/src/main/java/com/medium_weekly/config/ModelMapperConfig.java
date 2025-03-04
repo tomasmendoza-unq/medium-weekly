@@ -18,12 +18,7 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-        modelMapper.addMappings(new PropertyMap<Posteos, PosteoDTO>() {
-            @Override
-            protected void configure() {
-                map().setIdAutor(source.getAutor().getId_usuario());
-            }
-        });
+
 
 
         modelMapper.addMappings(new PropertyMap<PosteoDTO, Posteos>() {

@@ -40,8 +40,6 @@ public class PosteoDTO {
 
     private LocalDateTime created;
 
-    private Long idAutor;
-
     private List<ComentarioDTO> comentarios;
 
     private Categoria categoria;
