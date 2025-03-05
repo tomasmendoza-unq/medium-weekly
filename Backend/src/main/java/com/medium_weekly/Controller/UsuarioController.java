@@ -2,11 +2,9 @@ package com.medium_weekly.Controller;
 
 import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
-import com.medium_weekly.Model.Usuario;
 import com.medium_weekly.Service.IUsuarioService;
-import com.medium_weekly.config.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,41 +17,15 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.List;
-
-
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
 
-
-
-
-    @GetMapping
-    public ResponseEntity<?> getClientes(){
-        return ResponseEntity.ok(usuarioService.getClientes());
-    }
-
-
-    @GetMapping("/{id_usuario}")
-    public ResponseEntity<?> getCliente(@PathVariable Long id_usuario){
-        UsuarioDTO usuarioDTO = usuarioService.getUsuarioDTOById(id_usuario);
-        return ResponseEntity.status(HttpStatus.FOUND).body(usuarioDTO);
-    }
-
-
-    @PostMapping("/crear")
-    public ResponseEntity<?> crearCliente(@Valid @RequestBody UsuarioDTO nuevoUsuario){
-        UsuarioDTO usuarioDTO = usuarioService.saveUsuario(nuevoUsuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.uthenticateAndGenerateToken(loginDTO));
+    @PostMapping("/details")
+    public ResponseEntity<?> detailsUserJwt(HttpServletRequest request){
+        return ResponseEntity.ok(usuarioService.detailsUserJwt(request));
     }
 
     @DeleteMapping("/eliminar/{id_usuario}")
