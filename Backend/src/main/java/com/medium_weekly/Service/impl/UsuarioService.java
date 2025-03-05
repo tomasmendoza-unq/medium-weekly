@@ -1,5 +1,6 @@
 package com.medium_weekly.Service.impl;
 
+import com.medium_weekly.Dto.JWTDetailsDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
 import com.medium_weekly.Exception.ResourceNotFound;
 import com.medium_weekly.Model.Posteos;
@@ -8,6 +9,7 @@ import com.medium_weekly.Repository.IUsuarioRepository;
 import com.medium_weekly.Service.IAuthService;
 import com.medium_weekly.Service.IUsuarioService;
 import com.medium_weekly.security.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,15 @@ public class UsuarioService implements IUsuarioService {
         return posts;
     }
 
+    @Override
+    public JWTDetailsDTO detailsUserJwt(HttpServletRequest request) {
+        String token = jwtUtil.extraerToken(request);
+
+        return JWTDetailsDTO.builder()
+                .id_usuario(jwtUtil.extraerId(token))
+                .nombre(jwtUtil.extraerNombre(token))
+                .build();
+    }
 
 
     @Override

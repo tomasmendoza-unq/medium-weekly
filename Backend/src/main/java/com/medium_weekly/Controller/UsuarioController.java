@@ -3,6 +3,7 @@ package com.medium_weekly.Controller;
 import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
 import com.medium_weekly.Service.IUsuarioService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,11 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
+
+    @PostMapping("/details")
+    public ResponseEntity<?> detailsUserJwt(HttpServletRequest request){
+        return ResponseEntity.ok(usuarioService.detailsUserJwt(request));
+    }
 
     @DeleteMapping("/eliminar/{id_usuario}")
     public ResponseEntity<?> deleteCliente(@PathVariable Long id_usuario){
