@@ -12,6 +12,11 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/public/**")
+                        .allowedOrigins("http://localhost:5174","https://www.mediumweekly.com.ar")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
                 registry.addMapping("/api/**")
                         .allowedOrigins("http://localhost:5174","https://www.mediumweekly.com.ar")
                         .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
