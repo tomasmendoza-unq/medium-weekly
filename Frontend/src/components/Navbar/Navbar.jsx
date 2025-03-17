@@ -13,7 +13,6 @@ const Navbar = () => {
 
     const [isShrunk, setIsShrunk] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const id = Cookies.get("id")
     const webUrl = import.meta.env.VITE_WEB_URL;
 
     useEffect(() => {
@@ -53,7 +52,7 @@ const Navbar = () => {
                 </div>
                 <section className={`tools ${isMenuOpen ? 'active' : ''}`}>
                 <Search toggleMenu={toggleMenu} className={`results ${isShrunk ? "shrinkSearch": ""}`}/>
-                    {Cookies.get('logged') === undefined ?
+                    {Cookies.get('token') === undefined ?
                     <div className="menu__bar">
                             {isMenuOpen 
                             ?
@@ -98,7 +97,7 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <button className='userBtn'>
-                                        <Link onClick={toggleMenu} to={`/user/${id}`}>
+                                        <Link onClick={toggleMenu} to={`/user/1`}>
                                             <FaRegUser />
                                             <p className='pLink'>Ver Perfil</p>
                                         </Link>
@@ -133,7 +132,7 @@ const Navbar = () => {
                                         <ul className="list-items-with-description">
                                             <li>
                                                 <div className="item-title">
-                                                    <Link to={`/user/${id}`}>
+                                                    <Link to={`/user/1`}>
                                                         <h3>Ver Perfil</h3>
                                                     </Link>
                                                 </div>

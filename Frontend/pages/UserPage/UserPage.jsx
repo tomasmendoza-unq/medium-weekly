@@ -14,7 +14,7 @@ const UserPage = () => {
     useEffect(() => {
         setIsLoading(true)
         Promise.all([
-            fetch(`${apiUrl}/posteos/user/${id}`)
+            fetch(`${apiUrl}/public/posteos/user/${id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     if (Array.isArray(data)) {
@@ -26,7 +26,7 @@ const UserPage = () => {
                 .catch(error => {
                     setDataPost([])
                 }),
-            fetch(`${apiUrl}/user/${id}`)
+            fetch(`${apiUrl}/api/user/${id}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setDataUser(data)

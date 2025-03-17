@@ -26,7 +26,7 @@ const BlogContent = () => {
     useEffect(() => {
         setIsLoading(true);
         Promise.all([
-            fetch(`${apiUrl}/posteos`)
+            fetch(`${apiUrl}/public/posteos`)
                 .then((response) => response.json())
                 .then((data) => {
                     const post = data.find((e) => e.id_posteo === JSON.parse(id));
@@ -44,7 +44,7 @@ const BlogContent = () => {
                         setValue({});
                     }
                 }),
-            fetch(`${apiUrl}/user`)
+            fetch(`${apiUrl}/auth/user`)
                 .then((response) => response.json())
                 .then((data) => setDataUsers(data))
         ]).finally(() => {

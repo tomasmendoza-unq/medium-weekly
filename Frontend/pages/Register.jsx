@@ -8,7 +8,7 @@ const Register = ({ alert }) => {
     const [dataUsers, setDataUsers] = useState()
     
     useEffect(() => {
-        fetch(`${apiUrl}/user`)
+        fetch(`${apiUrl}/api/user`)
             .then((response) => response.json())
             .then((data) => {
                 setDataUsers(data)
@@ -16,7 +16,7 @@ const Register = ({ alert }) => {
     }, [])
 
     const crearUsuario = async (usuario) => {
-        fetch(`${apiUrl}/user/crear`, {
+        fetch(`${apiUrl}/api/user/crear`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +26,7 @@ const Register = ({ alert }) => {
             .then(response => response.json())
             .then(data => {
                 alert("Usuario creado correctamente!", "#1abb9c")
-                // window.location.href = `${webUrl}login`
+                window.location.href = `${webUrl}login`
             })
             .catch(error => console.error("Error:", error));
     };

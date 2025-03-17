@@ -6,23 +6,14 @@ const Login = ({ alert, Cookies }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const webUrl = import.meta.env.VITE_WEB_URL;
 
-    const [dataUsers, setDataUsers] = useState()
-
-    useEffect(() => {
-        fetch(`${apiUrl}/user`)
-        .then((response) => response.json())
-        .then((data) => {
-            setDataUsers(data)
-        })
-    }, [])
-
     const login = async (usuario) => {
         try {
-            const response = await fetch(`${apiUrl}/user/login`, {
+            const response = await fetch(`${apiUrl}/auth/login`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
+                credentials: 'include',
                 body: JSON.stringify(usuario)
             });
     
@@ -42,9 +33,6 @@ const Login = ({ alert, Cookies }) => {
                 default:
                     // Cookies
                     Cookies.set("token", data);
-                    Cookies.set("logged", true);
-                    Cookies.set("user", usuario.nombre);
-                    Cookies.set("id", dataUsers.find((e) => e.nombre === usuario.nombre).id_usuario);
                     alert("Bienvenido!", "#1abb9c");
                     window.location.href = `${webUrl}`;
             }

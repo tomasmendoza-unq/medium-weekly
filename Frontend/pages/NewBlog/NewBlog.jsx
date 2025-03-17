@@ -6,8 +6,9 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import TagSelector from '../../src/components/TagSelector/TagSelector'
 import { data } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
-const NewBlog = ({ alert, Cookies }) => {
+const NewBlog = ({ alert }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [tagSelected, setTag] = useState("")
 
@@ -21,29 +22,35 @@ const NewBlog = ({ alert, Cookies }) => {
         })
     }
     const [tags, setTags] = useState([]);
-    // ? Función para enviar los datos a la base de datos
     const crearPost = async (blog) => {
         try {
-            const res = await fetch(`${apiUrl}/posteos/crear`, {
+            const token = Cookies.get('token');
+            if (!token) {
+                alert("No hay sesión activa", "#bb1a1a");
+                return;
+            }
+            const res = await fetch(`${apiUrl}/api/posteos/crear`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(blog),
+                body: JSON.stringify(blog)
             });
-
+    
             if (!res.ok) {
-                console.log(blog)
-                const errorDetails = await res.json();
+                const errorDetails = await res.text();
                 console.error('Error details:', errorDetails);
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
-            alert("Blog creado correctamente", "#1abb1a")
+            
+            alert("Blog creado correctamente", "#1abb1a");
             setTimeout(() => {
-                window.location.replace("http://localhost:5174/")
-            }, 1000)
+                window.location.href = "/";
+            }, 1000);
         } catch (error) {
             console.error('Error creating post:', error);
+            alert("Error al crear el blog", "#bb1a1a");
         }
     }
 
@@ -79,7 +86,7 @@ const NewBlog = ({ alert, Cookies }) => {
         "resumen": '',
         "contenido": "",
         "src": '/img/coffe.png',
-        "idAutor": Cookies.get('id'),
+        "idAutor": 1,
         "categoria": ""
     });
 

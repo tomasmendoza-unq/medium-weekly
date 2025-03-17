@@ -48,7 +48,7 @@ function App() {
           <Route path='/newblog' element={<NewBlog alert={alert} Cookies={Cookies} />}></Route>
           <Route path='/user/:id' element={<UserPage />}></Route>
           <Route path='/filter/:idCategory' element={<Main />}></Route>
-          {Cookies.get("id")
+          {Cookies.get("token")
             ?
             <Route path='/blog/:id' element={<BlogContent />}></Route>
             :

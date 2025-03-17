@@ -12,7 +12,7 @@ const CommentList = ({ dataPost }) => {
     }
     
     useEffect(() => {
-        fetch(`${apiUrl}/user`)
+        fetch(`${apiUrl}/api/user`)
             .then((res) => res.json())
             .then((e) => { setDataUser(e) })
     }, [])

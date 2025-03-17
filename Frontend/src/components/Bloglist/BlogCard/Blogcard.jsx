@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Cookies from 'js-cookie'
 
-
 const Blogcard = ({ clase, title, resume, category, src, id, className, onClick}) => {
     const formatCategory = (cat) => {
         return cat
@@ -13,7 +12,7 @@ const Blogcard = ({ clase, title, resume, category, src, id, className, onClick}
     }
     return (
         <>
-            {Cookies.get("id") ?
+            {Cookies.get("token") ?
                 <Link to={`/blog/${id}`}>
                     <article className={clase || 'card'}>
                         <div className='cardCont'>

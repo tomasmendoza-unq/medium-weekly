@@ -11,11 +11,27 @@ const Main = () => {
     const { idCategory } = useParams()
     const [dataPost, setDataPost] = useState([])
     const [dataFiltered, setDataFiltered] = useState([])
-    const userName = Cookies.get("user")
+    const [userDetails, setUserDetails] = useState({})
+    const userName = userDetails.nombre
     const [visible, setVisible] = useState(5);
     const cargarMas = () => {
         setVisible((prevVisible) => prevVisible + 5);
     };
+
+    useEffect(()=>{
+        const token = Cookies.get("token")
+        if(token){
+            fetch(`${apiUrl}/api/user/details`, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserDetails(data)
+                })
+        }
+    },[])
 
     useEffect(() => {
         setDataFiltered(dataPost)
@@ -23,13 +39,13 @@ const Main = () => {
 
     useEffect(() => {
         if (idCategory) {
-            fetch(`${apiUrl}/posteos/categoria/${idCategory}`)
+            fetch(`${apiUrl}/public/posteos/categoria/${idCategory}`)
                 .then((response) => response.json())
                 .then((dataFil) => {
                     setDataFiltered(dataFil.reverse())
                 })
         } else {
-            fetch(`${apiUrl}/posteos`)
+            fetch(`${apiUrl}/public/posteos`)
                 .then((response) => response.json())
                 .then((data) => {
                     setDataPost(data.reverse())
@@ -41,7 +57,7 @@ const Main = () => {
     return (
         <main>
             <section className='mainContent'>
-                {Cookies.get("logged") === undefined ?
+                {Cookies.get("token") === undefined ?
                     <div className='msgMain'>
                         <p className='textMain'>Bienvenido a Medium Weekly, entra para empezar a leer!</p>
                         <Link to="/login" className='btnLink'>Entrar</Link>
@@ -54,7 +70,7 @@ const Main = () => {
                             <Loading />
                         ) : (
                             <>
-                                <Bloglist visible={visible} dataPost={dataFiltered} Cookies={Cookies} />
+                                <Bloglist visible={visible} dataPost={dataFiltered} />
                                 {visible < dataFiltered.length && (
                                     <button onClick={cargarMas} className="btn">
                                         Ver más...
