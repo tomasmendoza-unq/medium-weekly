@@ -16,13 +16,12 @@ import Cookies from 'js-cookie';
 const BlogContent = () => {
     const { id } = useParams();
     const [dataPost, setDataPost] = useState(null);
+    const [userDetails, setUserDetails] = useState({})
     const [morePosts, setMorePosts] = useState(null)
-    const [dataUsers, setDataUsers] = useState([]);
-    const [autor, setAutor] = useState(null);
     const [value, setValue] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const apiUrl = import.meta.env.VITE_API_URL;
-    
+
     useEffect(() => {
         setIsLoading(true);
         Promise.all([
@@ -44,20 +43,26 @@ const BlogContent = () => {
                         setValue({});
                     }
                 }),
-            fetch(`${apiUrl}/auth/user`)
-                .then((response) => response.json())
-                .then((data) => setDataUsers(data))
         ]).finally(() => {
             setIsLoading(false);
         });
     }, [id]);
 
     useEffect(() => {
-        if (dataPost && dataUsers.length) {
-            const author = dataUsers.find((user) => user.id_usuario === dataPost.idAutor);
-            setAutor(author ? author.nombre : "Autor desconocido");
+        const token = Cookies.get("token")
+        if (token) {
+            fetch(`${apiUrl}/api/user/details`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserDetails(data)
+                })
         }
-    }, [dataPost, dataUsers]);  
+    }, [])
 
     useEffect(() => {
         if (dataPost?.contenido) {
@@ -86,7 +91,7 @@ const BlogContent = () => {
         <section className="blogContent">
             <div className="headBlog">
                 <h1 className="titleBlog">{dataPost.titulo}</h1>
-                <RouterLink to={`/user/${dataPost.idAutor}`}><p className="textHead">{autor}</p></RouterLink>
+                <RouterLink to={`/user/1`}><p className="textHead">//nombre del autor</p></RouterLink>
                 <span className="flex">
                     <p className="textHead">{dataPost.created.replace("T", " ") || "Fecha no disponible"}</p>
                     <p className="textHead">{calculateReadingTime(dataPost.contenido)}</p>
@@ -97,19 +102,19 @@ const BlogContent = () => {
             </div>
             <div className="contentBlog">
                 {Object.keys(value).length > 0 ? (
-                    <Yoopta 
-                        value={value} 
-                        setValue={setValue} 
-                        block={true} 
+                    <Yoopta
+                        value={value}
+                        setValue={setValue}
+                        block={true}
                     />
                 ) : (
                     <div className="spinner"></div>
                 )}
             </div>
-            <Comments dataPost={dataPost} idAutor={Cookies.get("id")} idPost={dataPost.id_posteo}/>
+            <Comments dataPost={dataPost} idAutor={userDetails.id} idPost={dataPost.id_posteo} />
             <div className='moreContenteContainer'>
                 <h2 className='subTitleBlog'>Mas contenido...</h2>
-                <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"}/>
+                <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"} />
             </div>
             <div className='footerBlog'>
                 <RouterLink to="/" className="btnLink linkBlog">Volver al inicio</RouterLink>

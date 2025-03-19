@@ -12,7 +12,6 @@ const Main = () => {
     const [dataPost, setDataPost] = useState([])
     const [dataFiltered, setDataFiltered] = useState([])
     const [userDetails, setUserDetails] = useState({})
-    const userName = userDetails.nombre
     const [visible, setVisible] = useState(5);
     const cargarMas = () => {
         setVisible((prevVisible) => prevVisible + 5);
@@ -22,8 +21,9 @@ const Main = () => {
         const token = Cookies.get("token")
         if(token){
             fetch(`${apiUrl}/api/user/details`, {
+                method: "POST",
                 headers: {
-                    Authorization: `Bearer ${Cookies.get("token")}`,
+                    Authorization: `Bearer ${token}`,
                 },
             })
                 .then((response) => response.json())
@@ -63,7 +63,7 @@ const Main = () => {
                         <Link to="/login" className='btnLink'>Entrar</Link>
                     </div>
                     :
-                    <h2 className="class2 title2">Bienvenido/a <span className='ital'>{userName}</span></h2>}
+                    <h2 className="class2 title2">Bienvenido/a <span className='ital'>{userDetails.nombre}</span></h2>}
                     <div className='bloglist'>
                         <FilterByTags idParam={idCategory} />
                         {dataFiltered.length === 0 ? (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
+import Cookies from 'js-cookie'
 import './CommentInput.css'
 
 const CommentInput = ({ idAutor, idPost, dataPost }) => {
@@ -17,7 +18,10 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
         try {
             const response = await fetch(`${apiUrl}/api/comentario/crear`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Cookies.get("token")}`,
+                },
                 body: JSON.stringify(comentario),
             });
         } catch (error) {
@@ -35,7 +39,7 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
     const sendData = () => {
         setDataComentario({ ...dataComentario, "text": comentario });
         sendPost(dataComentario)
-        location.reload()
+        // location.reload()
     };
     const updateContent = () => {
         setDataComentario((prev) => ({

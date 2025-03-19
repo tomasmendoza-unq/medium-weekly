@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Blogcard from '../../src/components/Bloglist/BlogCard/Blogcard'
 import { useParams } from 'react-router-dom'
 import Loading from '../../src/components/Loading/Loading'
+import Cookies from 'js-cookie'
 
 const UserPage = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -26,7 +27,13 @@ const UserPage = () => {
                 .catch(error => {
                     setDataPost([])
                 }),
-            fetch(`${apiUrl}/api/user/${id}`)
+            fetch(`${apiUrl}/api/user/details`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            }
+            )
                 .then((res) => res.json())
                 .then((data) => {
                     setDataUser(data)
@@ -57,7 +64,7 @@ const UserPage = () => {
                 {isLoading ? (
                     <Loading />
                 ) : (
-                    <div className="list">
+                    <div className="listUserPage">
                         {dataPost.length <= 0
                             ? <p>El usuario no tiene blogs creados...</p>
                             : dataPost.map((e) => (
@@ -67,6 +74,7 @@ const UserPage = () => {
                                     resume={e.resumen || ''}
                                     src={e.src || ''}
                                     id={e.id_posteo || ''}
+                                    clase='miniCard'
                                 />
                             ))
                         }
