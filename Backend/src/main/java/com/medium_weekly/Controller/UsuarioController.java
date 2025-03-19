@@ -23,18 +23,18 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
 
-    @PostMapping("/details")
+    @PostMapping("details")
     public ResponseEntity<?> detailsUserJwt(HttpServletRequest request){
         return ResponseEntity.ok(usuarioService.detailsUserJwt(request));
     }
 
-    @DeleteMapping("/eliminar/{id_usuario}")
+    @DeleteMapping("eliminar/{id_usuario}")
     public ResponseEntity<?> deleteCliente(@PathVariable Long id_usuario){
         usuarioService.deleteUsuario(id_usuario);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Se elimino el usuario con el id: " + id_usuario);
     }
 
-    @PutMapping("/editar/{id_usuario}")
+    @PutMapping("editar/{id_usuario}")
     public ResponseEntity<?> editCliente(@PathVariable Long id_usuario,@Valid @RequestBody UsuarioDTO usuario){
         usuarioService.editUsuario(id_usuario,usuario);
 

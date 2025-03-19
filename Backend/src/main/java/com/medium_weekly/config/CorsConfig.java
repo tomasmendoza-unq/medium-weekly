@@ -22,6 +22,11 @@ public class CorsConfig {
                         .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
                         .allowedHeaders("*")
                         .allowCredentials(true);
+                registry.addMapping("/auth/**")
+                        .allowedOrigins("http://localhost:5174","https://www.mediumweekly.com.ar")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }
