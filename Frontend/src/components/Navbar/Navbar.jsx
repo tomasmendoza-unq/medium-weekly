@@ -14,6 +14,7 @@ const Navbar = () => {
     const [isShrunk, setIsShrunk] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const webUrl = import.meta.env.VITE_WEB_URL;
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -37,6 +38,25 @@ const Navbar = () => {
             Cookies.remove(cookie);
         });
     }
+
+    const handleLogout = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/auth/logout`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error(`Error en logout: ${response.status} ${response.statusText}`);
+            }
+            clearCookies();
+            window.location.href = webUrl;
+        } catch (error) {
+            console.error("Error en logout:", error);
+        }
+    };
 
     return (
         <header className={`header ${isShrunk ? "shrink" : ""}`}>
@@ -112,7 +132,7 @@ const Navbar = () => {
                                     </button>
                                 </li>
                                 <li>
-                                    <button onClick={()=>{clearCookies() ;window.location.href = webUrl}} className='userBtn' to="/login">
+                                    <button onClick={handleLogout} className='userBtn'>
                                         <Link>
                                             <FaArrowRightToBracket/>
                                             <p className='pLink'>LogOut</p>
@@ -139,7 +159,7 @@ const Navbar = () => {
                                             </li>
                                             <li>
                                                 <div className="item-title">
-                                                    <button onClick={()=>{clearCookies() ;window.location.href = webUrl}} className='logout' to="/login">
+                                                    <button onClick={handleLogout} className='logout' to="/login">
                                                         <h3>LogOut</h3>
                                                     </button>
                                                 </div>
