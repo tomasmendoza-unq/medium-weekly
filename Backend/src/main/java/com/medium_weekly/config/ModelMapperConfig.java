@@ -28,10 +28,19 @@ public class ModelMapperConfig {
             }
         });
 
+        modelMapper.addMappings(new PropertyMap<Posteos, PosteoDTO>() {
+            @Override
+            protected void configure() {
+                map().setId_usuario(source.getAutor().getId_usuario());
+                map().setNombreUsuario(source.getAutor().getNombre());
+            }
+        });
+
         modelMapper.addMappings(new PropertyMap<Comentario, ComentarioDTO>() {
             @Override
             protected void configure() {
                 map().setAutor(source.getUsuario().getId_usuario());
+                map().setNombreAutor(source.getUsuario().getNombre());
                 map().setPost(source.getPost().getId_posteo());
             }
         });

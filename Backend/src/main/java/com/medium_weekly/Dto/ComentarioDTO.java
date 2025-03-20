@@ -24,6 +24,8 @@ public class ComentarioDTO {
     @NotBlank(message = "id autor REQUIRED")
     private Long autor;
 
+    private String nombreAutor;
+
     @NotNull(message = "id post no puede ser null")
     @NotBlank(message = "id post REQUIRED")
     private Long post;
