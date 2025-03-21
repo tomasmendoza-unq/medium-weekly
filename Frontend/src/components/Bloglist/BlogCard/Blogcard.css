@@ -17,7 +17,7 @@
 
 .miniCard {
     width: 350px;
-    height: 320px;
+    height: 370px;
     border-radius: 20px;
     background-color: var(--tertiary-color);
     transition: all 0.5s;

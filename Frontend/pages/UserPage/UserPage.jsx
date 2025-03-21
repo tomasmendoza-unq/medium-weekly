@@ -8,7 +8,6 @@ import Cookies from 'js-cookie'
 
 const UserPage = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
-    const [dataUser, setDataUser] = useState([])
     const [dataPost, setDataPost] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [userDetails, setUserDetails] = useState({})
@@ -29,17 +28,6 @@ const UserPage = () => {
                 .catch(error => {
                     setDataPost([])
                 }),
-            fetch(`${apiUrl}/api/user/details`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${Cookies.get("token")}`,
-                },
-            }
-            )
-                .then((res) => res.json())
-                .then((data) => {
-                    setDataUser(data)
-                })
         ]).finally(() => {
             setIsLoading(false)
         });
@@ -62,14 +50,14 @@ const UserPage = () => {
     }, [])
 
     useEffect(() => {
-        document.title = `Medium Weekly | ${dataUser.nombre}`
-    }, [dataUser])
+        document.title = `Medium Weekly | `
+    }, [])
 
     return (
         <div className='containerUser'>
             <section className='userDetails boxUser'>
                 <div className='infoUser'>
-                    <h2 className='fontUser'>//Nombre de usuario</h2>
+                    <h2 className='fontUser'>{}</h2>
                     <img className='userImg' src="/img/coffe.png" alt="" />
                 </div>
                 <div className='statsUser'>
@@ -95,6 +83,7 @@ const UserPage = () => {
                                         resume={e.resumen || ''}
                                         src={e.src || ''}
                                         id={e.id_posteo || ''}
+                                        category={e.categoria || ''}
                                         clase='miniCard'
                                     />
                                 ))

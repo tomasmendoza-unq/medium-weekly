@@ -40,7 +40,7 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
         setDataComentario({ ...dataComentario, "text": comentario });
         sendPost(dataComentario)
         console.log(dataComentario)
-        // location.reload()
+        location.reload()
     };
     const updateContent = () => {
         setDataComentario((prev) => ({
