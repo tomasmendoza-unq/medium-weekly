@@ -91,7 +91,7 @@ const BlogContent = () => {
         <section className="blogContent">
             <div className="headBlog">
                 <h1 className="titleBlog">{dataPost.titulo}</h1>
-                <RouterLink to={`/user/1`}><p className="textHead">//nombre del autor</p></RouterLink>
+                <RouterLink to={`/user/2`}><p className="textHead">//nombre del autor</p></RouterLink>
                 <span className="flex">
                     <p className="textHead">{dataPost.created.replace("T", " ") || "Fecha no disponible"}</p>
                     <p className="textHead">{calculateReadingTime(dataPost.contenido)}</p>
@@ -111,7 +111,7 @@ const BlogContent = () => {
                     <div className="spinner"></div>
                 )}
             </div>
-            <Comments dataPost={dataPost} idAutor={userDetails.id} idPost={dataPost.id_posteo} />
+            <Comments dataPost={dataPost} idAutor={userDetails.id_usuario} idPost={dataPost.id_posteo} />
             <div className='moreContenteContainer'>
                 <h2 className='subTitleBlog'>Mas contenido...</h2>
                 <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"} />

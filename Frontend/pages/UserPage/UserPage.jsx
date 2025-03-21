@@ -1,8 +1,9 @@
 import './UserPage.css'
 import { useState, useEffect } from 'react'
 import Blogcard from '../../src/components/Bloglist/BlogCard/Blogcard'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Loading from '../../src/components/Loading/Loading'
+import { FaRegSquarePlus } from "react-icons/fa6";
 import Cookies from 'js-cookie'
 
 const UserPage = () => {
@@ -10,6 +11,7 @@ const UserPage = () => {
     const [dataUser, setDataUser] = useState([])
     const [dataPost, setDataPost] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [userDetails, setUserDetails] = useState({})
     const { id } = useParams()
 
     useEffect(() => {
@@ -44,6 +46,22 @@ const UserPage = () => {
     }, [id])
 
     useEffect(() => {
+        const token = Cookies.get("token")
+        if (token) {
+            fetch(`${apiUrl}/api/user/details`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserDetails(data);
+                })
+        }
+    }, [])
+
+    useEffect(() => {
         document.title = `Medium Weekly | ${dataUser.nombre}`
     }, [dataUser])
 
@@ -51,12 +69,12 @@ const UserPage = () => {
         <div className='containerUser'>
             <section className='userDetails boxUser'>
                 <div className='infoUser'>
-                    <h2 className='fontUser'>{dataUser.nombre}</h2>
+                    <h2 className='fontUser'>//Nombre de usuario</h2>
                     <img className='userImg' src="/img/coffe.png" alt="" />
                 </div>
                 <div className='statsUser'>
                     <h3 className='statsText'><span>Blogs creados:</span> {dataPost.length}</h3>
-                    <h3 className='statsText'><span>Id del usuario:</span> {dataUser.id_usuario}</h3>
+                    <h3 className='statsText'><span>Id del usuario:</span> {id}</h3>
                 </div>
             </section>
             <section className='userBlogs boxUser'>
@@ -65,18 +83,37 @@ const UserPage = () => {
                     <Loading />
                 ) : (
                     <div className="listUserPage">
-                        {dataPost.length <= 0
-                            ? <p>El usuario no tiene blogs creados...</p>
-                            : dataPost.map((e) => (
-                                <Blogcard
-                                    key={e.id_posteo}
-                                    title={e.titulo || ''}
-                                    resume={e.resumen || ''}
-                                    src={e.src || ''}
-                                    id={e.id_posteo || ''}
-                                    clase='miniCard'
-                                />
-                            ))
+                        {
+                            dataPost.length <= 0
+                                ?
+                                <p>El usuario no tiene blogs creados...</p>
+                                :
+                                (dataPost.map((e) => (
+                                    <Blogcard
+                                        key={e.id_posteo}
+                                        title={e.titulo || ''}
+                                        resume={e.resumen || ''}
+                                        src={e.src || ''}
+                                        id={e.id_posteo || ''}
+                                        clase='miniCard'
+                                    />
+                                ))
+                                
+                            )
+                        }
+                        {
+                            userDetails.id_usuario === parseInt(id)
+                                ?
+                                <article>
+                                    <Link to='/newblog'>
+                                        <div className='cardNewBlog miniCard'>
+                                            <FaRegSquarePlus className='iconNewBlog' />
+                                            <h3 className='fontUser'>Nuevo blog</h3>
+                                        </div>
+                                    </Link>
+                                </article>
+                                :
+                                null
                         }
                     </div>
                 )}
