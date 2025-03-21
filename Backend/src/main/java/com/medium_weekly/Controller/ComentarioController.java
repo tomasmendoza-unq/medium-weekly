@@ -2,6 +2,7 @@ package com.medium_weekly.Controller;
 
 import com.medium_weekly.Dto.ComentarioDTO;
 import com.medium_weekly.Service.IComentarioService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class ComentarioController {
 
 
     @PostMapping("/crear")
-    public ResponseEntity<?> crearComentario(@RequestBody ComentarioDTO comentarioDTO){
+    public ResponseEntity<?> crearComentario(@RequestBody ComentarioDTO comentarioDTO, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(comentarioServices.saveComentario(comentarioDTO));
     }
 

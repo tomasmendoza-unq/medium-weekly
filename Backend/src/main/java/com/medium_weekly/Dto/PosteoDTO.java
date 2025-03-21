@@ -38,6 +38,10 @@ public class PosteoDTO {
     @NotBlank(message = "Contenido REQUIRED")
     private String contenido;
 
+    private String NombreUsuario;
+
+    private Long id_usuario;
+
     private LocalDateTime created;
 
     private List<ComentarioDTO> comentarios;
