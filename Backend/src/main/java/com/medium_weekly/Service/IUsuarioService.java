@@ -20,4 +20,6 @@ public interface IUsuarioService {
     List<Posteos> findPost(Long idUsuario);
 
     JWTDetailsDTO detailsUserJwt(HttpServletRequest request);
+
+    UsuarioDTO findByIdDTO(Long idUsuario);
 }

@@ -57,6 +57,15 @@ public class UsuarioService implements IUsuarioService {
                 .build();
     }
 
+    @Override
+    public UsuarioDTO findByIdDTO(Long idUsuario) {
+        return this.createDTO(findById(idUsuario));
+    }
+
+    private UsuarioDTO createDTO(Usuario byId) {
+        return modelMapper.map(byId, UsuarioDTO.class);
+    }
+
 
     @Override
     public void deleteUsuario(Long idUsuario) {

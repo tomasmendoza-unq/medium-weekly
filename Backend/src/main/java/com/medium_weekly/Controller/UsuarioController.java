@@ -34,6 +34,11 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Se elimino el usuario con el id: " + id_usuario);
     }
 
+    @GetMapping("{id_usuario}")
+    public ResponseEntity<?> getUser(@PathVariable Long id_usuario){
+        return ResponseEntity.status(HttpStatus.FOUND).body(usuarioService.findByIdDTO(id_usuario));
+    }
+
     @PutMapping("editar/{id_usuario}")
     public ResponseEntity<?> editCliente(@PathVariable Long id_usuario,@Valid @RequestBody UsuarioDTO usuario){
         usuarioService.editUsuario(id_usuario,usuario);
