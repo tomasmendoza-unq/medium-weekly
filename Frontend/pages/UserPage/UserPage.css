@@ -102,3 +102,22 @@
 .boxUser {
     animation: fadeIn 0.5s ease forwards;
 }
+
+.cardNewBlog {
+    background: linear-gradient(to top right, #416056, var(--primary-color));
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.cardNewBlog h3 {
+    color: var(--white);
+}
+
+.iconNewBlog {
+    font-size: 3rem;
+    color: var(--white);
+}

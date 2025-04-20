@@ -13,6 +13,7 @@ const Navbar = () => {
 
     const [isShrunk, setIsShrunk] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [userDetails, setUserDetails] = useState({})
     const webUrl = import.meta.env.VITE_WEB_URL;
     const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -28,6 +29,22 @@ const Navbar = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    useEffect(() => {
+        const token = Cookies.get("token")
+        if (token) {
+            fetch(`${apiUrl}/api/user/details`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserDetails(data);
+                })
+        }
+    }, [])
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -117,7 +134,7 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <button className='userBtn'>
-                                        <Link onClick={toggleMenu} to={`/user/1`}>
+                                        <Link onClick={toggleMenu} to={`/user/${userDetails.id_usuario}`}>
                                             <FaRegUser />
                                             <p className='pLink'>Ver Perfil</p>
                                         </Link>
@@ -152,7 +169,7 @@ const Navbar = () => {
                                         <ul className="list-items-with-description">
                                             <li>
                                                 <div className="item-title">
-                                                    <Link to={`/user/1`}>
+                                                    <Link to={`/user/${userDetails.id_usuario}`}>
                                                         <h3>Ver Perfil</h3>
                                                     </Link>
                                                 </div>
