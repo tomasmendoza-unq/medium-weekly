@@ -111,7 +111,7 @@ const BlogContent = () => {
                     <div className="spinner"></div>
                 )}
             </div>
-            <Comments dataPost={dataPost} idAutor={userDetails.id_usuario} idPost={dataPost.id_posteo} />
+            <Comments dataPost={dataPost} idPost={dataPost.id_posteo} />
             <div className='moreContenteContainer'>
                 <h2 className='subTitleBlog'>Mas contenido...</h2>
                 <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"} />

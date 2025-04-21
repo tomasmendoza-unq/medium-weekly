@@ -4,16 +4,19 @@ import { FaPaperPlane } from "react-icons/fa6";
 import Cookies from 'js-cookie'
 import './CommentInput.css'
 
-const CommentInput = ({ idAutor, idPost, dataPost }) => {
+const CommentInput = ({ idPost, dataPost }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [comentario, setComentario] = useState("")
+    const [userDetails, setUserDetails] = useState({})
     const [read, setRead] = useState(false)
     const [input, setInput] = useState("")
     const [dataComentario, setDataComentario] = useState({
         "text": "",
-        "autor": idAutor,
+        "autor": userDetails.id_usuario,
         "post": idPost,
     })
+
+    
     const sendPost = async (comentario) => {
         try {
             const response = await fetch(`${apiUrl}/api/comentario/crear`, {
@@ -28,7 +31,7 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
             console.error('Error:', error);
         }
     }
-
+    
     const handleClick = () => {
         input === "" ? setInput("inpActivated") && setRead(true) : setInput("") && setRead(false)
     }
@@ -39,15 +42,31 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
     const sendData = () => {
         setDataComentario({ ...dataComentario, "text": comentario });
         sendPost(dataComentario)
-        console.log(dataComentario)
-        location.reload()
+        
     };
     const updateContent = () => {
         setDataComentario((prev) => ({
             ...prev,
             "text": comentario,
+            "autor": userDetails.id_usuario,
         }));
     };
+
+    useEffect(() => {
+        const token = Cookies.get("token")
+        if (token) {
+            fetch(`${apiUrl}/api/user/details`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserDetails(data)
+                })
+        }
+    }, [])
     
     useEffect(()=>{
         updateContent()

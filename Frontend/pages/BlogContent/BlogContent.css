@@ -5,6 +5,7 @@
     margin: 60px auto;
     box-shadow: 0px 0px 20px 50px var(--white);
     min-height: 600px;
+    animation: fadeIn 0.7s;
 }
 
 .titleBlog {
