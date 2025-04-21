@@ -28,6 +28,13 @@ public class ModelMapperConfig {
             }
         });
 
+        modelMapper.addMappings(new PropertyMap<Usuario, UsuarioDTO>() {
+            @Override
+            protected void configure() {
+                skip(destination.getContrasena());
+            }
+        });
+
         modelMapper.addMappings(new PropertyMap<Posteos, PosteoDTO>() {
             @Override
             protected void configure() {
