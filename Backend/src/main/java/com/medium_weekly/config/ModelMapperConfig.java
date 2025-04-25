@@ -18,12 +18,7 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-        modelMapper.addMappings(new PropertyMap<Posteos, PosteoDTO>() {
-            @Override
-            protected void configure() {
-                map().setIdAutor(source.getAutor().getId_usuario());
-            }
-        });
+
 
 
         modelMapper.addMappings(new PropertyMap<PosteoDTO, Posteos>() {
@@ -33,10 +28,26 @@ public class ModelMapperConfig {
             }
         });
 
+        modelMapper.addMappings(new PropertyMap<Usuario, UsuarioDTO>() {
+            @Override
+            protected void configure() {
+                skip(destination.getContrasena());
+            }
+        });
+
+        modelMapper.addMappings(new PropertyMap<Posteos, PosteoDTO>() {
+            @Override
+            protected void configure() {
+                map().setId_usuario(source.getAutor().getId_usuario());
+                map().setNombreUsuario(source.getAutor().getNombre());
+            }
+        });
+
         modelMapper.addMappings(new PropertyMap<Comentario, ComentarioDTO>() {
             @Override
             protected void configure() {
                 map().setAutor(source.getUsuario().getId_usuario());
+                map().setNombreAutor(source.getUsuario().getNombre());
                 map().setPost(source.getPost().getId_posteo());
             }
         });

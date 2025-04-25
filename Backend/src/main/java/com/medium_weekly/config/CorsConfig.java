@@ -6,14 +6,27 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public  class CorsConfig{
+public class CorsConfig {
     @Bean
-    public WebMvcConfigurer corsConfigurer(){
+    public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+                registry.addMapping("/public/**")
+                        .allowedOrigins("http://localhost:5174","https://www.mediumweekly.com.ar")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+                registry.addMapping("/api/**")
+                        .allowedOrigins("http://localhost:5174","https://www.mediumweekly.com.ar")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+                registry.addMapping("/auth/**")
+                        .allowedOrigins("http://localhost:5174","https://www.mediumweekly.com.ar")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }

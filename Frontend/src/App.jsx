@@ -13,6 +13,7 @@ import UserPage from '../pages/UserPage/UserPage'
 import Toastify from 'toastify-js'
 import FilterByTags from './components/FilterByTags/FilterByTags'
 import Cookies from 'js-cookie'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
 
@@ -40,15 +41,16 @@ function App() {
   return (
     <div className='app'>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path='/' element={<Main />}></Route>
           <Route path='/register' element={<Register alert={alert} />}></Route>
           <Route path='*' element={<NotFound />}></Route>
           <Route path='/newblog' element={<NewBlog alert={alert} Cookies={Cookies} />}></Route>
-          <Route path='/user/:id' element={<UserPage />}></Route>
+          <Route path='/user/:id' element={<UserPage alert={alert}/>}></Route>
           <Route path='/filter/:idCategory' element={<Main />}></Route>
-          {Cookies.get("id")
+          {Cookies.get("token")
             ?
             <Route path='/blog/:id' element={<BlogContent />}></Route>
             :

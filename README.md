@@ -1,4 +1,6 @@
+
 ![](./Frontend/public/img/bannerMedium.png)
+
 # Medium Weekly
 
 Medium Weekly es un proyecto colavorativo donde los usuarios pueden escribir y compartir artículos sobre diversos temas.

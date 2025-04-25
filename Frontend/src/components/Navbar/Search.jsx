@@ -7,7 +7,7 @@ const Search = ({ className, toggleMenu }) => {
     const [dataPost, setDataPost] = useState([])
     const [query, setQuery] = useState('')
     useEffect(() => {
-        fetch(`${apiUrl}/posteos`)
+        fetch(`${apiUrl}/public/posteos`)
             .then((response) => response.json())
             .then((data) => {
                 setDataPost(data)

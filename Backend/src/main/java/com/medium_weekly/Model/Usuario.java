@@ -29,5 +29,4 @@ public class Usuario {
     private List<Posteos> posts;
 
 
-
 }

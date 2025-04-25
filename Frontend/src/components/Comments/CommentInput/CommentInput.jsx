@@ -1,52 +1,90 @@
 import { useState, useEffect } from 'react'
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa6";
+import Cookies from 'js-cookie'
 import './CommentInput.css'
 
-const CommentInput = ({ idAutor, idPost, dataPost }) => {
+const CommentInput = ({ idPost, dataPost, onCommentAdded }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [comentario, setComentario] = useState("")
+    const [userDetails, setUserDetails] = useState({})
     const [read, setRead] = useState(false)
     const [input, setInput] = useState("")
     const [dataComentario, setDataComentario] = useState({
-        "text": "",
-        "autor": idAutor,
-        "post": idPost,
+        text: "",
+        post: idPost,
+        autor: null
     })
+
     const sendPost = async (comentario) => {
         try {
-            const response = await fetch(`${apiUrl}/comentario/crear`, {
+            const response = await fetch(`${apiUrl}/api/comentario/crear`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Cookies.get("token")}`,
+                },
                 body: JSON.stringify(comentario),
             });
+            if (!response.ok) {
+                throw new Error('Error al crear comentario');
+            }
+            const newComment = await response.json();
+            newComment.nombreAutor = userDetails.nombre;
+            onCommentAdded(newComment);
+            setComentario("");
+            setInput("");
+            setRead(false);
         } catch (error) {
             console.error('Error:', error);
         }
     }
-
+    
     const handleClick = () => {
-        input === "" ? setInput("inpActivated") && setRead(true) : setInput("") && setRead(false)
+        if (input === "") {
+            setInput("inpActivated");
+            setRead(false);
+        } else {
+            setInput("");
+            setRead(true);
+        }
     }
+
     const handleInput = (e) => {
         setComentario(e.target.value)
-        setDataComentario({ ...dataComentario, "text": comentario })
     }
+
     const sendData = () => {
-        setDataComentario({ ...dataComentario, "text": comentario });
-        sendPost(dataComentario)
-        location.reload()
+        if (comentario.trim() === "" || !userDetails.id_usuario) return;
+        
+        const commentData = {
+            text: comentario,
+            autor: userDetails.id_usuario,
+            post: idPost
+        };
+        sendPost(commentData);
     };
-    const updateContent = () => {
-        setDataComentario((prev) => ({
-            ...prev,
-            "text": comentario,
-        }));
-    };
-    
-    useEffect(()=>{
-        updateContent()
-    },[comentario])
+
+    useEffect(() => {
+        const token = Cookies.get("token")
+        if (token) {
+            fetch(`${apiUrl}/api/user/details`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUserDetails(data)
+                    setDataComentario(prev => ({
+                        ...prev,
+                        autor: data.id_usuario
+                    }));
+                })
+        }
+    }, [])
+
     return (
         <>
             <div className='writeComment'>
@@ -62,6 +100,7 @@ const CommentInput = ({ idAutor, idPost, dataPost }) => {
                         readOnly={read}
                         maxLength={255}
                         onChange={handleInput}
+                        value={comentario}
                     ></textarea>
                     <div className='toolsComments'>
                         <p className='lenght'>{comentario.length}/255</p>

@@ -1,18 +1,15 @@
 package com.medium_weekly.Service;
 
+import com.medium_weekly.Dto.JWTDetailsDTO;
 import com.medium_weekly.Dto.LoginDTO;
 import com.medium_weekly.Dto.UsuarioDTO;
 import com.medium_weekly.Model.Posteos;
 import com.medium_weekly.Model.Usuario;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
 public interface IUsuarioService {
-    List<UsuarioDTO> getClientes();
-
-    UsuarioDTO getUsuarioDTOById(Long idUsuario);
-
-    UsuarioDTO saveUsuario(UsuarioDTO nuevoUsuario);
 
     void deleteUsuario(Long idUsuario);
 
@@ -22,5 +19,7 @@ public interface IUsuarioService {
 
     List<Posteos> findPost(Long idUsuario);
 
-    String uthenticateAndGenerateToken(LoginDTO loginDTO);
+    JWTDetailsDTO detailsUserJwt(HttpServletRequest request);
+
+    UsuarioDTO findByIdDTO(Long idUsuario);
 }
