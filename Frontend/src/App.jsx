@@ -10,10 +10,12 @@ import NewBlog from '../pages/NewBlog/NewBlog'
 import BlogContent from '../pages/BlogContent/BlogContent'
 import Yoopta from './components/Yoopta/Yoopta'
 import UserPage from '../pages/UserPage/UserPage'
+import Contact from '../pages/Contact/Contact'
 import Toastify from 'toastify-js'
 import FilterByTags from './components/FilterByTags/FilterByTags'
 import Cookies from 'js-cookie'
 import ScrollToTop from './components/ScrollToTop'
+import AboutUs from '../pages/AboutUs/AboutUs'
 
 function App() {
 
@@ -50,6 +52,8 @@ function App() {
           <Route path='/newblog' element={<NewBlog alert={alert} Cookies={Cookies} />}></Route>
           <Route path='/user/:id' element={<UserPage alert={alert}/>}></Route>
           <Route path='/filter/:idCategory' element={<Main />}></Route>
+          <Route path='/nosotros' element={<AboutUs />}></Route>
+          <Route path='/contact' element={<Contact />}></Route>
           {Cookies.get("token")
             ?
             <Route path='/blog/:id' element={<BlogContent />}></Route>

@@ -122,10 +122,10 @@ const NewBlog = ({ alert }) => {
     }
     return (
             <section className='containerNewBlog'>
-                <div className='titleBlogs'>
-                    <h2 className='title2'>Crear un nuevo Blog</h2>
-                </div>
                 <div className='contentNewBlog'>
+                    <div className='titleBlogs'>
+                        <h2 className='title2'>Crear un nuevo Blog</h2>
+                    </div>
                     <form onSubmit={handleSubmit} id='formBlog' className='formNewBlog' action="post">
                         <h3 className='subTitle3'>Empieza por darle un titulo a tu blog.</h3>
                         <input

@@ -85,9 +85,7 @@ const UserPage = ({ alert }) => {
 
     return (
         <div className='containerUser'>
-
             <Modal title={"Configuración de blogs"} alert={alert} dataPost={dataPost} switchModal={switchModal} modal={modal} content={dataPost.map((e) => (<Blogcard key={e.id_posteo} title={e.titulo || ''} resume={e.resumen || ''} src={e.src || ''} id={e.id_posteo || ''} category={e.categoria || ''} clase='miniCard' admin={userDetails.id_usuario === parseInt(id)} blockLink={true} setDataPost={setDataPost} alert={alert}/>))}/>
-
             <section className='userDetails boxUser'>
                 <div className='infoUser'>
                     <h2 className='fontUser'>{adminDetails.nombre}</h2>

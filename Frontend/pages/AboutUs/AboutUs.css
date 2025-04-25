@@ -1,0 +1,47 @@
+.containerAboutUs {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.contentAboutUs {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.containerAboutUs p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 15px 0;
+}
+
+.textAboutUs {
+    margin-top: 20px;
+}
+
+.containerAboutUs a {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.2px;
+}
+
+.containerAboutUs img {
+    width: 60%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 40px;
+    display: block;
+}
+
+.containerAboutUs img:hover {
+    transform: scale(1.02);
+}

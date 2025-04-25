@@ -117,7 +117,7 @@ const BlogContent = () => {
                 <Bloglist visible={4} dataPost={morePosts} clase={"moreContent"} claseBC={"miniCard"} />
             </div>
             <div className='footerBlog'>
-                <RouterLink to="/" className="btnLink linkBlog">Volver al inicio</RouterLink>
+                <RouterLink to="/" className="btn linkBlog">Volver al inicio</RouterLink>
             </div>
         </section>
     );

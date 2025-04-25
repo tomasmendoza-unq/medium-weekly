@@ -212,6 +212,10 @@ a {
     background-color: transparent;
 }
 
+.yoopta-link {
+    color: var(--secondary-color) !important;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

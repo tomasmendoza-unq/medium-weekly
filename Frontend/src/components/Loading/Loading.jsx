@@ -5,7 +5,7 @@ const Loading = () => {
     return (
         <section className='containerLoading'>
             <div className="spinner"></div>
-            <button className='btnAlt' onClick={()=>{location.reload()}}>Recargar la pagina</button>
+            <button className='btn' onClick={()=>{location.reload()}}>Recargar la pagina</button>
         </section>
     )
 }

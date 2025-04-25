@@ -14,13 +14,7 @@ const Modal = ({ alert, switchModal , modal, content, title}) => {
                     <button onClick={switchModal} className='btnCloseModal'>Cerrar</button>
                 </div>
                 <div className='modalBody'>
-                    {content.length > 0 ? (
-                        <>
-                        {content}
-                        </>
-                    ) : (
-                        <p className='noBlogs'>No tienes blogs creados...</p>
-                    )}
+                    {content}
                 </div>
             </div>
         </div>

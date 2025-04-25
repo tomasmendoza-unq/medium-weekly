@@ -16,6 +16,9 @@
 .titleFooter {
     color: var(--title-nav-color);
     text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+    font-family: var(--title-font);
 }
 
 .divFoot {
@@ -26,4 +29,19 @@
 .containerFooter p {
     text-align: center;
     color: var(--title-nav-color);
+}
+
+.linksFooter {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 0px 0px 50px 0px;
+}
+
+.linkFooter {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
 }
