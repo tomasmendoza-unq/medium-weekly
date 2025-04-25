@@ -6,27 +6,44 @@ import Loading from '../../src/components/Loading/Loading'
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { FaGear } from "react-icons/fa6";
 import Cookies from 'js-cookie'
+import Modal from '../../src/components/Modal/Modal'
 
-const UserPage = () => {
+const UserPage = ({ alert }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [dataPost, setDataPost] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [userDetails, setUserDetails] = useState({})
-    const [modal, setModal] = useState(false)
+    const [adminDetails, setAdminDetails] = useState({})
+    const token = Cookies.get("token")
     const { id } = useParams()
+    const [modal, setModal] = useState(false)
 
     const switchModal = () => {
         if (modal) {
             setModal(false)
-            console.log(modal)
+            document.body.classList.remove('modal-open')
         } else {
             setModal(true)
-            console.log(modal)
+            document.body.classList.add('modal-open')
         }
     }
 
     useEffect(() => {
         setIsLoading(true)
+        fetch(`${apiUrl}/api/user/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setAdminDetails(data);
+                document.title = `Medium Weekly | ${data.nombre}`
+            })
+            .catch(error => {
+                console.error('Error fetching user details:', error);
+        })
         Promise.all([
             fetch(`${apiUrl}/public/posteos/user/${id}`)
                 .then((response) => response.json())
@@ -46,7 +63,6 @@ const UserPage = () => {
     }, [id])
 
     useEffect(() => {
-        const token = Cookies.get("token")
         if (token) {
             fetch(`${apiUrl}/api/user/details`, {
                 method: "POST",
@@ -62,37 +78,19 @@ const UserPage = () => {
     }, [])
 
     useEffect(() => {
-        document.title = `Medium Weekly | `
+        return () => {
+            document.body.classList.remove('modal-open')
+        }
     }, [])
 
     return (
         <div className='containerUser'>
-            <div className={modal ? 'modal' : 'hidden'}>
-                <div className='modalContent'>
-                    <div className='modalHeader'>
-                        <h2 className='fontUser'>Configuración de blogs</h2>
-                        <button onClick={switchModal} className='btnCloseModal'>Cerrar</button>
-                    </div>
-                    <div className='modalBody'>
-                        {dataPost.map((e) => (
-                            <Blogcard
-                                key={e.id_posteo}
-                                title={e.titulo || ''}
-                                resume={e.resumen || ''}
-                                src={e.src || ''}
-                                id={e.id_posteo || ''}
-                                category={e.categoria || ''}
-                                clase='miniCard'
-                                admin={userDetails.id_usuario === parseInt(id)}
-                                blockLink={true}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </div>
+
+            <Modal title={"Configuración de blogs"} alert={alert} dataPost={dataPost} switchModal={switchModal} modal={modal} content={dataPost.map((e) => (<Blogcard key={e.id_posteo} title={e.titulo || ''} resume={e.resumen || ''} src={e.src || ''} id={e.id_posteo || ''} category={e.categoria || ''} clase='miniCard' admin={userDetails.id_usuario === parseInt(id)} blockLink={true} setDataPost={setDataPost} alert={alert}/>))}/>
+
             <section className='userDetails boxUser'>
                 <div className='infoUser'>
-                    <h2 className='fontUser'>{ }</h2>
+                    <h2 className='fontUser'>{adminDetails.nombre}</h2>
                     <img className='userImg' src="/img/coffe.png" alt="" />
                 </div>
                 <div className='statsUser'>

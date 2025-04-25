@@ -48,7 +48,7 @@ function App() {
           <Route path='/register' element={<Register alert={alert} />}></Route>
           <Route path='*' element={<NotFound />}></Route>
           <Route path='/newblog' element={<NewBlog alert={alert} Cookies={Cookies} />}></Route>
-          <Route path='/user/:id' element={<UserPage />}></Route>
+          <Route path='/user/:id' element={<UserPage alert={alert}/>}></Route>
           <Route path='/filter/:idCategory' element={<Main />}></Route>
           {Cookies.get("token")
             ?

@@ -22,6 +22,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 8px;
 }
 
 .noComments {
@@ -41,4 +42,20 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+.deleteCommentBtn {
+    background-color: transparent;
+    border: none;
+    color: #bb1a1a;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: auto;
+    padding: 4px 8px;
+    transition: all 0.2s ease;
+}
+
+.deleteCommentBtn:hover {
+    background-color: rgba(187, 26, 26, 0.08);
+    border-radius: 4px;
 }

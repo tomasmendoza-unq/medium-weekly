@@ -1,3 +1,7 @@
+body.modal-open {
+    overflow: hidden;
+}
+
 .containerUser {
     max-width: 1200px;
     margin: 2rem auto;
@@ -39,7 +43,7 @@
 }
 
 .fontUser {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: var(--secondary-color);
     font-weight: 600;
     margin: 0;
@@ -74,10 +78,12 @@
 
 .listUserPage .noBlogs {
     font-size: 2rem;
+    font-weight: 400;
     display: block;
     width: fit-content;
     margin: 0 auto;
     grid-column: 1 / -1;
+    color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
@@ -101,6 +107,7 @@
 
 .cardNewBlog {
     background: linear-gradient(to top right, #416056, var(--primary-color));
+    min-height: 370px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -133,49 +140,6 @@
 
 .iconGear:hover {
     animation: spin 2s linear infinite;
-}
-
-.modal {
-    background-color: #00000090;
-    position: fixed;
-    height: 100dvb;
-    width: 100dvw;
-    z-index: 100000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hidden {
-    display: none;
-}
-
-.modalContent {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    width: 80%;
-    max-width: 90%;
-    position: relative;
-}
-
-.modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.btnCloseModal{
-    font-size: 1rem;
-    color: #666;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
 }
 
 @keyframes spin {

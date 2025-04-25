@@ -2,8 +2,6 @@ import './NewBlog.css'
 import { useEffect, useState } from 'react'
 import Yoopta from '../../src/components/Yoopta/Yoopta'
 import Toastify from 'toastify-js'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import TagSelector from '../../src/components/TagSelector/TagSelector'
 import { data } from 'react-router-dom'
 import Cookies from 'js-cookie'
@@ -12,15 +10,6 @@ const NewBlog = ({ alert }) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [tagSelected, setTag] = useState("")
 
-    const showSwal = () => {
-        withReactContent(Swal).fire({
-            title: <p>Estas seguro de crear el blog?</p>,
-            icon: "question",
-            preConfirm: () => {
-                console.log("Creando Blog")
-            }
-        })
-    }
     const [tags, setTags] = useState([]);
     const crearPost = async (blog) => {
         try {
@@ -115,32 +104,22 @@ const NewBlog = ({ alert }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        Swal.fire({
-            title: "¿Estás seguro de crear el blog?",
-            text: "Confirma para subir el blog",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sí, enviar",
-            cancelButtonText: "Cancelar",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                if (dataBlog.titulo.length <= 6) {
-                    alert("El título debe tener un minimo de 6 caracteres", "#bb1a1a")
-                } else if (dataBlog.titulo.length >= 55) {
-                    alert("El título debe tener como maximo 45 caracteres", "#bb1a1a")
-                } else if(JSON.stringify(dataBlog.contenido) === "{}"){
-                    alert("El blog no puede estar vacio", "#bb1a1a")
-                } else if (dataBlog.resumen.length <= 10) {
-                    alert("La descripción debe de tener un minimo de 10 caracteres", "#bb1a1a")
-                } else if (dataBlog.resumen.length > 130) {
-                    alert("La descripción debe de tener como maximo 130 caracteres", "#bb1a1a")
-                } else if(dataBlog.categoria === "") {
-                    alert("Selecciona una categoria para tu blog", "#bb1a1a")
-                }else {
-                    crearPost(dataBlog)
-                }
-            }})
+        if (dataBlog.titulo.length <= 6) {
+            alert("El título debe tener un minimo de 6 caracteres", "#bb1a1a")
+        } else if (dataBlog.titulo.length >= 55) {
+            alert("El título debe tener como maximo 45 caracteres", "#bb1a1a")
+        } else if(JSON.stringify(dataBlog.contenido) === "{}"){
+            alert("El blog no puede estar vacio", "#bb1a1a")
+        } else if (dataBlog.resumen.length <= 10) {
+            alert("La descripción debe de tener un minimo de 10 caracteres", "#bb1a1a")
+        } else if (dataBlog.resumen.length > 130) {
+            alert("La descripción debe de tener como maximo 130 caracteres", "#bb1a1a")
+        } else if(dataBlog.categoria === "") {
+            alert("Selecciona una categoria para tu blog", "#bb1a1a")
+        }else {
+            crearPost(dataBlog)
         }
+    }
     return (
             <section className='containerNewBlog'>
                 <div className='titleBlogs'>

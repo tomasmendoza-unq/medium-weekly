@@ -13,15 +13,47 @@ const Blogcard = ({
     category = '',
     src = '',
     id = '',
+    setDataPost,
     className,
     onClick,
     admin,
-    blockLink
+    blockLink,
+    alert
 }) => {
+    const apiUrl = import.meta.env.VITE_API_URL
+    const token = Cookies.get("token");
+
     const formatCategory = (cat) => {
         return cat
             ? cat.toLowerCase().replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())
             : '';
+    }
+
+    const deletePost = (id) => {
+        fetch(`${apiUrl}/api/eliminar/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+                    setDataPost((prevPosts) => prevPosts.filter((post) => post.id_posteo !== id));
+                    alert("Post deleted successfully", "#1abb9c")
+                } else {
+                    alert("Error deleting post", "#bb1a1a")
+                }
+            })
+            .catch((error) => {
+                console.error("Error deleting post:", error);
+                alert("Error deleting post", "#bb1a1a")
+            });
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        deletePost(id)
     }
     
     return (
@@ -35,8 +67,7 @@ const Blogcard = ({
                                 <div className='headerCard'>
                                     {category && <p className='category'>{formatCategory(category)}</p>}
                                     <div className='btnCont'>
-                                        {admin && <button className='btnCard del' onClick={onClick}><FaRegTrashCan className='btnCard'/></button>}
-                                        {admin && <button className='btnCard' onClick={onClick}><FaPencil /></button>}
+                                        {admin && <button className='btnCard del' onClick={handleDelete}><FaRegTrashCan className='btnCard'/></button>}
                                     </div>
                                 </div>
 
@@ -52,7 +83,9 @@ const Blogcard = ({
                         <div className='cardCont'>
                             <img className='imgBlog' src={src} alt={title} />
                             <div className='blogBody'>
-                                {category && <p className='category'>{formatCategory(category)}</p>}
+                                <div className='headerCard'>
+                                    {category && <p className='category'>{formatCategory(category)}</p>}
+                                </div>
                                 <h3 className='blogTitle'>{title}</h3>
                                 <p className='description'>{resume}</p>
                             </div>
@@ -72,7 +105,7 @@ Blogcard.propTypes = {
     src: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     className: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
 }
 
 export default Blogcard

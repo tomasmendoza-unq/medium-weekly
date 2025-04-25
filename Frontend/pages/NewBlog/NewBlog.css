@@ -1,21 +1,23 @@
 .containerNewBlog {
-    width: 90%;
-    margin: 60px auto;
-    animation: fadeIn 0.5s ease;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    animation: slideIn 0.6s ease-out;
 }
 
 .contentNewBlog {
-    background-color: var(--white);
-    border-radius: 30px;
-    box-shadow: 0px 0px 25px 45px var(--white);
-    padding: 2.5rem;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    margin-bottom: 2rem;
     transition: all 0.3s ease;
 }
 
 .formNewBlog {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
 .title2NewBlog {
@@ -40,18 +42,18 @@
 
 .inputNewBlog {
     width: 100%;
-    border-left: 3px solid var(--secondary-color);
-    font-family: var(--text-font);
-    margin: 0 auto;
-    background-color: var(--tertiary-color);
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 5px 0px;
+    background: var(--white);
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
     transition: all 0.3s ease;
+    font-family: var(--text-font);
 }
 
 .inputNewBlog:focus {
-    box-shadow: 0 0 0 3px rgba(var(--secondary-color-rgb), 0.1);
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(var(--secondary-color-rgb), 0.1);
     transform: translateY(-2px);
+    outline: none;
 }
 
 textarea {
@@ -60,54 +62,50 @@ textarea {
 }
 
 .titleNewBlog {
-    height: 55px;
-    padding: 1rem 1.5rem;
-    font-size: 2.25rem;
-    font-weight: 600;
-    line-height: 2.5rem;
+    height: 70px;
+    padding: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c2c2c;
     transition: all 0.3s ease;
 }
 
 .resumeNewBlog {
-    resize: none;
-    height: 120px;
-    padding: 1rem 1.5rem;
+    min-height: 150px;
+    padding: 1.5rem;
     font-size: 1.25rem;
-    font-weight: 500;
     line-height: 1.6;
+    resize: vertical;
 }
 
 .box {
-    min-height: 200px;
-    margin: 0 auto; 
-    padding: 1.5rem;
-    border-radius: 10px;
-    border-left: 3px solid var(--secondary-color);
-    background-color: var(--tertiary-color);
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 5px 0px;
+    min-height: 400px;
+    background: var(--white);
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1rem;
     transition: all 0.3s ease;
 }
 
-.box:hover {
-    cursor: text;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px 0px;
+.box:hover, .box:focus-within {
+    border-color: var(--secondary-color);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .subTitle3 {
-    margin: 60px 0px 20px 0px;
+    font-size: 1.5rem;
     color: #2c2c2c;
-    font-size: 1.375rem;
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 1.5px;
-    font-weight: 500;
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+    padding-left: 1rem;
+    border-left: 4px solid var(--secondary-color);
 }
 
 @media (max-width: 768px) {
     .containerNewBlog {
-        width: 95%;
-        margin: 30px auto;
+        margin: 1rem auto;
     }
 
     .contentNewBlog {
@@ -117,11 +115,116 @@ textarea {
     .titleNewBlog {
         font-size: 1.75rem;
         height: auto;
-        min-height: 55px;
+        min-height: 60px;
     }
 
     .subTitle3 {
         font-size: 1.25rem;
-        margin: 40px 0px 15px 0px;
+    }
+
+    .box {
+        min-height: 300px;
+        padding: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.titleBlogs {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title2 {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+}
+
+.title2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    border-radius: 2px;
+}
+
+.btn {
+    width: 100%;
+    max-width: 200px;
+    align-self: center;
+    height: 50px;
+    background-color: var(--primary-color);
+    border: none;
+    font-family: var(--text-font);
+    font-weight: 600;
+    color: var(--title-nav-color);
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all 0.2s ease-in;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Contenedor para mostrar el conteo de caracteres */
+.charCounter {
+    margin-top: 0.5rem;
+    text-align: right;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Estilos para el selector de etiquetas */
+.tagContainer {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Animaciones para elementos */
+.inputNewBlog, .box, .btn {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

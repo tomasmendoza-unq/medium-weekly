@@ -18,7 +18,10 @@ const Register = ({ alert }) => {
             .then(response => response.json())
             .then(data => {
                 alert("Usuario creado correctamente!", "#1abb9c")
-                window.location.href = `${webUrl}login`
+                setTimeout(() => {
+                    window.location.href = `${webUrl}login`
+                }
+                , 200)
             })
             .catch(error => console.error("Error:", error));
     };
