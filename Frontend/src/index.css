@@ -1,5 +1,12 @@
 @import "toastify-js/src/toastify.css";
-@import url('https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@font-face {
+    font-family: "Inika";
+    src: url(./fonts/Inika/Inika-Regular.ttf);
+}
+@font-face {
+    font-family: "Inter";
+    src: url(./fonts/Inter/Inter-VariableFont_opsz,wght.ttf);
+}
 
 * {
     margin: 0;
