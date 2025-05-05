@@ -1,11 +1,11 @@
 @import "toastify-js/src/toastify.css";
 @font-face {
     font-family: "Inika";
-    src: url(./fonts/Inika/Inika-Regular.ttf);
+    src: url(/fonts/Inika/Inika-Regular.ttf);
 }
 @font-face {
     font-family: "Inter";
-    src: url(./fonts/Inter/Inter-VariableFont_opsz,wght.ttf);
+    src: url(/fonts/Inter/Inter-VariableFont_opsz,wght.ttf);
 }
 
 * {
